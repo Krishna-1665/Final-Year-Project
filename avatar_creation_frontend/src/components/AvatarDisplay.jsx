@@ -14,6 +14,8 @@ const AvatarDisplay = () => {
         <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full animate-pulse" title="Active"></div>
       </div>
       
+
+      
       <div className="text-center space-y-2">
         <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Shweta </h2>
         <p className="text-sm font-medium text-indigo-600 uppercase tracking-wide">Senior HR Interviewer</p>
