@@ -15,7 +15,7 @@ const AvatarDisplay = () => {
       </div>
       
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Shweta Sinha</h2>
+        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Shweta </h2>
         <p className="text-sm font-medium text-indigo-600 uppercase tracking-wide">Senior HR Interviewer</p>
         <div className="h-1 w-16 bg-indigo-100 mx-auto rounded-full my-3"></div>
         <p className="text-slate-600 text-sm leading-relaxed px-4">
