@@ -21,7 +21,11 @@ const AvatarDisplay = ({ onStartInterview }) => {
 
  
       <div className="text-center space-y-2">
+<<<<<<< HEAD
         <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Shweta </h2>
+=======
+        <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Sarah Sharma</h2>
+>>>>>>> 5d81fe138718bae8331eb6dbd8ae9a4f7460ae61
         <p className="text-sm font-medium text-indigo-600 uppercase tracking-wide">Senior HR Interviewer</p>
         <div className="h-1 w-16 bg-indigo-100 mx-auto rounded-full my-3"></div>
         <p className="text-slate-600 text-sm leading-relaxed px-4">
