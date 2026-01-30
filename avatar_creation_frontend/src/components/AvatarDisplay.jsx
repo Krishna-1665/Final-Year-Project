@@ -7,7 +7,7 @@ const AvatarDisplay = ({ onStartInterview }) => {
       
       {/* Avatar Image with Glow */}
       <div className="relative mb-4 group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 blur"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r- from-blue-600 to-indigo-600 rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 blur"></div>
         <img 
           src={avatarImage} 
           alt="Professional Interview Host Avatar" 
