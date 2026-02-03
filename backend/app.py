@@ -15,7 +15,7 @@ model = joblib.load("model/interview_model.joblib")
 vectorizer = joblib.load("model/vectorizer.joblib")
 
 # ------------------ LOAD DATASET ------------------
-df = pd.read_excel("data/dataset.xlsx") 
+df = pd.read_excel("data/dataset.xlsx")
 
 # Keep only required columns
 df = df[["question_id", "question", "answer", "score"]]
