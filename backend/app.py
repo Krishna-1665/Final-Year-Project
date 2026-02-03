@@ -2,91 +2,65 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd
 import joblib
-import uuid
-import os
+import random
 
 from utils.preprocessing import clean_text
 
-# ---------------- APP SETUP ----------------
+# ------------------ APP SETUP ------------------
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # allow frontend requests
 
-# ---------------- LOAD MODEL ----------------
-MODEL_PATH = os.path.join("model", "interview_model.joblib")
-VEC_PATH = os.path.join("model", "vectorizer.joblib")
+# ------------------ LOAD MODEL ------------------
+model = joblib.load("model/interview_model.joblib")
+vectorizer = joblib.load("model/vectorizer.joblib")
 
-model = joblib.load(MODEL_PATH)
-vectorizer = joblib.load(VEC_PATH)
-
-LABEL_MAP = {0: "Poor", 1: "Average", 2: "Good"}
-
-# ---------------- LOAD QUESTIONS ----------------
+# ------------------ LOAD DATASET ------------------
 df = pd.read_excel("data/dataset.xlsx")
 
-QUESTIONS = df["question"].dropna().tolist()
+# Keep only required columns
+df = df[["question_id", "question", "answer", "score"]]
 
-if not QUESTIONS:
-    raise ValueError("No questions found in dataset.xlsx")
-
-# Limit interview length
-QUESTIONS = QUESTIONS[:5]
-
-# ---------------- SESSION STORAGE ----------------
-sessions = {}
-
-# ---------------- START INTERVIEW ----------------
-@app.route("/start-interview", methods=["POST"])
-def start_interview():
-    session_id = str(uuid.uuid4())
-
-    sessions[session_id] = {
-        "current_index": 0,
-        "total_score": 0
-    }
+# ------------------ API 1: GET QUESTION ------------------
+@app.route("/api/question", methods=["GET"])
+def get_question():
+    question = df.sample(1).iloc[0]
 
     return jsonify({
-        "session_id": session_id,
-        "question": QUESTIONS[0]
+        "question_id": int(question["question_id"]),
+        "question": question["question"]
     })
 
-# ---------------- SUBMIT ANSWER ----------------
-@app.route("/submit-answer", methods=["POST"])
+
+# ------------------ API 2: SUBMIT ANSWER ------------------
+@app.route("/api/submit-answer", methods=["POST"])
 def submit_answer():
-    data = request.get_json()
+    data = request.json
 
-    session_id = data.get("session_id")
-    answer = data.get("answer")
+    user_answer = data.get("answer")
+    question_id = data.get("question_id")
 
-    if not session_id or not answer:
-        return jsonify({"error": "Invalid request"}), 400
+    if not user_answer or not question_id:
+        return jsonify({"error": "Missing data"}), 400
 
-    session = sessions.get(session_id)
-    if not session:
-        return jsonify({"error": "Invalid session"}), 400
+    # Clean user answer
+    cleaned_answer = clean_text(user_answer)
 
-    cleaned = clean_text(answer)
-    vector = vectorizer.transform([cleaned])
-    score = int(model.predict(vector)[0])
+    # Vectorize
+    X = vectorizer.transform([cleaned_answer])
 
-    session["total_score"] += score
-    session["current_index"] += 1
-
-    if session["current_index"] >= len(QUESTIONS):
-        return jsonify({
-            "finished": True,
-            "final_score": session["total_score"],
-            "verdict": "Selected" if session["total_score"] >= 6 else "Needs Improvement"
-        })
-
-    next_question = QUESTIONS[session["current_index"]]
+    # Predict score
+    predicted_score = model.predict(X)[0]
 
     return jsonify({
-        "finished": False,
-        "next_question": next_question,
-        "answer_score": score,
-        "label": LABEL_MAP[score]
+        "predicted_score": int(predicted_score)
     })
 
-# ---------------- RUN SERVER ----------------
+
+# ------------------ HEALTH CHECK ------------------
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "Backend is running"})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
