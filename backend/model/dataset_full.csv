@@ -1,0 +1,211 @@
+﻿category,question_id,question,answer,score
+HR,q1,Tell me about yourself.,I am a self-motivated BCA student passionate about web development.,2
+HR,q1,Tell me about yourself.,I am a BCA student.,1
+HR,q1,Tell me about yourself.,I am a student.,0
+HR,q2,What are your strengths?,I am a good communicator and a quick learner.,2
+HR,q2,What are your strengths?,I am honest.,1
+HR,q2,What are your strengths?,I like watching movies.,0
+HR,q3,What are your weaknesses?,"One of my weaknesses is that I sometimes focus too much on details, but I’m learning to balance perfection with efficiency by setting clear priorities and timelines.",2
+HR,q3,What are your weaknesses?,"sometimes get nervous when speaking in front of large groups, but I try to improve by practicing presentations.",1
+HR,q3,What are your weaknesses?,I don’t have any weaknesses.,0
+HR,q4,Why do you want to work with us?,Your innovation in web development aligns with my career goals.,2
+HR,q4,Why do you want to work with us?,I like your company culture and want a new challenge.,1
+HR,q4,Why do you want to work with us?,I really need a job and the pay looks good.,0
+HR,q5,Where do you see yourself in 5 years?,Leading impactful projects while mastering advanced full-stack development skills.,2
+HR,q5,Where do you see yourself in 5 years?,"In a senior role here, having grown with the company.",1
+HR,q5,Where do you see yourself in 5 years?,I hope to be retired or running my own business.,0
+HR,q6,Describe a challenge you faced and how you handled it.,"In a recent research project, I struggled with organizing massive amounts of data on digital well-being. To handle it, I implemented a structured categorization system and used project management tools to break the data into manageable themes. This turned a chaotic workflow into a clear, academic structure, ensuring the paper stayed on track and met every deadline.",2
+HR,q6,Describe a challenge you faced and how you handled it.,"""I once faced a very tight deadline for a report on cyberbullying. I handled it by cutting out distractions and working extra hours until it was finished. It was stressful, but I learned that staying focused and managing my time better is the only way to get through heavy workloads without losing quality.",1
+HR,q6,Describe a challenge you faced and how you handled it.,"I had a difficult teammate who wasn't doing any of their work. I basically ended up doing the whole project myself because I didn't want to fail. I handled it by just staying quiet and finishing it, but I made sure to tell the boss later that I did all the work.",0
+HR,q7,How do you handle stress and pressure?,I break the project into small wins. It keeps me from feeling overwhelmed and ensures the quality doesn't drop when things get fast.,2
+HR,q7,How do you handle stress and pressure?,I stay organized and focus on my checklist. Taking short breaks also helps me keep a clear head during busy weeks.,1
+HR,q7,How do you handle stress and pressure?,I don't really get stressed. I just work faster and stay late until the work is finished.,0
+HR,q8,Describe a time you worked successfully in a team.,"In my college project, I worked with four teammates to build a web app. I handled the frontend and ensured good communication, which helped us complete the project on time.",2
+HR,q8,Describe a time you worked successfully in a team.,I usually work well with others when given clear tasks.,1
+HR,q8,Describe a time you worked successfully in a team.,I prefer working alone; I don’t like group work.,0
+HR,q9,Why should we hire you?,I have the right combination of technical skills and eagerness to learn. I’m confident that I can adapt quickly and contribute to your team’s success,2
+HR,q9,Why should we hire you?,Because I’ll try to do my best and follow instructions.,1
+HR,q9,Why should we hire you?,Because I really need a job.,0
+HR,q10,What motivates you at work?,Learning new things and seeing my work make an impact motivates me. I like when my efforts lead to visible improvements or user satisfaction.,2
+HR,q10,What motivates you at work?,Appreciation from others motivates me.,1
+HR,q10,What motivates you at work?,I just work for salary.,0
+HR,q11,How do you prioritize tasks?,"How do you prioritize tasks? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+HR,q11,How do you prioritize tasks?,How do you prioritize tasks? An average answer: partially correct but missing some details.,1
+HR,q11,How do you prioritize tasks?,How do you prioritize tasks? A poor answer: incorrect or irrelevant to the question.,0
+HR,q12,Tell me about a mistake you made and what you learned.,"Tell me about a mistake you made and what you learned. A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+HR,q12,Tell me about a mistake you made and what you learned.,Tell me about a mistake you made and what you learned. An average answer: partially correct but missing some details.,1
+HR,q12,Tell me about a mistake you made and what you learned.,Tell me about a mistake you made and what you learned. A poor answer: incorrect or irrelevant to the question.,0
+HR,q13,Do you prefer working alone or in a team?,"Do you prefer working alone or in a team? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+HR,q13,Do you prefer working alone or in a team?,Do you prefer working alone or in a team? An average answer: partially correct but missing some details.,1
+HR,q13,Do you prefer working alone or in a team?,Do you prefer working alone or in a team? A poor answer: incorrect or irrelevant to the question.,0
+HR,q14,Do you have any questions for us?,"Do you have any questions for us? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+HR,q14,Do you have any questions for us?,Do you have any questions for us? An average answer: partially correct but missing some details.,1
+HR,q14,Do you have any questions for us?,Do you have any questions for us? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q15,What is HTML?,"What is HTML? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q15,What is HTML?,What is HTML? An average answer: partially correct but missing some details.,1
+Technical,q15,What is HTML?,What is HTML? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q16,What is CSS and how is it used?,"What is CSS and how is it used? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q16,What is CSS and how is it used?,What is CSS and how is it used? An average answer: partially correct but missing some details.,1
+Technical,q16,What is CSS and how is it used?,What is CSS and how is it used? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q17,What is JavaScript and why is it important?,"What is JavaScript and why is it important? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q17,What is JavaScript and why is it important?,What is JavaScript and why is it important? An average answer: partially correct but missing some details.,1
+Technical,q17,What is JavaScript and why is it important?,What is JavaScript and why is it important? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q18,What is the DOM?,"What is the DOM? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q18,What is the DOM?,What is the DOM? An average answer: partially correct but missing some details.,1
+Technical,q18,What is the DOM?,What is the DOM? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q19,What is the difference between frontend and backend?,"What is the difference between frontend and backend? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q19,What is the difference between frontend and backend?,What is the difference between frontend and backend? An average answer: partially correct but missing some details.,1
+Technical,q19,What is the difference between frontend and backend?,What is the difference between frontend and backend? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q20,What are HTTP methods?,"What are HTTP methods? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q20,What are HTTP methods?,What are HTTP methods? An average answer: partially correct but missing some details.,1
+Technical,q20,What are HTTP methods?,What are HTTP methods? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q21,What is an API?,"What is an API? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q21,What is an API?,What is an API? An average answer: partially correct but missing some details.,1
+Technical,q21,What is an API?,What is an API? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q22,What is JSON?,"What is JSON? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q22,What is JSON?,What is JSON? An average answer: partially correct but missing some details.,1
+Technical,q22,What is JSON?,What is JSON? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q23,What is responsive web design?,"What is responsive web design? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q23,What is responsive web design?,What is responsive web design? An average answer: partially correct but missing some details.,1
+Technical,q23,What is responsive web design?,What is responsive web design? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q24,What is the difference between == and === in JavaScript?,"What is the difference between == and === in JavaScript? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q24,What is the difference between == and === in JavaScript?,What is the difference between == and === in JavaScript? An average answer: partially correct but missing some details.,1
+Technical,q24,What is the difference between == and === in JavaScript?,What is the difference between == and === in JavaScript? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q25,What is a closure in JavaScript?,"What is a closure in JavaScript? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q25,What is a closure in JavaScript?,What is a closure in JavaScript? An average answer: partially correct but missing some details.,1
+Technical,q25,What is a closure in JavaScript?,What is a closure in JavaScript? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q26,What is React?,"What is React? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q26,What is React?,What is React? An average answer: partially correct but missing some details.,1
+Technical,q26,What is React?,What is React? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q27,What is JSX?,"What is JSX? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q27,What is JSX?,What is JSX? An average answer: partially correct but missing some details.,1
+Technical,q27,What is JSX?,What is JSX? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q28,What is a component in React?,"What is a component in React? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q28,What is a component in React?,What is a component in React? An average answer: partially correct but missing some details.,1
+Technical,q28,What is a component in React?,What is a component in React? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q29,What is state and props in React?,"What is state and props in React? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q29,What is state and props in React?,What is state and props in React? An average answer: partially correct but missing some details.,1
+Technical,q29,What is state and props in React?,What is state and props in React? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q30,What is event bubbling?,"What is event bubbling? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q30,What is event bubbling?,What is event bubbling? An average answer: partially correct but missing some details.,1
+Technical,q30,What is event bubbling?,What is event bubbling? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q31,What is CORS and why does it matter?,"What is CORS and why does it matter? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q31,What is CORS and why does it matter?,What is CORS and why does it matter? An average answer: partially correct but missing some details.,1
+Technical,q31,What is CORS and why does it matter?,What is CORS and why does it matter? A poor answer: incorrect or irrelevant to the question.,0
+Technical,q32,What is RESTful API?,"What is RESTful API? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Technical,q32,What is RESTful API?,What is RESTful API? An average answer: partially correct but missing some details.,1
+Technical,q32,What is RESTful API?,What is RESTful API? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q33,What is a variable?,"What is a variable? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q33,What is a variable?,What is a variable? An average answer: partially correct but missing some details.,1
+Programming,q33,What is a variable?,What is a variable? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q34,What are data types?,"What are data types? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q34,What are data types?,What are data types? An average answer: partially correct but missing some details.,1
+Programming,q34,What are data types?,What are data types? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q35,What is a function?,"What is a function? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q35,What is a function?,What is a function? An average answer: partially correct but missing some details.,1
+Programming,q35,What is a function?,What is a function? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q36,What is object-oriented programming (OOP)?,"What is object-oriented programming (OOP)? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q36,What is object-oriented programming (OOP)?,What is object-oriented programming (OOP)? An average answer: partially correct but missing some details.,1
+Programming,q36,What is object-oriented programming (OOP)?,What is object-oriented programming (OOP)? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q37,What are the four pillars of OOP?,"What are the four pillars of OOP? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q37,What are the four pillars of OOP?,What are the four pillars of OOP? An average answer: partially correct but missing some details.,1
+Programming,q37,What are the four pillars of OOP?,What are the four pillars of OOP? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q38,What is inheritance?,"What is inheritance? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q38,What is inheritance?,What is inheritance? An average answer: partially correct but missing some details.,1
+Programming,q38,What is inheritance?,What is inheritance? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q39,What is polymorphism?,"What is polymorphism? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q39,What is polymorphism?,What is polymorphism? An average answer: partially correct but missing some details.,1
+Programming,q39,What is polymorphism?,What is polymorphism? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q40,What is encapsulation?,"What is encapsulation? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q40,What is encapsulation?,What is encapsulation? An average answer: partially correct but missing some details.,1
+Programming,q40,What is encapsulation?,What is encapsulation? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q41,What is abstraction?,"What is abstraction? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q41,What is abstraction?,What is abstraction? An average answer: partially correct but missing some details.,1
+Programming,q41,What is abstraction?,What is abstraction? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q42,What is recursion?,"What is recursion? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q42,What is recursion?,What is recursion? An average answer: partially correct but missing some details.,1
+Programming,q42,What is recursion?,What is recursion? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q43,What is an algorithm?,"What is an algorithm? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q43,What is an algorithm?,What is an algorithm? An average answer: partially correct but missing some details.,1
+Programming,q43,What is an algorithm?,What is an algorithm? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q44,What is time complexity?,"What is time complexity? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q44,What is time complexity?,What is time complexity? An average answer: partially correct but missing some details.,1
+Programming,q44,What is time complexity?,What is time complexity? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q45,What is a loop?,"What is a loop? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q45,What is a loop?,What is a loop? An average answer: partially correct but missing some details.,1
+Programming,q45,What is a loop?,What is a loop? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q46,What is an array?,"What is an array? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q46,What is an array?,What is an array? An average answer: partially correct but missing some details.,1
+Programming,q46,What is an array?,What is an array? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q47,What is a stack?,"What is a stack? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q47,What is a stack?,What is a stack? An average answer: partially correct but missing some details.,1
+Programming,q47,What is a stack?,What is a stack? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q48,What is a queue?,"What is a queue? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q48,What is a queue?,What is a queue? An average answer: partially correct but missing some details.,1
+Programming,q48,What is a queue?,What is a queue? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q49,What is a hash table?,"What is a hash table? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q49,What is a hash table?,What is a hash table? An average answer: partially correct but missing some details.,1
+Programming,q49,What is a hash table?,What is a hash table? A poor answer: incorrect or irrelevant to the question.,0
+Programming,q50,What is exception handling?,"What is exception handling? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Programming,q50,What is exception handling?,What is exception handling? An average answer: partially correct but missing some details.,1
+Programming,q50,What is exception handling?,What is exception handling? A poor answer: incorrect or irrelevant to the question.,0
+Database,q51,What is a database?,"What is a database? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q51,What is a database?,What is a database? An average answer: partially correct but missing some details.,1
+Database,q51,What is a database?,What is a database? A poor answer: incorrect or irrelevant to the question.,0
+Database,q52,What is SQL?,"What is SQL? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q52,What is SQL?,What is SQL? An average answer: partially correct but missing some details.,1
+Database,q52,What is SQL?,What is SQL? A poor answer: incorrect or irrelevant to the question.,0
+Database,q53,What is NoSQL and how is it different from SQL?,"What is NoSQL and how is it different from SQL? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q53,What is NoSQL and how is it different from SQL?,What is NoSQL and how is it different from SQL? An average answer: partially correct but missing some details.,1
+Database,q53,What is NoSQL and how is it different from SQL?,What is NoSQL and how is it different from SQL? A poor answer: incorrect or irrelevant to the question.,0
+Database,q54,What is a primary key?,"What is a primary key? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q54,What is a primary key?,What is a primary key? An average answer: partially correct but missing some details.,1
+Database,q54,What is a primary key?,What is a primary key? A poor answer: incorrect or irrelevant to the question.,0
+Database,q55,What is a foreign key?,"What is a foreign key? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q55,What is a foreign key?,What is a foreign key? An average answer: partially correct but missing some details.,1
+Database,q55,What is a foreign key?,What is a foreign key? A poor answer: incorrect or irrelevant to the question.,0
+Database,q56,What is normalization?,"What is normalization? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q56,What is normalization?,What is normalization? An average answer: partially correct but missing some details.,1
+Database,q56,What is normalization?,What is normalization? A poor answer: incorrect or irrelevant to the question.,0
+Database,q57,What are CRUD operations?,"What are CRUD operations? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q57,What are CRUD operations?,What are CRUD operations? An average answer: partially correct but missing some details.,1
+Database,q57,What are CRUD operations?,What are CRUD operations? A poor answer: incorrect or irrelevant to the question.,0
+Database,q58,What is indexing in databases?,"What is indexing in databases? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q58,What is indexing in databases?,What is indexing in databases? An average answer: partially correct but missing some details.,1
+Database,q58,What is indexing in databases?,What is indexing in databases? A poor answer: incorrect or irrelevant to the question.,0
+Database,q59,What is ACID?,"What is ACID? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q59,What is ACID?,What is ACID? An average answer: partially correct but missing some details.,1
+Database,q59,What is ACID?,What is ACID? A poor answer: incorrect or irrelevant to the question.,0
+Database,q60,What is a transaction?,"What is a transaction? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+Database,q60,What is a transaction?,What is a transaction? An average answer: partially correct but missing some details.,1
+Database,q60,What is a transaction?,What is a transaction? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q61,What is artificial intelligence?,"What is artificial intelligence? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q61,What is artificial intelligence?,What is artificial intelligence? An average answer: partially correct but missing some details.,1
+AI/ML,q61,What is artificial intelligence?,What is artificial intelligence? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q62,What is machine learning?,"What is machine learning? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q62,What is machine learning?,What is machine learning? An average answer: partially correct but missing some details.,1
+AI/ML,q62,What is machine learning?,What is machine learning? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q63,What is supervised learning?,"What is supervised learning? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q63,What is supervised learning?,What is supervised learning? An average answer: partially correct but missing some details.,1
+AI/ML,q63,What is supervised learning?,What is supervised learning? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q64,What is unsupervised learning?,"What is unsupervised learning? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q64,What is unsupervised learning?,What is unsupervised learning? An average answer: partially correct but missing some details.,1
+AI/ML,q64,What is unsupervised learning?,What is unsupervised learning? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q65,What is overfitting?,"What is overfitting? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q65,What is overfitting?,What is overfitting? An average answer: partially correct but missing some details.,1
+AI/ML,q65,What is overfitting?,What is overfitting? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q66,What is underfitting?,"What is underfitting? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q66,What is underfitting?,What is underfitting? An average answer: partially correct but missing some details.,1
+AI/ML,q66,What is underfitting?,What is underfitting? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q67,What is a dataset?,"What is a dataset? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q67,What is a dataset?,What is a dataset? An average answer: partially correct but missing some details.,1
+AI/ML,q67,What is a dataset?,What is a dataset? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q68,What is feature engineering?,"What is feature engineering? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q68,What is feature engineering?,What is feature engineering? An average answer: partially correct but missing some details.,1
+AI/ML,q68,What is feature engineering?,What is feature engineering? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q69,What is a model?,"What is a model? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q69,What is a model?,What is a model? An average answer: partially correct but missing some details.,1
+AI/ML,q69,What is a model?,What is a model? A poor answer: incorrect or irrelevant to the question.,0
+AI/ML,q70,What is cross-validation?,"What is cross-validation? A good answer: concise, correct, and mentions key concepts relevant to the question.",2
+AI/ML,q70,What is cross-validation?,What is cross-validation? An average answer: partially correct but missing some details.,1
+AI/ML,q70,What is cross-validation?,What is cross-validation? A poor answer: incorrect or irrelevant to the question.,0
