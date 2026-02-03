@@ -1,5 +1,7 @@
 flask
 flask-cors
-numpy
+pandas
 scikit-learn
-pickle-mixin
+nltk
+joblib
+openpyxl
