@@ -3,6 +3,7 @@ import joblib, os
 from utils.preprocessing import clean_text  # if you have it
 
 app = Flask(__name__)
+
 # optional: load model if present
 MODEL_PATH = os.path.join(os.path.dirname(__file__), 'model', 'interview_model.joblib')
 VEC_PATH = os.path.join(os.path.dirname(__file__), 'model', 'vectorizer.joblib')
