@@ -3,7 +3,6 @@ import joblib, os
 from utils.preprocessing import clean_text  # if you have it
 
 app = Flask(__name__)
-
 # optional: load model if present
 MODEL_PATH = os.path.join(os.path.dirname(__file__), 'model', 'interview_model.joblib')
 VEC_PATH = os.path.join(os.path.dirname(__file__), 'model', 'vectorizer.joblib')
@@ -17,6 +16,7 @@ def index():
 @app.route('/health')
 def health():
     return jsonify({"status": "ok"}), 200
+
 if __name__ == '__main__':
     for rule in app.url_map.iter_rules():
         print(rule, list(rule.methods))
