@@ -1,128 +1,84 @@
-import React, { useState } from "react";
-import AvatarDisplay from "./components/AvatarDisplay";
-import "./App.css";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Lock, CheckCircle2 } from 'lucide-react';
+import AvatarDisplay from './components/AvatarDisplay';
+import SignUp from './components/Auth/SignUp';
+import Login from './components/Auth/Login';
+import './App.css';
+
+const AvatarPage = () => (
+  <div className="min-h-screen bg-white flex flex-col md:flex-row overflow-hidden font-sans">
+    {/* Left Section - Hero/Branding (Consistent with Auth) */}
+    <div className="hidden md:flex md:w-1/3 bg-[#0F172A] relative overflow-hidden flex-col justify-between p-10">
+      <div className="absolute top-0 right-0 w-full h-full opacity-25 pointer-events-none">
+        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-pink-600 rounded-full blur-[100px]"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] bg-indigo-600 rounded-full blur-[80px]"></div>
+      </div>
+
+      <div className="relative z-10">
+        <div className="flex items-center gap-2 mb-12">
+          <div className="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <Lock className="text-white w-5 h-5" />
+          </div>
+          <span className="text-2xl font-black text-white tracking-tight font-display">HireVision</span>
+        </div>
+
+        <div className="max-w-xs">
+          <h1 className="text-4xl font-black text-white leading-[1.1] mb-6 font-display">
+            Interview <span className="text-pink-400">Portal</span>
+          </h1>
+          <p className="text-slate-400 text-base leading-relaxed mb-8">
+            Experience our professional AI-driven interview assessment. Your path to excellence starts here.
+          </p>
+
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-slate-300">
+              <CheckCircle2 className="w-5 h-5 text-pink-500" />
+              <span className="font-medium text-sm">Real-time AI Feedback</span>
+            </div>
+            <div className="flex items-center gap-3 text-slate-300">
+              <CheckCircle2 className="w-5 h-5 text-pink-500" />
+              <span className="font-medium text-sm">Behavioral Analysis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 pt-8 border-t border-white/10">
+        <p className="text-slate-500 text-xs">
+          &copy; 2026 HireVision AI. Professional Suite.
+        </p>
+      </div>
+    </div>
+
+    {/* Right Section - Interview Panel */}
+    <div className="flex-1 flex items-center justify-center p-6 sm:p-12 bg-slate-50">
+      <div className="w-full max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-black text-slate-900 mb-2 font-display">Welcome to your Session</h2>
+          <p className="text-slate-500">Your AI interviewer is ready to begin.</p>
+        </div>
+
+        <AvatarDisplay />
+
+        <div className="mt-12 flex justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 grayscale">
+          {/* Logo cloud or trust signals could go here */}
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Secured by HireVision AI Guard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 function App() {
-  const PASS_MARKS = 12;
-
-  const [stage, setStage] = useState("home"); // home | interview | result
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answer, setAnswer] = useState("");
-  const [totalMarks, setTotalMarks] = useState(0);
-  const [answeredCount, setAnsweredCount] = useState(0);
-
-  // Start interview: fetch 10 unique questions
-  const startInterview = async () => {
-    try {
-      const res = await fetch("http://127.0.0.1:5000/api/questions");
-      const data = await res.json();
-
-      setQuestions(data);
-      setCurrentIndex(0);
-      setTotalMarks(0);
-      setAnsweredCount(0);
-      setAnswer("");
-      setStage("interview");
-    } catch (err) {
-      console.error(err);
-      alert("Backend not reachable!");
-    }
-  };
-
-  // Submit answer
-  const submitAnswer = async () => {
-    if (!answer.trim()) {
-      alert("Please write an answer first.");
-      return;
-    }
-
-    const currentQuestion = questions[currentIndex];
-
-    const res = await fetch("http://127.0.0.1:5000/api/submit-answer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question_id: currentQuestion.question_id,
-        answer: answer,
-      }),
-    });
-
-    const data = await res.json();
-
-    // Update score
-    setTotalMarks((prev) => prev + data.predicted_score);
-    setAnsweredCount((prev) => prev + 1);
-    setAnswer("");
-
-    // Next or finish
-    if (currentIndex + 1 < questions.length) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      setStage("result");
-    }
-  };
-
-  const isPassed = totalMarks >= PASS_MARKS;
-
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4">
-      {stage === "home" && <AvatarDisplay onStartInterview={startInterview} />}
-
-      {stage === "interview" && questions.length > 0 && (
-        <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
-          <h2 className="text-xl font-bold mb-2">
-            Question {currentIndex + 1} of {questions.length}
-          </h2>
-
-          <p className="mb-4">{questions[currentIndex].question}</p>
-
-          <textarea
-            className="w-full border p-2 rounded mb-4"
-            rows="4"
-            placeholder="Type your answer here..."
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-
-          <button
-            onClick={submitAnswer}
-            className="w-full bg-indigo-600 text-white py-2 rounded"
-          >
-            {currentIndex + 1 === questions.length
-              ? "Finish Interview"
-              : "Next"}
-          </button>
-        </div>
-      )}
-
-      {stage === "result" && (
-        <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md text-center">
-          <h2 className="text-2xl font-bold mb-4">Final Result</h2>
-
-          <p className="text-lg">Total Questions: {questions.length}</p>
-          <p className="text-lg">Answered Questions: {answeredCount}</p>
-          <p className="text-lg font-semibold mt-2">
-            Total Marks: {totalMarks}
-          </p>
-
-          <p
-            className={`text-xl font-bold mt-4 ${
-              isPassed ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {isPassed ? "You are Selected ✅" : "You are Rejected ❌"}
-          </p>
-
-          <button
-            onClick={() => setStage("home")}
-            className="mt-6 bg-slate-600 text-white py-2 px-4 rounded"
-          >
-            Back to Home
-          </button>
-        </div>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/avatar" element={<AvatarPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
