@@ -16,13 +16,15 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
 
+  // optionally keep track of skipped questions if you want to review later
+  const [skippedQuestions, setSkippedQuestions] = useState([]);
 
-  // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
     if (interviewStarted) {
       fetchQuestions();
     }
   }, [interviewStarted]);
+
   useEffect(() => {
     if (!interviewStarted) return;
 
@@ -30,7 +32,7 @@ const AvatarDisplay = () => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          setShowResult(true); // End interview automatically
+          setShowResult(true);
           return 0;
         }
         return prev - 1;
@@ -40,17 +42,23 @@ const AvatarDisplay = () => {
     return () => clearInterval(timer);
   }, [interviewStarted]);
 
-
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
       const data = await response.json();
-
       if (response.ok) {
         setQuestions(data);
       }
     } catch (error) {
       alert("Backend not running on port 5000");
+    }
+  };
+
+  const goToNextQuestion = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      setShowResult(true);
     }
   };
 
@@ -61,17 +69,14 @@ const AvatarDisplay = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/submit-answer`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            answer: answer,
-            question_id: questions[currentIndex]?.question_id,
-          }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answer: answer,
+          question_id: questions[currentIndex]?.question_id,
+        }),
+      });
 
       const data = await response.json();
 
@@ -82,11 +87,10 @@ const AvatarDisplay = () => {
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
 
-        if (currentIndex < questions.length - 1) {
-          setCurrentIndex((prev) => prev + 1);
-        } else {
-          setShowResult(true);
-        }
+        goToNextQuestion();
+      } else {
+        // show server message if available
+        alert(data.message || "Submission failed");
       }
     } catch (error) {
       alert("Submission failed");
@@ -94,28 +98,45 @@ const AvatarDisplay = () => {
       setLoading(false);
     }
   };
+
+  // NEW: handle skip
+  const handleSkip = async () => {
+    // prevent skipping while submit is in progress
+    if (loading) return;
+
+    // optional: record skipped question client-side for review
+    const qid = questions[currentIndex]?.question_id;
+    setSkippedQuestions((prev) => [...prev, qid]);
+
+    // Optionally notify backend that question was skipped (uncomment if you add endpoint)
+    // try {
+    //   await fetch(`${API_BASE_URL}/api/skip-question`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ question_id: qid }),
+    //   });
+    // } catch (err) {
+    //   console.warn("Failed to record skip on backend:", err);
+    // }
+
+    // Move to next question
+    goToNextQuestion();
+  };
+
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-
   // ================= START SCREEN =================
   if (!interviewStarted) {
     return (
       <div style={styles.startContainer}>
         <h1>Welcome to HireVision Interview</h1>
-        <p style={{ marginTop: "15px" }}>
-          Your AI interviewer is ready.
-        </p>
-        <h3 style={{ marginTop: "20px", color: "#4CAF50" }}>
-          Best of Luck 👍
-        </h3>
-        <button
-          style={styles.startButton}
-          onClick={() => setInterviewStarted(true)}
-        >
+        <p style={{ marginTop: "15px" }}>Your AI interviewer is ready.</p>
+        <h3 style={{ marginTop: "20px", color: "#4CAF50" }}>Best of Luck 👍</h3>
+        <button style={styles.startButton} onClick={() => setInterviewStarted(true)}>
           Start Interview
         </button>
       </div>
@@ -140,16 +161,16 @@ const AvatarDisplay = () => {
         <h2>Final Result</h2>
         <p>Total Questions: {questions.length}</p>
         <p>Answered Questions: {answeredCount}</p>
+        <p>Skipped Questions: {skippedQuestions.length}</p>
         <h3>Total Marks: {totalScore}</h3>
 
         <h2 style={{ color: isSelected ? "green" : "red" }}>
-          {isSelected ? "You are Selected ✅" : "Not Selected ❌"}
+          {isSelected
+            ? "Thank you for your response — you will receive a phone call within a few hours ✅"
+            : "We will let you know"}
         </h2>
 
-        <button
-          style={styles.homeButton}
-          onClick={() => navigate("/")}
-        >
+        <button style={styles.homeButton} onClick={() => navigate("/")}>
           Back to Home
         </button>
       </div>
@@ -164,7 +185,6 @@ const AvatarDisplay = () => {
         Time Remaining: {formatTime(timeLeft)}
       </h3>
 
-
       <h4>Question {currentIndex + 1}</h4>
       <p>{questions[currentIndex]?.question}</p>
 
@@ -175,7 +195,7 @@ const AvatarDisplay = () => {
           onChange={(e) => setAnswer(e.target.value)}
           rows="4"
           style={styles.textarea}
-          required
+          required={false} // allow empty if user wants to skip
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -184,10 +204,25 @@ const AvatarDisplay = () => {
           }}
         />
 
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", marginTop: 12 }}>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{ ...styles.button, backgroundColor: "#1e90ff", color: "#fff" }}
+          >
+            {loading ? "Submitting..." : "Submit Answer"}
+          </button>
 
-        <button type="submit" disabled={loading} style={styles.button}>
-          {loading ? "Submitting..." : "Submit Answer"}
-        </button>
+          <button
+            type="button"
+            onClick={handleSkip}
+            disabled={loading}
+            style={{ ...styles.button, backgroundColor: "#888", color: "#fff" }}
+            title="Skip this question and move to the next"
+          >
+            Skip Question
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -230,6 +265,8 @@ const styles = {
     marginTop: "10px",
     padding: "8px 16px",
     cursor: "pointer",
+    borderRadius: 6,
+    border: "none",
   },
   resultContainer: {
     maxWidth: "500px",
