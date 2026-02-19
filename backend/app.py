@@ -9,6 +9,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 import pandas as pd
 import random
+import numpy as np
 
 load_dotenv()
 
@@ -18,8 +19,8 @@ BASE_DIR = os.path.dirname(__file__)
 
 
 # Load model and vectorizer
-MODEL_PATH = os.path.join(BASE_DIR, 'model', 'interview_model.joblib')
-VEC_PATH = os.path.join(BASE_DIR, 'model', 'vectorizer.joblib')
+MODEL_PATH = os.path.join(BASE_DIR, 'model', 'interview_clf_calibrated.joblib')
+VEC_PATH = os.path.join(BASE_DIR, 'model', 'vectorizer_calibrated.joblib')
 
 MODEL = joblib.load(MODEL_PATH)
 VEC = joblib.load(VEC_PATH)
@@ -62,29 +63,53 @@ def get_questions():
 
     return jsonify(questions)
 
+
+def predict_score_dict(answer_text):
+    """
+    Returns: expected_class (float), score_0_5 (float), probabilities (list)
+    """
+    cleaned = clean_text(answer_text)
+    X = VEC.transform([cleaned])
+    proba = MODEL.predict_proba(X)[0]                # probabilities for classes [0,1,2]
+    classes = np.array(sorted(MODEL.classes_), dtype=float)
+    expected = float((proba * classes).sum())
+    max_class = classes.max() if classes.size else 1.0
+    score_0_5 = (expected / max_class) * 5.0 if max_class > 0 else expected
+    return {
+        "expected_class": round(expected, 3),
+        "score_0_5": round(score_0_5, 2),
+        "probabilities": [round(float(x), 4) for x in proba.tolist()]
+    }
+
 # ------------------ API: Submit Answer ------------------
 @app.route('/api/submit-answer', methods=['POST'])
 def submit_answer():
     data = request.get_json()
-
     answer = data.get("answer")
     question_id = data.get("question_id")
 
     if not answer or question_id is None:
         return jsonify({"error": "Missing answer or question_id"}), 400
 
-    # Clean answer
-    cleaned = clean_text(answer)
+    try:
+        result = predict_score_dict(answer)
 
-    # Vectorize
-    X = VEC.transform([cleaned])
+        # optional: save result in MongoDB if you want
+        record = {
+            "question_id": question_id,
+            "answer": answer,
+            "prediction": result,
+        }
+        db.results.insert_one(record)
 
-    # Predict
-    predicted_score = MODEL.predict(X)[0]
+        return jsonify({
+            "message": "Answer evaluated successfully",
+            "prediction": result
+        }), 200
 
-    return jsonify({
-        "predicted_score": int(predicted_score)
-    })
+    except Exception as e:
+        print("Prediction error:", e)
+        return jsonify({"error": str(e)}), 500
 
 
    
