@@ -5,6 +5,8 @@ import AvatarDisplay from './components/AvatarDisplay';
 import SignUp from './components/Auth/SignUp';
 import Login from './components/Auth/Login';
 import './App.css';
+import WebcamPreview from "./components/webcamPreview";
+
 
 const AvatarPage = () => (
   <div className="min-h-screen bg-white flex flex-col md:flex-row overflow-hidden font-sans">
