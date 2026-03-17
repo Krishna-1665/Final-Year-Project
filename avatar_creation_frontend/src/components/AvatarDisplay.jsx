@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Timer, CheckCircle2, ArrowRight, Home, BrainCircuit, MessageSquare, AlertCircle, FastForward, Send, ShieldCheck } from 'lucide-react';
+import avatarInterviewer from "../assets/avatar_interviewer.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 const API_BASE_URL = "http://localhost:5000";
 
@@ -16,9 +19,8 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
 
-  // optionally keep track of skipped questions if you want to review later
-  const [skippedQuestions, setSkippedQuestions] = useState([]);
 
+  // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
     if (interviewStarted) {
       fetchQuestions();
@@ -26,13 +28,13 @@ const AvatarDisplay = () => {
   }, [interviewStarted]);
 
   useEffect(() => {
-    if (!interviewStarted) return;
+    if (!interviewStarted || showResult) return;
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          setShowResult(true);
+          setShowResult(true); // End interview automatically
           return 0;
         }
         return prev - 1;
@@ -40,43 +42,40 @@ const AvatarDisplay = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [interviewStarted]);
+  }, [interviewStarted, showResult]);
+
 
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
       const data = await response.json();
+
       if (response.ok) {
         setQuestions(data);
       }
     } catch (error) {
-      alert("Backend not running on port 5000");
-    }
-  };
-
-  const goToNextQuestion = () => {
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      setShowResult(true);
+      console.error("Fetch error:", error);
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!answer.trim()) return;
 
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          answer: answer,
-          question_id: questions[currentIndex]?.question_id,
-        }),
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/api/submit-answer`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            answer: answer,
+            question_id: questions[currentIndex]?.question_id,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -87,40 +86,26 @@ const AvatarDisplay = () => {
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
 
-        goToNextQuestion();
-      } else {
-        // show server message if available
-        alert(data.message || "Submission failed");
+        if (currentIndex < questions.length - 1) {
+          setCurrentIndex((prev) => prev + 1);
+        } else {
+          setShowResult(true);
+        }
       }
     } catch (error) {
-      alert("Submission failed");
+      console.error("Submission failed", error);
     } finally {
       setLoading(false);
     }
   };
 
-  // NEW: handle skip
-  const handleSkip = async () => {
-    // prevent skipping while submit is in progress
-    if (loading) return;
-
-    // optional: record skipped question client-side for review
-    const qid = questions[currentIndex]?.question_id;
-    setSkippedQuestions((prev) => [...prev, qid]);
-
-    // Optionally notify backend that question was skipped (uncomment if you add endpoint)
-    // try {
-    //   await fetch(`${API_BASE_URL}/api/skip-question`, {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ question_id: qid }),
-    //   });
-    // } catch (err) {
-    //   console.warn("Failed to record skip on backend:", err);
-    // }
-
-    // Move to next question
-    goToNextQuestion();
+  const handleSkip = () => {
+    setAnswer("");
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      setShowResult(true);
+    }
   };
 
   const formatTime = (seconds) => {
@@ -129,16 +114,124 @@ const AvatarDisplay = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
-  // ================= START SCREEN =================
+
+  // ================= START SCREEN / PORTAL =================
   if (!interviewStarted) {
     return (
-      <div style={styles.startContainer}>
-        <h1>Welcome to HireVision Interview</h1>
-        <p style={{ marginTop: "15px" }}>Your AI interviewer is ready.</p>
-        <h3 style={{ marginTop: "20px", color: "#4CAF50" }}>Best of Luck 👍</h3>
-        <button style={styles.startButton} onClick={() => setInterviewStarted(true)}>
-          Start Interview
-        </button>
+      <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
+        {/* Left Branding Sidebar */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="md:w-[40%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
+            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
+          </div>
+
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-16">
+              <div className="w-10 h-10 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <BrainCircuit className="text-white w-5 h-5" />
+              </div>
+              <span className="text-2xl font-black text-white tracking-tight">HireVision</span>
+            </div>
+
+            <div className="max-w-md">
+              <h1 className="text-5xl font-black text-white leading-tight mb-8">
+                Interview <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Portal</span>
+              </h1>
+              <p className="text-slate-400 text-lg leading-relaxed mb-10">
+                Experience our professional AI-driven interview assessment. Your path to excellence starts here.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">Real-time AI Feedback</span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">Behavioral Analysis</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 pt-10 border-t border-white/10">
+            <p className="text-slate-500 text-sm">
+              &copy; 2026 HireVision AI. Professional Suite.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Right Content Area */}
+        <div className="flex-1 bg-white flex items-center justify-center p-8 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5 pointer-events-none">
+            <div className="absolute top-[-10%] right-[-10%] w-full h-full bg-blue-500 rounded-full blur-[120px]"></div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="w-full max-w-2xl text-center relative z-10"
+          >
+            <h2 className="text-4xl font-black text-slate-900 mb-2">Welcome to your Session</h2>
+            <p className="text-slate-500 mb-12 text-lg">Your AI interviewer is ready to begin.</p>
+
+            <div className="bg-white rounded-[2.5rem] p-1 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[400px]">
+              {/* Interviewer Profile Card */}
+              <div className="md:w-[45%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
+                <div className="relative mb-6">
+                  <div className="w-40 h-40 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 p-1">
+                    <img
+                      src={avatarInterviewer}
+                      alt="Interviewer Avatar"
+                      className="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
+                    />
+                  </div>
+                  <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
+                </div>
+                <h3 className="text-2xl font-black text-slate-900">Shweta</h3>
+                <p className="text-[10px] font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-1">
+                  Senior HR Interviewer
+                </p>
+              </div>
+
+              {/* Start Action */}
+              <div className="flex-1 p-10 flex flex-col justify-center items-center gap-8">
+                <div className="text-left w-full space-y-4">
+                  <div className="flex items-center gap-4 text-slate-600">
+                    <Timer className="w-5 h-5 text-blue-500" />
+                    <span className="font-semibold text-lg italic tracking-tight">20 Minutes Session</span>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed italic text-base">
+                    Please ensure you are in a quiet environment and have a stable connection.
+                  </p>
+                </div>
+
+                <div className="w-full space-y-4">
+                  <button
+                    onClick={() => setInterviewStarted(true)}
+                    className="w-full h-16 flex items-center justify-center rounded-2xl text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-xl shadow-blue-500/20 active:scale-[0.98] transition-all duration-200"
+                  >
+                    <span>Start My Interview</span>
+                    <ArrowRight className="ml-2 h-6 w-6" />
+                  </button>
+                  <p className="text-slate-400 font-bold tracking-widest uppercase text-[10px] text-center">
+                    Secured by HireVision AI Guard
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     );
   }
@@ -146,8 +239,11 @@ const AvatarDisplay = () => {
   // ================= LOADING SCREEN =================
   if (interviewStarted && questions.length === 0) {
     return (
-      <div style={{ textAlign: "center", marginTop: "100px" }}>
-        <h2>Loading Questions...</h2>
+      <div className="min-h-screen flex items-center justify-center font-sans bg-[#020617] text-white">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-4"></div>
+          <h2 className="text-xl font-bold">Preparing Your Interview Environment...</h2>
+        </div>
       </div>
     );
   }
@@ -157,130 +253,210 @@ const AvatarDisplay = () => {
     const isSelected = totalScore >= 10;
 
     return (
-      <div style={styles.resultContainer}>
-        <h2>Final Result</h2>
-        <p>Total Questions: {questions.length}</p>
-        <p>Answered Questions: {answeredCount}</p>
-        <p>Skipped Questions: {skippedQuestions.length}</p>
-        <h3>Total Marks: {totalScore}</h3>
+      <div className="min-h-screen flex items-center justify-center p-6 font-sans bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-lg p-10 rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl relative z-10 text-center"
+        >
+          <h2 className="text-3xl font-black text-white mb-8 font-display">Interview Complete</h2>
 
-        <h2 style={{ color: isSelected ? "green" : "red" }}>
-          {isSelected
-            ? "Thank you for your response — you will receive a phone call within a few hours ✅"
-            : "We will let you know"}
-        </h2>
+          <div className="grid grid-cols-2 gap-4 mb-10">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+              <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Answered</p>
+              <p className="text-2xl font-black text-white">{answeredCount}/{questions.length}</p>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+              <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Total Score</p>
+              <p className="text-2xl font-black text-blue-400">{totalScore}</p>
+            </div>
+          </div>
 
-        <button style={styles.homeButton} onClick={() => navigate("/")}>
-          Back to Home
-        </button>
+          <div className={`p-8 rounded-3xl mb-10 ${isSelected ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20'} border`}>
+            {isSelected ? (
+              <>
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="text-white w-10 h-10" />
+                </div>
+                <h2 className="text-3xl font-black text-green-400">We will let know</h2>
+                <p className="text-green-200/70 mt-2 font-medium">Congratulations! You've passed the assessment.</p>
+              </>
+            ) : (
+              <>
+
+                <h2 className="text-3xl font-black text-white">We will let you know</h2>
+
+              </>
+            )}
+          </div>
+
+          <button
+            onClick={() => navigate("/")}
+            className="w-full h-14 flex items-center justify-center rounded-2xl text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-all duration-200"
+          >
+            <Home className="mr-2 h-5 w-5" />
+            <span>Back to Home</span>
+          </button>
+        </motion.div>
       </div>
     );
   }
 
-  // ================= INTERVIEW SCREEN =================
+  // ================= INTERVIEW SESSION VIEW =================
   return (
-    <div style={styles.container}>
-      <h2>Virtual Interview Assistant</h2>
-      <h3 style={{ color: timeLeft < 60 ? "red" : "black" }}>
-        Time Remaining: {formatTime(timeLeft)}
-      </h3>
-
-      <h4>Question {currentIndex + 1}</h4>
-      <p>{questions[currentIndex]?.question}</p>
-
-      <form onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Type your answer here..."
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          rows="4"
-          style={styles.textarea}
-          required={false} // allow empty if user wants to skip
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit(e);
-            }
-          }}
-        />
-
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center", marginTop: 12 }}>
-          <button
-            type="submit"
-            disabled={loading}
-            style={{ ...styles.button, backgroundColor: "#1e90ff", color: "#fff" }}
-          >
-            {loading ? "Submitting..." : "Submit Answer"}
-          </button>
-
-          <button
-            type="button"
-            onClick={handleSkip}
-            disabled={loading}
-            style={{ ...styles.button, backgroundColor: "#888", color: "#fff" }}
-            title="Skip this question and move to the next"
-          >
-            Skip Question
-          </button>
+    <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
+      {/* Left Branding Sidebar (Same as Start screen) */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="hidden lg:flex md:w-[30%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-10 flex-col justify-between border-r border-white/5 relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
+          <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full blur-[100px]"></div>
         </div>
-      </form>
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 mb-16">
+            <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <BrainCircuit className="text-white w-4 h-4" />
+            </div>
+            <span className="text-xl font-black text-white tracking-tight">HireVision</span>
+          </div>
+
+          <div className="space-y-12">
+            <div className="space-y-4">
+              <h2 className="text-4xl font-black text-white leading-tight">Session <span className="text-blue-400">Live</span></h2>
+              <p className="text-slate-400 leading-relaxed italic uppercase font-bold tracking-widest text-[10px]">
+                Please maintain professional conduct throughout the session.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-white/5 border border-white/5 space-y-4 backdrop-blur-sm">
+              <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Live Progress</h3>
+              <div className="space-y-4">
+                {questions.map((_, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-colors ${idx === currentIndex ? 'bg-blue-600 text-white ring-4 ring-blue-600/20 shadow-lg shadow-blue-500/20' : idx < currentIndex ? 'bg-green-600/20 text-green-500 border border-green-600/30' : 'bg-white/5 text-slate-500 border border-white/5'}`}>
+                      {idx < currentIndex ? <CheckCircle2 className="w-4 h-4" /> : idx + 1}
+                    </div>
+                    <span className={`text-xs font-bold tracking-tight ${idx === currentIndex ? 'text-white' : 'text-slate-500'}`}>Question {idx + 1}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 flex items-center gap-3 bg-red-500/10 border border-red-500/20 p-4 rounded-2xl text-red-400">
+          <Timer className="w-5 h-5 animate-pulse" />
+          <span className="font-mono text-lg font-black tracking-widest">{formatTime(timeLeft)}</span>
+        </div>
+      </motion.div>
+
+      {/* Main Content Area (White background style) */}
+      <div className="flex-1 bg-slate-50 flex items-center justify-center p-6 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-5xl relative z-10 flex flex-col items-center"
+        >
+
+          <div className="w-full bg-white rounded-[2.5rem] p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
+            {/* Interviewer Profile Card */}
+            <div className="md:w-[40%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
+              <div className="relative mb-6 group">
+                <div className="w-36 h-36 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 p-1 transition-transform duration-500 group-hover:scale-105">
+                  <img
+                    src={avatarInterviewer}
+                    alt="Interviewer Avatar"
+                    className="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
+                  />
+                </div>
+                <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 leading-tight">Shweta</h3>
+              <p className="text-[10px] font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-2">
+                Senior HR Interviewer
+              </p>
+
+              <div className="mt-8 pt-8 border-t border-slate-200 w-full flex items-center justify-center gap-3 text-slate-400">
+                <ShieldCheck className="w-4 h-4" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Verified Expert</span>
+              </div>
+            </div>
+
+            {/* Conversation/Input Area */}
+            <div className="flex-1 p-8 md:p-12 flex flex-col gap-8 bg-white relative">
+              {/* Question Bubble */}
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-2 text-blue-600">
+                  <MessageSquare className="w-4 h-4" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Inquiry</span>
+                </div>
+                <div className="p-8 rounded-[2rem] rounded-tl-none bg-blue-50/50 border border-blue-100/50 text-slate-800 text-xl font-medium leading-relaxed shadow-sm">
+                  {questions[currentIndex]?.question || "Loading question..."}
+                </div>
+              </div>
+
+              {/* Answer Input */}
+              <div className="flex-1 flex flex-col gap-4">
+                <div className="flex items-center gap-2 mb-1 text-slate-400">
+                  <Send className="w-4 h-4 rotate-45" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Your Response</span>
+                </div>
+                <textarea
+                  placeholder="Type your response here..."
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSubmit();
+                    }
+                  }}
+                  className="w-full h-full min-h-[150px] p-8 rounded-[2rem] bg-slate-50/50 border border-slate-200 text-slate-800 text-base placeholder:text-slate-400 placeholder:italic focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600/20 transition-all duration-300 resize-none leading-relaxed shadow-inner"
+                  required
+                />
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading || !answer.trim()}
+                  className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
+                >
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>
+                      <span>Submit Answer</span>
+                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleSkip}
+                  disabled={loading}
+                  className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
+                  title="Skip Question"
+                >
+                  <FastForward className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-8 text-slate-400 font-bold tracking-widest uppercase text-[9px]">
+            Professional Assessment Interface &bull; Powered by HireVision AI
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  startContainer: {
-    maxWidth: "500px",
-    margin: "100px auto",
-    padding: "40px",
-    textAlign: "center",
-    border: "1px solid #ddd",
-    borderRadius: "12px",
-    backgroundColor: "#ffffff",
-  },
-  startButton: {
-    marginTop: "25px",
-    padding: "12px 25px",
-    fontSize: "16px",
-    cursor: "pointer",
-    backgroundColor: "#1e90ff",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-  },
-  container: {
-    maxWidth: "600px",
-    margin: "50px auto",
-    padding: "20px",
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    textAlign: "center",
-  },
-  textarea: {
-    width: "100%",
-    padding: "10px",
-    marginTop: "10px",
-  },
-  button: {
-    marginTop: "10px",
-    padding: "8px 16px",
-    cursor: "pointer",
-    borderRadius: 6,
-    border: "none",
-  },
-  resultContainer: {
-    maxWidth: "500px",
-    margin: "80px auto",
-    padding: "30px",
-    border: "1px solid #ccc",
-    borderRadius: "12px",
-    textAlign: "center",
-  },
-  homeButton: {
-    marginTop: "20px",
-    padding: "10px 20px",
-    cursor: "pointer",
-  },
 };
 
 export default AvatarDisplay;

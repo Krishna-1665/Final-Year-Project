@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Mail, Lock, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate, Link } from "react-router-dom";
+import { Mail, Lock, LogIn, Github, ArrowRight, Eye, EyeOff, BrainCircuit, CheckCircle2 } from "lucide-react"; // Kept CheckCircle2 as it's used in JSX
+import { GoogleLogin } from "@react-oauth/google";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -83,9 +84,14 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row overflow-hidden font-sans bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b]">
-            {/* Left Section - Hero/Branding */}
-            <div className="hidden md:flex md:w-1/2 relative overflow-hidden flex-col justify-between p-12 border-r border-white/5">
+        <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white overflow-hidden">
+            {/* Left Decoration Sidebar */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="hidden md:flex md:w-[40%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex-col justify-between border-r border-white/5 relative overflow-hidden"
+            >
                 {/* Decorative background effects */}
                 <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
                     <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
@@ -102,17 +108,17 @@ const Login = () => {
 
                     <div className="max-w-md">
                         <h1 className="text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-8 font-display">
-                            Master your next <span className="text-blue-400">Interview</span> with AI.
+                            Ace Your Next <span className="text-blue-400">Interview</span> with AI Precision.
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed mb-10">
-                            Join thousands of professionals using HireVision to practice, improve, and land their dream jobs with personalized AI feedback.
+                            A machine learning–based virtual interview assistant that analyzes responses, predicts performance scores, and helps candidates enhance their confidence through structured mock interviews.
                         </p>
 
                         <div className="space-y-4">
                             {[
-                                "Personalized AI Avatars",
-                                "Real-time performance metrics",
-                                "Industry-specific scenarios"
+                                "AI-powered answer evaluationn",
+                                " Real-time scoring & feedback",
+                                " Smart interview simulations"
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3 text-slate-300">
                                     <CheckCircle2 className="w-5 h-5 text-blue-500" />
@@ -128,17 +134,22 @@ const Login = () => {
                         &copy; 2026 HireVision AI. All rights reserved.
                     </p>
                 </div>
-            </div>
+            </motion.div>
 
-            {/* Right Section - Login Form */}
-            <div className="flex-1 flex items-center justify-center p-6 sm:p-12 md:p-20 relative">
-                {/* Mobile background decorative effects */}
-                <div className="md:hidden absolute inset-0 opacity-20 pointer-events-none">
-                    <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-blue-500 rounded-full blur-[80px]"></div>
-                    <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 bg-purple-500 rounded-full blur-[80px]"></div>
+            {/* Right Login Sidebar */}
+            <div className="flex-1 flex items-center justify-center p-6 sm:p-12 relative overflow-hidden">
+                {/* Animated background blobs */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-500 rounded-full blur-[120px] animate-pulse"></div>
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-purple-600 rounded-full blur-[100px] animate-pulse delay-700"></div>
                 </div>
 
-                <div className="w-full max-w-md p-8 sm:p-12 rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl relative z-10 transition-all duration-500 hover:border-white/20">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full max-w-md p-8 sm:p-12 rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl relative z-10"
+                >
                     <div className="md:hidden flex items-center gap-2 mb-10 justify-center">
                         <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                             <Lock className="text-white w-4 h-4" />
@@ -247,7 +258,7 @@ const Login = () => {
                             </Link>
                         </p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
