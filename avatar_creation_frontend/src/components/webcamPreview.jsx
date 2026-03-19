@@ -34,6 +34,7 @@ const WebcamPreview = () => {
         borderRadius: "10px",
         border: "1px solid #ccc",
         transform: "scaleX(-1)", //
+      
       }}
     />
   );
