@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { Timer, CheckCircle2, ArrowRight, Home, BrainCircuit, MessageSquare, AlertCircle, FastForward, Send, ShieldCheck } from 'lucide-react';
 import avatarInterviewer from "../assets/avatar_interviewer.png";
 import { motion, AnimatePresence } from "framer-motion";
+=======
+import WebcamPreview from "./webcamPreview";
+
+import avatarImage from "../assets/avatar_interviewer.png";
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
 
 const API_BASE_URL = "http://localhost:5000";
 
@@ -17,19 +23,26 @@ const AvatarDisplay = () => {
   const [answeredCount, setAnsweredCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
+<<<<<<< HEAD
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
 
+=======
+  const [timeLeft, setTimeLeft] = useState(1200);
+  const [skippedQuestions, setSkippedQuestions] = useState([]);
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
 
   // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
-    if (interviewStarted) {
-      fetchQuestions();
-    }
+    if (interviewStarted) fetchQuestions();
   }, [interviewStarted]);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (!interviewStarted || showResult) return;
 
+=======
+    if (!interviewStarted) return;
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -40,7 +53,6 @@ const AvatarDisplay = () => {
         return prev - 1;
       });
     }, 1000);
-
     return () => clearInterval(timer);
   }, [interviewStarted, showResult]);
 
@@ -49,12 +61,26 @@ const AvatarDisplay = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
       const data = await response.json();
+<<<<<<< HEAD
 
       if (response.ok) {
         setQuestions(data);
       }
     } catch (error) {
       console.error("Fetch error:", error);
+=======
+      if (response.ok) setQuestions(data);
+    } catch {
+      alert("Backend not running on port 5000");
+    }
+  };
+
+  const goToNextQuestion = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      setShowResult(true);
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
     }
   };
 
@@ -63,8 +89,8 @@ const AvatarDisplay = () => {
     if (!answer.trim()) return;
 
     setLoading(true);
-
     try {
+<<<<<<< HEAD
       const response = await fetch(
         `${API_BASE_URL}/api/submit-answer`,
         {
@@ -76,15 +102,24 @@ const AvatarDisplay = () => {
           }),
         }
       );
+=======
+      const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answer,
+          question_id: questions[currentIndex]?.question_id,
+        }),
+      });
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
 
       const data = await response.json();
-
       if (response.ok) {
         const score = Number(data.predicted_score || 0);
-
         setTotalScore((prev) => prev + score);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
+<<<<<<< HEAD
 
         if (currentIndex < questions.length - 1) {
           setCurrentIndex((prev) => prev + 1);
@@ -94,18 +129,33 @@ const AvatarDisplay = () => {
       }
     } catch (error) {
       console.error("Submission failed", error);
+=======
+        goToNextQuestion();
+      } else {
+        alert(data.message || "Submission failed");
+      }
+    } catch {
+      alert("Submission failed");
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
     } finally {
       setLoading(false);
     }
   };
 
   const handleSkip = () => {
+<<<<<<< HEAD
     setAnswer("");
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       setShowResult(true);
     }
+=======
+    if (loading) return;
+    const qid = questions[currentIndex]?.question_id;
+    setSkippedQuestions((prev) => [...prev, qid]);
+    goToNextQuestion();
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
   };
 
   const formatTime = (seconds) => {
@@ -114,8 +164,11 @@ const AvatarDisplay = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
+<<<<<<< HEAD
 
   // ================= START SCREEN / PORTAL =================
+=======
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
   if (!interviewStarted) {
     return (
       <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
@@ -236,8 +289,8 @@ const AvatarDisplay = () => {
     );
   }
 
-  // ================= LOADING SCREEN =================
   if (interviewStarted && questions.length === 0) {
+<<<<<<< HEAD
     return (
       <div className="min-h-screen flex items-center justify-center font-sans bg-[#020617] text-white">
         <div className="flex flex-col items-center">
@@ -246,13 +299,15 @@ const AvatarDisplay = () => {
         </div>
       </div>
     );
+=======
+    return <h2 style={{ textAlign: "center", marginTop: "100px" }}>Loading Questions...</h2>;
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
   }
 
-  // ================= RESULT SCREEN =================
   if (showResult) {
     const isSelected = totalScore >= 10;
-
     return (
+<<<<<<< HEAD
       <div className="min-h-screen flex items-center justify-center p-6 font-sans bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b]">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -299,12 +354,27 @@ const AvatarDisplay = () => {
             <span>Back to Home</span>
           </button>
         </motion.div>
+=======
+      <div style={styles.resultContainer}>
+        <h2>Final Result</h2>
+        <p>Total Questions: {questions.length}</p>
+        <p>Answered Questions: {answeredCount}</p>
+        <p>Skipped Questions: {skippedQuestions.length}</p>
+        <h3>Total Marks: {totalScore}</h3>
+        <h2 style={{ color: isSelected ? "green" : "red" }}>
+          {isSelected ? "You are Selected ✅" : "You are Rejected ❌"}
+        </h2>
+        <button style={styles.homeButton} onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
       </div>
     );
   }
 
   // ================= INTERVIEW SESSION VIEW =================
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
       {/* Left Branding Sidebar (Same as Start screen) */}
       <motion.div
@@ -314,6 +384,58 @@ const AvatarDisplay = () => {
       >
         <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
           <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full blur-[100px]"></div>
+=======
+    <div style={styles.container}>
+
+      {/* ✅ ADDED TOP BAR (ONLY ADDITION) */}
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+        <div style={{ textAlign: "center" }}>
+          <img
+            src={avatarImage}
+            alt="Avatar"
+            style={{ width: "80px", borderRadius: "50%", border: "2px solid #1e90ff" }}
+          />
+          <p style={{ fontSize: "12px" }}>AI Interviewer</p>
+        </div>
+        <div style={{ width: "150px" }}>
+          <WebcamPreview />
+        </div>
+      </div>
+      {/* ✅ END ADDITION */}
+
+      <h2>Virtual Interview Assistant</h2>
+
+      <h3 style={{ color: timeLeft < 60 ? "red" : "black" }}>
+        Time Remaining: {formatTime(timeLeft)}
+      </h3>
+
+      <h4>Question {currentIndex + 1}</h4>
+      <p>{questions[currentIndex]?.question}</p>
+
+      <form onSubmit={handleSubmit}>
+        <textarea
+          placeholder="Type your answer here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          rows="4"
+          style={styles.textarea}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit(e);
+            }
+          }}
+        />
+
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", marginTop: 12 }}>
+          <button type="submit" disabled={loading} style={{ ...styles.button, backgroundColor: "#1e90ff", color: "#fff" }}>
+            {loading ? "Submitting..." : "Submit Answer"}
+          </button>
+
+          <button type="button" onClick={handleSkip} disabled={loading} style={{ ...styles.button, backgroundColor: "#888", color: "#fff" }}>
+            Skip Question
+          </button>
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
         </div>
 
         <div className="relative z-10">
@@ -459,4 +581,21 @@ const AvatarDisplay = () => {
   );
 };
 
+<<<<<<< HEAD
+=======
+const styles = {
+  startContainer: { maxWidth: "500px", margin: "100px auto", padding: "40px", textAlign: "center", border: "1px solid #ddd", borderRadius: "12px", backgroundColor: "#ffffff" },
+  startButton: { marginTop: "25px", padding: "12px 25px", fontSize: "16px", cursor: "pointer", backgroundColor: "#1e90ff", color: "white", border: "none", borderRadius: "6px" },
+  container: { maxWidth: "600px", margin: "50px auto", padding: "20px", border: "1px solid #ddd", borderRadius: "10px", textAlign: "center" },
+  textarea: { width: "100%", padding: "10px", marginTop: "10px" },
+  button: { marginTop: "10px", padding: "8px 16px", cursor: "pointer", borderRadius: 6, border: "none" },
+  resultContainer: { maxWidth: "500px", margin: "80px auto", padding: "30px", border: "1px solid #ccc", borderRadius: "12px", textAlign: "center" },
+  homeButton: { marginTop: "20px", padding: "10px 20px", cursor: "pointer" },
+};
+
+>>>>>>> 814d250122e1be4be7648ab429b80c79be20449e
 export default AvatarDisplay;
+
+
+
+
