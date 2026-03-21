@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Timer, CheckCircle2, ArrowRight, Home, BrainCircuit, MessageSquare, AlertCircle, FastForward, Send, ShieldCheck } from 'lucide-react';
-import avatarInterviewer from "../assets/avatar_interviewer.png";
+import avatarInterviewer from "../assets/avatars/avatar_interviewer.png";
+import TechAvatar from "../assets/avatars/Sweta.png";
+import DatasetAvatar from "../assets/avatars/Krishna.png";
+import AiMLAvatar from "../assets/avatars/Rahul.png";
+import managerAvatar from "../assets/avatars/Arpita.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 const API_BASE_URL = "http://localhost:5000";
@@ -18,6 +22,35 @@ const AvatarDisplay = () => {
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
+  const isLowTime = timeLeft < 60;
+  const avatarList = [
+    {
+      name: "Vandana Verma",
+      role: "HR Interviewer",
+      image: avatarInterviewer
+    },
+    {
+      name: "Sweta",
+      role: "Technical",
+      image: TechAvatar
+    },
+    {
+      name: "Krishna",
+      role: "Dataset Expert",
+      image: DatasetAvatar
+    },
+    {
+      name: "Rahul",
+      role: "AI/ML Specialist",
+      image: AiMLAvatar
+    },
+    {
+      name: "Arpita",
+      role: "Manager",
+      image: managerAvatar
+    }
+  ];
+  const [activeAvatar, setActiveAvatar] = useState(0);
 
 
   // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
@@ -118,7 +151,7 @@ const AvatarDisplay = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-[40%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
+          className="md:w-[25%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
             <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
@@ -165,36 +198,51 @@ const AvatarDisplay = () => {
         </motion.div>
 
         {/* Right Content Area */}
-        <div className="flex-1 bg-white flex items-center justify-center p-8 relative overflow-hidden">
+        <div className="flex-1 bg-white flex items-center justify-center p-12 relative overflow-hidden">
           <div className="absolute inset-0 opacity-5 pointer-events-none">
-            <div className="absolute top-[-10%] right-[-10%] w-full h-full bg-blue-500 rounded-full blur-[120px]"></div>
+            <div className="absolute top-[-20%] right-[-20%] w-full h-full bg-blue-500 rounded-full blur-[120px]"></div>
           </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full max-w-2xl text-center relative z-10"
+            className="w-full max-w-4xl text-center relative z-10"
           >
             <h2 className="text-4xl font-black text-slate-900 mb-2">Welcome to your Session</h2>
-            <p className="text-slate-500 mb-12 text-lg">Your AI interviewer is ready to begin.</p>
+            <p className="text-slate-500 mb-12 text-lg">Your AI interviewers is ready to begin.</p>
 
             <div className="bg-white rounded-[2.5rem] p-1 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[400px]">
               {/* Interviewer Profile Card */}
-              <div className="md:w-[45%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
-                <div className="relative mb-6">
-                  <div className="w-40 h-40 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 p-1">
-                    <img
-                      src={avatarInterviewer}
-                      alt="Interviewer Avatar"
-                      className="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
-                    />
-                  </div>
-                  <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
+              <div className="md:w-[35%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
+                <div className="flex justify-center items-end gap-6 mb-8 flex-wrap">
+
+                  {avatarList.map((avatar, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setActiveAvatar(index)}
+                      className="flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-105"
+                    >
+                      {/* Avatar Image */}
+                      <div className="w-27 h-27 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <img
+                          src={avatar.image}
+                          alt={avatar.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      {/* Name */}
+                      <p className="text-xs font-bold text-slate-700 mt-2 text-center">
+                        {avatar.name}
+                      </p>
+                    </div>
+                  ))}
+
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">Shweta</h3>
+                <h3 className="text-2xl font-black text-slate-900">Interviewers Panel</h3>
                 <p className="text-[10px] font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-1">
-                  Senior HR Interviewer
+                  Senior Interviewers
                 </p>
               </div>
 
@@ -219,7 +267,7 @@ const AvatarDisplay = () => {
                     <ArrowRight className="ml-2 h-6 w-6" />
                   </button>
                   <p className="text-slate-400 font-bold tracking-widest uppercase text-[10px] text-center">
-                    Secured by HireVision AI Guard
+                    Secured by HireVision Pvt Ltd
                   </p>
                 </div>
               </div>
@@ -282,13 +330,41 @@ const AvatarDisplay = () => {
             )}
           </div>
 
-          <button
-            onClick={() => navigate("/")}
-            className="w-full h-14 flex items-center justify-center rounded-2xl text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/10 transition-all duration-200"
-          >
-            <Home className="mr-2 h-5 w-5" />
-            <span>Back to Home</span>
-          </button>
+
+          <div className="space-y-4">
+            {/* Career Guidance Question */}
+            <p className="text-slate-300 font-semibold">
+              Would you like Career Guidance?
+            </p>
+
+            <div className="flex gap-4">
+              {/* YES BUTTON */}
+              <button
+                onClick={() => navigate("/career-guidance", {
+                  state: { score: totalScore }
+                })}
+                className="flex-1 h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold transition"
+              >
+                Yes
+              </button>
+
+              {/* NO BUTTON */}
+              <button
+                onClick={() => navigate("/login")}
+                className="flex-1 h-12 rounded-xl bg-gray-500 hover:bg-gray-600 text-white font-bold transition"
+              >
+                No
+              </button>
+            </div>
+
+            {/* Back Home (optional) */}
+            <button
+              onClick={() => navigate("/login")}
+              className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold mt-2"
+            >
+              Back to Home
+            </button>
+          </div>
         </motion.div>
       </div>
     );
@@ -339,9 +415,11 @@ const AvatarDisplay = () => {
           </div>
         </div>
 
-        <div className="relative z-10 flex items-center gap-3 bg-red-500/10 border border-red-500/20 p-4 rounded-2xl text-red-400">
-          <Timer className="w-5 h-5 animate-pulse" />
-          <span className="font-mono text-lg font-black tracking-widest">{formatTime(timeLeft)}</span>
+        <div className="absolute top-6 right-8 z-20 flex items-center gap-2 bg-white border border-slate-200 px-5 py-2 rounded-full shadow-md">
+          <Timer className="w-4 h-4 text-red-500 animate-pulse" />
+          <span className={`font-mono font-bold ${isLowTime ? "text-red-600" : "text-slate-700"}`}>
+            {formatTime(timeLeft)}
+          </span>
         </div>
       </motion.div>
 
@@ -367,7 +445,7 @@ const AvatarDisplay = () => {
                 </div>
                 <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 leading-tight">Shweta</h3>
+              <h3 className="text-2xl font-black text-slate-900 leading-tight">Vandan Verma</h3>
               <p className="text-[10px] font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-2">
                 Senior HR Interviewer
               </p>
