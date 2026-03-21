@@ -33,7 +33,8 @@ const WebcamPreview = () => {
         width: "100%",
         borderRadius: "10px",
         border: "1px solid #ccc",
-        transform: "scaleX(-1)", // ✅ Fix mirror
+        transform: "scaleX(-1)", //
+      
       }}
     />
   );
