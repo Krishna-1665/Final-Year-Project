@@ -6,6 +6,7 @@ import TechAvatar from "../assets/avatars/Sweta.png";
 import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
 import ProgrammingAvatar from "../assets/avatars/Arpita.png";
+import Careerguide from "../assets/avatars/Prakash.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 const API_BASE_URL = "http://localhost:5000";
