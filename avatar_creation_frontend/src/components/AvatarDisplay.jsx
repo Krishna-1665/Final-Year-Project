@@ -5,7 +5,7 @@ import avatarInterviewer from "../assets/avatars/avatar_interviewer.png";
 import TechAvatar from "../assets/avatars/Sweta.png";
 import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
-import managerAvatar from "../assets/avatars/Arpita.png";
+import ProgrammingAvatar from "../assets/avatars/Arpita.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 const API_BASE_URL = "http://localhost:5000";
@@ -23,31 +23,31 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
   const isLowTime = timeLeft < 60;
-  const avatarList = [
+  const interviewPanel = [
     {
-      name: "Vandana Verma",
+      name: "Rashita",
       role: "HR Interviewer",
       image: avatarInterviewer
     },
     {
       name: "Sweta",
-      role: "Technical",
+      role: "Technical Interviewer",
       image: TechAvatar
     },
     {
       name: "Krishna",
-      role: "Dataset Expert",
+      role: "Database Interviewer",
       image: DatasetAvatar
     },
     {
       name: "Rahul",
-      role: "AI/ML Specialist",
+      role: "AI/ML Interviewer",
       image: AiMLAvatar
     },
     {
       name: "Arpita",
-      role: "Manager",
-      image: managerAvatar
+      role: "Programming Interviewer",
+      image: ProgrammingAvatar
     }
   ];
   const [activeAvatar, setActiveAvatar] = useState(0);
@@ -212,66 +212,74 @@ const AvatarDisplay = () => {
             <h2 className="text-4xl font-black text-slate-900 mb-2">Welcome to your Session</h2>
             <p className="text-slate-500 mb-12 text-lg">Your AI interviewers is ready to begin.</p>
 
-            <div className="bg-white rounded-[2.5rem] p-1 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[400px]">
-              {/* Interviewer Profile Card */}
-              <div className="md:w-[35%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
-                <div className="flex justify-center items-end gap-6 mb-8 flex-wrap">
 
-                  {avatarList.map((avatar, index) => (
-                    <div
-                      key={index}
-                      onClick={() => setActiveAvatar(index)}
-                      className="flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-105"
-                    >
-                      {/* Avatar Image */}
-                      <div className="w-27 h-27 rounded-full overflow-hidden border-4 border-white shadow-lg">
+
+            {/* Interview Panel */}
+            <div className="bg-white rounded-[2.5rem] p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col items-center gap-8 min-h-[420px]">
+
+              {/* 🔼 AVATAR PANEL (TOP) */}
+              <div className="w-full flex flex-col items-center">
+
+                <h3 className="text-lg font-bold text-slate-900 mb-6">
+                  Interview Panel
+                </h3>
+
+                <div className="flex justify-center gap-7 flex-wrap">
+                  {interviewPanel.map((member, index) => (
+                    <div key={index} className="flex flex-col items-center">
+
+                      <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-400 shadow-md">
                         <img
-                          src={avatar.image}
-                          alt={avatar.name}
+                          src={member.image}
+                          alt={member.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
 
-                      {/* Name */}
-                      <p className="text-xs font-bold text-slate-700 mt-2 text-center">
-                        {avatar.name}
+                      <p className="text-sm font-bold mt-2 text-slate-700">
+                        {member.name}
+                      </p>
+
+                      <p className="text-[13px] text-slate-500 text-center">
+                        {member.role}
                       </p>
                     </div>
                   ))}
-
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">Interviewers Panel</h3>
-                <p className="text-[10px] font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-1">
-                  Senior Interviewers
+              </div>
+
+              {/* 🔽 START INTERVIEW SECTION (BOTTOM) */}
+              <div className="w-full max-w-md flex flex-col items-center gap-5">
+
+                <div className="flex items-center gap-2 text-slate-600">
+                  <Timer className="w-5 h-5 text-blue-500" />
+                  <span className="font-semibold text-lg">20 Minutes Session</span>
+                </div>
+
+                <p className="text-slate-400 text-center">
+                  Please ensure you are in a quiet environment and have a stable connection.
+                </p>
+
+                <button
+                  onClick={() => setInterviewStarted(true)}
+                  className="w-full h-14 rounded-xl text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition"
+                >
+                  Start My Interview
+                </button>
+
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest">
+                  Secured by HireVision
                 </p>
               </div>
 
-              {/* Start Action */}
-              <div className="flex-1 p-10 flex flex-col justify-center items-center gap-8">
-                <div className="text-left w-full space-y-4">
-                  <div className="flex items-center gap-4 text-slate-600">
-                    <Timer className="w-5 h-5 text-blue-500" />
-                    <span className="font-semibold text-lg italic tracking-tight">20 Minutes Session</span>
-                  </div>
-                  <p className="text-slate-400 leading-relaxed italic text-base">
-                    Please ensure you are in a quiet environment and have a stable connection.
-                  </p>
-                </div>
-
-                <div className="w-full space-y-4">
-                  <button
-                    onClick={() => setInterviewStarted(true)}
-                    className="w-full h-16 flex items-center justify-center rounded-2xl text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-xl shadow-blue-500/20 active:scale-[0.98] transition-all duration-200"
-                  >
-                    <span>Start My Interview</span>
-                    <ArrowRight className="ml-2 h-6 w-6" />
-                  </button>
-                  <p className="text-slate-400 font-bold tracking-widest uppercase text-[10px] text-center">
-                    Secured by HireVision Pvt Ltd
-                  </p>
-                </div>
-              </div>
             </div>
+
+
+
+
+
+
+
           </motion.div>
         </div>
       </div>
@@ -438,14 +446,14 @@ const AvatarDisplay = () => {
               <div className="relative mb-6 group">
                 <div className="w-36 h-36 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 p-1 transition-transform duration-500 group-hover:scale-105">
                   <img
-                    src={avatarInterviewer}
-                    alt="Interviewer Avatar"
+                    src={interviewPanel[activeAvatar].image}
+                    alt="Active Interviewer"
                     className="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
                   />
                 </div>
                 <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 leading-tight">Vandan Verma</h3>
+              <h3 className="text-2xl font-black text-slate-900 leading-tight">Rashita</h3>
               <p className="text-[10px] font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-2">
                 Senior HR Interviewer
               </p>
