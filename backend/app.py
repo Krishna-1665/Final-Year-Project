@@ -51,17 +51,36 @@ def health():
 # ------------------ API: Get Question ------------------
 @app.route('/api/questions', methods=['GET'])
 def get_questions():
-    # Shuffle dataset and take 10 unique questions
-    sample_df = df.sample(n=10)
-    questions = []
+    try:
+        categories = ["HR", "Technical", "Programming", "Database", "AI/ML"]
+        final_questions = []
 
-    for _, row in sample_df.iterrows():
-        questions.append({
-            "question_id": str(row["question_id"]),
-            "question": row["question"]
-        })
+        for cat in categories:
+            # Filter category
+            cat_df = df[df['category'] == cat]
 
-    return jsonify(questions)
+             # Remove duplicate questions (case-insensitive)
+            cat_df['question_clean'] = cat_df['question'].str.lower().str.strip()
+            cat_df = cat_df.drop_duplicates(subset='question_clean')
+
+            # Shuffle the category questions
+            cat_df = cat_df.sample(frac=1).reset_index(drop=True)
+
+            # Pick 3 random questions (or less if not enough)
+            selected = cat_df.head(3)
+
+            for _, row in selected.iterrows():
+                final_questions.append({
+                    "question_id": str(row["question_id"]),
+                    "question": row["question"],
+                    "category": row["category"]
+                })
+
+        return jsonify(final_questions)
+
+    except Exception as e:
+        print("Error fetching questions:", e)
+        return jsonify({"error": str(e)}), 500
 
 
 def predict_score_dict(answer_text):
