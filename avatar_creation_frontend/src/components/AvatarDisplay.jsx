@@ -109,7 +109,7 @@ const AvatarDisplay = () => {
 
       const data = await response.json();
       if (response.ok) {
-        const score = Number(data.predicted_score || 0);
+       const score = Number(data.prediction?.expected_class || 0);
         setTotalScore((prev) => prev + score);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
@@ -317,7 +317,7 @@ const AvatarDisplay = () => {
             </div>
             <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
               <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Total Score</p>
-              <p className="text-2xl font-black text-blue-400">{totalScore}</p>
+              <p className="text-2xl font-black text-blue-400">{totalScore.toFixed(2)}</p>
             </div>
           </div>
 
