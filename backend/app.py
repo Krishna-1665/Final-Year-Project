@@ -57,7 +57,7 @@ def get_questions():
 
         for cat in categories:
             # Filter category
-            cat_df = df[df['category'] == cat]
+            cat_df = df[df['category'] == cat].copy()
 
              # Remove duplicate questions (case-insensitive)
             cat_df['question_clean'] = cat_df['question'].str.lower().str.strip()
@@ -104,33 +104,106 @@ def predict_score_dict(answer_text):
 @app.route('/api/submit-answer', methods=['POST'])
 def submit_answer():
     data = request.get_json()
+
     answer = data.get("answer")
     question_id = data.get("question_id")
 
-    if not answer or question_id is None:
+    if not answer or not question_id:
         return jsonify({"error": "Missing answer or question_id"}), 400
 
     try:
+        # 🔥 FIX: handle q5 → 5
+        question_id_clean = ''.join(filter(str.isdigit, str(question_id)))
+
+        if not question_id_clean:
+            return jsonify({"error": "Invalid question_id"}), 400
+
+        question_id_str = str(question_id).strip()
+
+        row = df[df['question_id'].astype(str) == question_id_str]
+
+
+        if row.empty:
+            return jsonify({"error": "Question not found"}), 404
+
+        category = row.iloc[0]['category']
+
+        # 🔥 Predict score
         result = predict_score_dict(answer)
 
-        # optional: save result in MongoDB if you want
         record = {
             "question_id": question_id,
-            "answer": answer,
-            "prediction": result,
+            "category": category,
+            "score": result["expected_class"]
         }
+
         db.results.insert_one(record)
 
         return jsonify({
-            "message": "Answer evaluated successfully",
+            "message": "Answer submitted successfully",
             "prediction": result
         }), 200
 
     except Exception as e:
-        print("Prediction error:", e)
+        print("SUBMIT ERROR:", e)
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/api/career-guidance', methods=['GET'])
+def career_guidance():
+    try:
+        # 🔹 Fetch all results
+        results = list(db.results.find({}, {"_id": 0}))
 
+        # 🔹 Initialize category scores
+        category_scores = {
+            "HR": 0,
+            "Technical": 0,
+            "Programming": 0,
+            "Database": 0,
+            "AI/ML": 0
+        }
 
+        # 🔹 Aggregate scores
+        for r in results:
+            if "category" not in r or "score" not in r:
+                continue
+
+            cat = r["category"]
+            score = r["score"]
+
+            if cat in category_scores:
+                category_scores[cat] += score
+
+        # 🔹 Handle empty data
+        if all(v == 0 for v in category_scores.values()):
+            return jsonify({"error": "No valid data found"}), 400
+
+        # 🔹 Find best category
+        best_category = max(category_scores, key=category_scores.get)
+
+        # 🔹 Career mapping
+        career_map = {
+            "HR": "You have strong communication skills. Go for HR or Management roles.",
+            "Technical": "Strong fundamentals. Target core engineering roles.",
+            "Programming": "Good in coding. Focus on Software Development and DSA.",
+            "Database": "Strong in Database. Go for Data Engineer or Data Scientist roles.",
+            "AI/ML": "Great in AI/ML. Go for Machine Learning Engineer or AI roles."
+        }
+
+        # 🔥 Round scores to 2 decimal places
+        rounded_scores = {
+            k: round(v, 2) for k, v in category_scores.items()
+        }
+
+        return jsonify({
+            "category_scores": rounded_scores,
+            "best_category": best_category,
+            "career_guidance": career_map[best_category]
+        })
+
+    except Exception as e:
+        print("Career Guidance Error:", e)
+        return jsonify({"error": str(e)}), 500
    
 @app.route('/google-login', methods=['POST'])
 def google_login():
