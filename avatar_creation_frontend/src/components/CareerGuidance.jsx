@@ -4,7 +4,7 @@ import TechAvatar from "../assets/avatars/Sweta.png";
 import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
 import managerAvatar from "../assets/avatars/Arpita.png";
-
+import PrakashAvatar from "../assets/avatars/prakash.png";
 const CareerGuidance = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ const CareerGuidance = () => {
         role = "Technical Mentor";
     } else {
         feedback = "You should start from fundamentals and build strong concepts.";
-        avatar = managerAvatar;
+        avatar = PrakashAvatar;
         role = "Career Mentor";
     }
 
