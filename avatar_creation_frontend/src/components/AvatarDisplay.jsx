@@ -19,6 +19,7 @@ const AvatarDisplay = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
+  const [sessionId, setSessionId] = useState("");
   const [totalScore, setTotalScore] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,7 @@ const AvatarDisplay = () => {
   
 
 console.log("INDEX:", activeAvatar);
-console.log("CATEGORY:", questions[currentIndex]?.category);
+console.log("CATEGORY:", questions[currentIndex]?.category || "Loading...");
 console.log("NAME:", currentAvatar.name);
 // Map category → avatar index
 const categoryAvatarMap = {
@@ -102,7 +103,8 @@ useEffect(() => {
       const data = await response.json();
 
       if (response.ok) {
-        setQuestions(data);
+        setQuestions(data.questions);     
+        setSessionId(data.session_id);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -111,7 +113,7 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!answer.trim()) return;
+    if (!answer.trim() || !sessionId) return;
 
     setLoading(true);
     try {
@@ -123,6 +125,7 @@ useEffect(() => {
           body: JSON.stringify({
             answer: answer,
             question_id: questions[currentIndex]?.question_id,
+             session_id: sessionId
           }),
         }
       );
@@ -369,12 +372,10 @@ useEffect(() => {
             <div className="flex gap-4">
               {/* YES BUTTON */}
               <button
-                onClick={() => navigate("/career-guidance", {
-                  state: { score: totalScore }
-                })}
-                className="flex-1 h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold transition"
+              onClick={() => navigate(`/career-guidance?session_id=${sessionId}`)}
+              className="flex-1 h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold transition"
               >
-                Yes
+                    Yes
               </button>
 
               {/* NO BUTTON */}
