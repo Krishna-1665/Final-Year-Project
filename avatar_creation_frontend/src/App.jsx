@@ -6,6 +6,7 @@ import AvatarDisplay from "./components/AvatarDisplay";
 import CareerGuidance from "./components/CareerGuidance";
 
 function App() {
+  
   return (
     <Router>
       <Routes>
