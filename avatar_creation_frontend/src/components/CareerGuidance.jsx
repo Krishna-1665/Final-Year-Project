@@ -4,19 +4,24 @@ import TechAvatar from "../assets/avatars/Sweta.png";
 import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
 import managerAvatar from "../assets/avatars/Arpita.png";
+import Careerguide from "../assets/avatars/Prakash.png";
 
 
 
 const CareerGuidance = () => {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const sessionId = searchParams.get("session_id");
 
     const [scores, setScores] = React.useState({});
     const [bestCategory, setBestCategory] = React.useState("");
     const [guidance, setGuidance] = React.useState("");
-     React.useEffect(() => {
+
+    React.useEffect(() => {
         const fetchGuidance = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:5000/api/career-guidance");
+                const res = await fetch(`http://127.0.0.1:5000/api/career-guidance?session_id=${sessionId}`);
                 const data = await res.json();
 
                 setScores(data.category_scores);
@@ -30,14 +35,6 @@ const CareerGuidance = () => {
 
         fetchGuidance();
     }, []);
-    // 🎯 Decide feedback based on score
-    
-    let avatar = TechAvatar;
-    let role = bestCategory;
-    if (bestCategory === "AI/ML") avatar = AiMLAvatar;
-    else if (bestCategory === "Database") avatar = DatasetAvatar;
-    else if (bestCategory === "Programming") avatar = TechAvatar;
-    else if (bestCategory === "HR") avatar = managerAvatar;
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] text-white p-6">
@@ -47,11 +44,11 @@ const CareerGuidance = () => {
 
                 <div className="flex flex-col items-center mb-6">
                     <img
-                        src={avatar}
+                        src={Careerguide}
                         alt="avatar"
                         className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
                     />
-                    <h3 className="mt-4 text-xl font-bold">{role}</h3>
+                    <h3 className="mt-4 text-xl font-bold">Hii I am  your career guide</h3>
                 </div>
 
                 <div className="mb-6 text-left">

@@ -8,6 +8,7 @@ import AiMLAvatar from "../assets/avatars/Rahul.png";
 import ProgrammingAvatar from "../assets/avatars/Arpita.png";
 import Careerguide from "../assets/avatars/Prakash.png";
 import { motion, AnimatePresence } from "framer-motion";
+import Webcam from "react-webcam";
 
 const API_BASE_URL = "http://localhost:5000";
 
@@ -18,6 +19,7 @@ const AvatarDisplay = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
+  const [sessionId, setSessionId] = useState("");
   const [totalScore, setTotalScore] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -52,8 +54,20 @@ const AvatarDisplay = () => {
     }
   ];
   const [activeAvatar, setActiveAvatar] = useState(0);
+  const currentAvatar = interviewPanel[activeAvatar] || interviewPanel[0];
 
 
+  console.log("INDEX:", activeAvatar);
+  console.log("CATEGORY:", questions[currentIndex]?.category || "Loading...");
+  console.log("NAME:", currentAvatar.name);
+  // Map category → avatar index
+  const categoryAvatarMap = {
+    HR: 0,
+    Technical: 1,
+    Database: 2,
+    "AI/ML": 3,
+    Programming: 4
+  };
   // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
     if (interviewStarted) fetchQuestions();
@@ -74,15 +88,23 @@ const AvatarDisplay = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [interviewStarted, showResult]);
+  useEffect(() => {
+    if (questions.length > 0) {
+      const category = questions[currentIndex]?.category;
 
-
+      if (category in categoryAvatarMap) {
+        setActiveAvatar(categoryAvatarMap[category]);
+      }
+    }
+  }, [currentIndex, questions]);
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
       const data = await response.json();
 
       if (response.ok) {
-        setQuestions(data);
+        setQuestions(data.questions);
+        setSessionId(data.session_id);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -91,7 +113,7 @@ const AvatarDisplay = () => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!answer.trim()) return;
+    if (!answer.trim() || !sessionId) return;
 
     setLoading(true);
     try {
@@ -103,6 +125,7 @@ const AvatarDisplay = () => {
           body: JSON.stringify({
             answer: answer,
             question_id: questions[currentIndex]?.question_id,
+            session_id: sessionId
           }),
         }
       );
@@ -349,9 +372,7 @@ const AvatarDisplay = () => {
             <div className="flex gap-4">
               {/* YES BUTTON */}
               <button
-                onClick={() => navigate("/career-guidance", {
-                  state: { score: totalScore }
-                })}
+                onClick={() => navigate(`/career-guidance?session_id=${sessionId}`)}
                 className="flex-1 h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold transition"
               >
                 Yes
@@ -383,6 +404,18 @@ const AvatarDisplay = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
       {/* Left Branding Sidebar (Same as Start screen) */}
+      <div className="absolute top-6 right-6 z-20 w-48 h-36 rounded-xl overflow-hidden border-2 border-white shadow-lg bg-black">
+        <Webcam
+          audio={false}
+          mirrored={false}
+          className="w-full h-full object-cover"
+          videoConstraints={{
+            width: 300,
+            height: 200,
+            facingMode: "user"
+          }}
+        />
+      </div>
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -441,30 +474,44 @@ const AvatarDisplay = () => {
           className="w-full max-w-5xl relative z-10 flex flex-col items-center"
         >
 
-          <div className="w-full bg-white rounded-[2.5rem] p-60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
-            {/* Interviewer Profile Card */}
-            <div className="md:w-[40%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
-              <div className="relative mb-6 group">
-                <div className="w-36 h-36 rounded-full bg-gradient-to-tr from-blue-100 to-purple-100 p-1 transition-transform duration-500 group-hover:scale-105">
+          <div className="w-full bg-white rounded-[2.5rem] p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
+
+            <div className="flex flex-col items-center text-center">
+
+              {/* Avatar */}
+              <div className="relative mb-4">
+                <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-lg">
                   <img
-                    src={interviewPanel[activeAvatar].image}
-                    alt="Active Interviewer"
-                    className="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
+                    src={currentAvatar.image}
+                    alt={currentAvatar.name}
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white rounded-full shadow-sm"></div>
+
+                {/* Online Dot */}
+                <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 leading-tight">Rashita</h3>
-              <p className="text-[10px] font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 uppercase mt-2">
-                Senior HR Interviewer
+
+              {/* Name */}
+              <h3 className="text-2xl font-bold text-slate-900 text-center">
+                {currentAvatar.name}
+              </h3>
+
+              {/* Role (single line) */}
+              <p className="text-sm text-slate-600 whitespace-nowrap">
+                {currentAvatar.role}
               </p>
 
-              <div className="mt-8 pt-8 border-t border-slate-200 w-full flex items-center justify-center gap-3 text-slate-400">
-                <ShieldCheck className="w-4 h-4" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Verified Expert</span>
-              </div>
-            </div>
+              {/* Divider Line */}
+              <div className="w-40 h-[1px] bg-slate-300 mt-4"></div>
 
+              {/* Verified */}
+              <div className="mt-3 flex items-center gap-2 text-slate-400 text-xs">
+                <ShieldCheck className="w-4 h-4" />
+                <span>VERIFIED EXPERT</span>
+              </div>
+
+            </div>
             {/* Conversation/Input Area */}
             <div className="flex-1 p-8 md:p-12 flex flex-col gap-8 bg-white relative">
               {/* Question Bubble */}

@@ -31,4 +31,7 @@ venv/
 .venv/
 backend/venv/
 __pycache__/
-.env
+.env*.xlsx
+
+# Excel Temporary files
+~$*.xlsx

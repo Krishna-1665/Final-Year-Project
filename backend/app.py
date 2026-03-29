@@ -10,6 +10,7 @@ from google.auth.transport import requests as google_requests
 import pandas as pd
 import random
 import numpy as np
+import uuid
 
 load_dotenv()
 
@@ -52,6 +53,7 @@ def health():
 @app.route('/api/questions', methods=['GET'])
 def get_questions():
     try:
+        session_id = str(uuid.uuid4())
         categories = ["HR", "Technical", "Programming", "Database", "AI/ML"]
         final_questions = []
 
@@ -73,10 +75,14 @@ def get_questions():
                 final_questions.append({
                     "question_id": str(row["question_id"]),
                     "question": row["question"],
-                    "category": row["category"]
+                    "category": row["category"],
+                    "session_id": session_id
                 })
 
-        return jsonify(final_questions)
+        return jsonify({
+            "session_id":session_id,
+            "questions":final_questions
+        })
 
     except Exception as e:
         print("Error fetching questions:", e)
@@ -104,11 +110,11 @@ def predict_score_dict(answer_text):
 @app.route('/api/submit-answer', methods=['POST'])
 def submit_answer():
     data = request.get_json()
-
+    session_id = data.get("session_id")
     answer = data.get("answer")
     question_id = data.get("question_id")
 
-    if not answer or not question_id:
+    if not answer or not question_id or not session_id:
         return jsonify({"error": "Missing answer or question_id"}), 400
 
     try:
@@ -134,7 +140,8 @@ def submit_answer():
         record = {
             "question_id": question_id,
             "category": category,
-            "score": result["expected_class"]
+            "score": result["expected_class"],
+            "session_id": session_id 
         }
 
         db.results.insert_one(record)
@@ -151,9 +158,12 @@ def submit_answer():
 @app.route('/api/career-guidance', methods=['GET'])
 def career_guidance():
     try:
-        # 🔹 Fetch all results
-        results = list(db.results.find({}, {"_id": 0}))
+        session_id = request.args.get("session_id")
 
+        if not session_id:
+            return jsonify({"error": "session_id required"}), 400
+
+        results = list(db.results.find({"session_id": session_id}, {"_id": 0}))
         # 🔹 Initialize category scores
         category_scores = {
             "HR": 0,
