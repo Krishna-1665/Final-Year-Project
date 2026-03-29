@@ -109,7 +109,7 @@ const AvatarDisplay = () => {
 
       const data = await response.json();
       if (response.ok) {
-       const score = Number(data.prediction?.expected_class || 0);
+        const score = Number(data.predicted_score || 0);
         setTotalScore((prev) => prev + score);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
@@ -317,7 +317,7 @@ const AvatarDisplay = () => {
             </div>
             <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
               <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Total Score</p>
-              <p className="text-2xl font-black text-blue-400">{totalScore.toFixed(2)}</p>
+              <p className="text-2xl font-black text-blue-400">{totalScore}</p>
             </div>
           </div>
 
@@ -433,7 +433,7 @@ const AvatarDisplay = () => {
       </motion.div>
 
       {/* Main Content Area (White background style) */}
-      <div className="flex-1 bg-slate-50 flex items-center justify-center p-6 relative">
+      <div className="flex-1 bg-slate-50 flex items-center justify-center p-1 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -441,7 +441,7 @@ const AvatarDisplay = () => {
           className="w-full max-w-5xl relative z-10 flex flex-col items-center"
         >
 
-          <div className="w-full bg-white rounded-[2.5rem] p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
+          <div className="w-full bg-white rounded-[2.5rem] p-60 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
             {/* Interviewer Profile Card */}
             <div className="md:w-[40%] bg-slate-50/50 border-r border-slate-100 p-8 flex flex-col items-center justify-center">
               <div className="relative mb-6 group">
@@ -481,7 +481,7 @@ const AvatarDisplay = () => {
               {/* Answer Input */}
               <div className="flex-1 flex flex-col gap-4">
                 <div className="flex items-center gap-2 mb-1 text-slate-400">
-                  <Send className="w-4 h-4 rotate-45" />
+                  <Send className="w-6 h-4 rotate-45" />
                   <span className="text-[10px] font-black uppercase tracking-widest">Your Response</span>
                 </div>
                 <textarea
