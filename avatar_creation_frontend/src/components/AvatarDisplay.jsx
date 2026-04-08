@@ -404,14 +404,14 @@ const AvatarDisplay = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
       {/* Left Branding Sidebar (Same as Start screen) */}
-      <div className="absolute top-6 right-6 z-20 w-48 h-36 rounded-xl overflow-hidden border-2 border-white shadow-lg bg-black">
+      <div className="absolute top-55 right-15 z-20 w-48 h-36 rounded-xl overflow-hidden border-2 border-white shadow-lg bg-black">
         <Webcam
           audio={false}
           mirrored={false}
           className="w-full h-full object-cover"
           videoConstraints={{
-            width: 300,
-            height: 200,
+            width: 400,
+            height: 300,
             facingMode: "user"
           }}
         />
@@ -419,21 +419,21 @@ const AvatarDisplay = () => {
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="hidden lg:flex md:w-[30%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-10 flex-col justify-between border-r border-white/5 relative overflow-hidden"
+        className="hidden lg:flex md:w-[22%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-10 flex-col justify-between border-r border-white/5 relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
-          <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full blur-[100px]"></div>
+        <div className="absolute top-10 right-20 w-full h-full opacity-30 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-16">
+          <div className="flex items-center gap-1 mb-2">
             <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <BrainCircuit className="text-white w-4 h-4" />
             </div>
             <span className="text-xl font-black text-white tracking-tight">HireVision</span>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-10">
             <div className="space-y-4">
               <h2 className="text-4xl font-black text-white leading-tight">Session <span className="text-blue-400">Live</span></h2>
               <p className="text-slate-400 leading-relaxed italic uppercase font-bold tracking-widest text-[10px]">
@@ -441,7 +441,7 @@ const AvatarDisplay = () => {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white/5 border border-white/5 space-y-4 backdrop-blur-sm">
+            <div className="p-4 rounded-3xl bg-white/5 border border-white/5 space-y-2 backdrop-blur-sm">
               <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Live Progress</h3>
               <div className="space-y-4">
                 {questions.map((_, idx) => (
@@ -457,21 +457,16 @@ const AvatarDisplay = () => {
           </div>
         </div>
 
-        <div className="absolute top-6 right-8 z-20 flex items-center gap-2 bg-white border border-slate-200 px-5 py-2 rounded-full shadow-md">
-          <Timer className="w-4 h-4 text-red-500 animate-pulse" />
-          <span className={`font-mono font-bold ${isLowTime ? "text-red-600" : "text-slate-700"}`}>
-            {formatTime(timeLeft)}
-          </span>
-        </div>
+
       </motion.div>
 
       {/* Main Content Area (White background style) */}
-      <div className="flex-1 bg-slate-50 flex items-center justify-center p-1 relative">
+      <div className="flex-1 bg-slate-50 flex items-center justify-left p-2 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-5xl relative z-10 flex flex-col items-center"
+          className="w-full max-w-4xl top-0 relative z-10 flex flex-col items-center"
         >
 
           <div className="w-full bg-white rounded-[2.5rem] p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
@@ -578,7 +573,14 @@ const AvatarDisplay = () => {
           <p className="mt-8 text-slate-400 font-bold tracking-widest uppercase text-[9px]">
             Professional Assessment Interface &bull; Powered by HireVision AI
           </p>
+
         </motion.div>
+      </div>
+      <div className="absolute top-97 right-32 z-20 flex items-center gap-5 bg-white border border-slate-200 px-5 py-2 rounded-full shadow-md">
+        <Timer className="w-10 h-10 text-red-500 animate-pulse" />
+        <span className={`font-mono font-bold ${isLowTime ? "text-red-500" : "text-slate-900"}`}>
+          {formatTime(timeLeft)}
+        </span>
       </div>
     </div>
   );
