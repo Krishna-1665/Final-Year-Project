@@ -13,6 +13,8 @@ import Webcam from "react-webcam";
 const API_BASE_URL = "http://localhost:5000";
 
 const AvatarDisplay = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const webcamRef = React.useRef(null);
   const navigate = useNavigate();
 
   const [interviewStarted, setInterviewStarted] = useState(false);
@@ -24,7 +26,9 @@ const AvatarDisplay = () => {
   const [answeredCount, setAnsweredCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
+
   const isLowTime = timeLeft < 60;
   const interviewPanel = [
     {
@@ -78,8 +82,17 @@ const AvatarDisplay = () => {
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
-        if (prev <= 1) {
+        if (prev === 1) {
           clearInterval(timer);
+          fetch("http://localhost:5000/api/live", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: user?.name,
+              email: user?.email,
+              status: "Completed"
+            })
+          });
           setShowResult(true); // End interview automatically
           return 0;
         }
@@ -88,6 +101,91 @@ const AvatarDisplay = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [interviewStarted, showResult]);
+  useEffect(() => {
+    //  if (!interviewStarted || isStopped) return;
+    if (!interviewStarted || isStopped || showResult) return;
+    const interval = setInterval(() => {
+
+      // 🚨 IMPORTANT: stop sending after interview ends
+      if (showResult) return;
+
+      fetch(`${API_BASE_URL}/api/live`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user?.name,
+          email: user?.email,
+          // isCompleted: false,
+          status: "In Interview",
+          lastActive: new Date().toISOString()
+        })
+      }).catch(err => console.error("Heartbeat error:", err));
+
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [interviewStarted, showResult]);
+  useEffect(() => {
+    if (!interviewStarted || isStopped) return;
+
+    const interval = setInterval(() => {
+      captureAndSend();
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [interviewStarted]);
+  useEffect(() => {
+    if (!interviewStarted || isStopped || showResult) return;
+
+    const checkStatus = setInterval(async () => {
+      const res = await fetch("http://localhost:5000/api/live");
+      const data = await res.json();
+
+      const me = data.find(u => u.email === user?.email);
+
+      if (!me) return; // safety
+
+      if (me?.isCompleted && me?.status === "Stopped by Admin") {
+        alert("Interview stopped by admin");
+
+        setIsStopped(true);
+        setInterviewStarted(false);
+        setShowResult(true);
+
+        clearInterval(checkStatus);
+
+        navigate("/login");
+      }
+    }, 3000);
+
+    return () => clearInterval(checkStatus);
+  }, [interviewStarted]);
+  useEffect(() => {
+    const handleTabClose = async () => {
+      if (!interviewStarted) return;
+
+      // ✅ ONLY HANDLE REAL TAB CLOSE (NOT SWITCH)
+      await fetch("http://localhost:5000/api/live", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user?.name,
+          email: user?.email,
+          isCompleted: true,
+          status: "Closed Tab",
+          lastActive: new Date().toISOString()
+        })
+      });
+    };
+
+    // ❌ REMOVE visibilitychange COMPLETELY
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
+  }, [interviewStarted]);
   useEffect(() => {
     if (questions.length > 0) {
       const category = questions[currentIndex]?.category;
@@ -116,45 +214,110 @@ const AvatarDisplay = () => {
     if (!answer.trim() || !sessionId) return;
 
     setLoading(true);
+
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/submit-answer`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            answer: answer,
-            question_id: questions[currentIndex]?.question_id,
-            session_id: sessionId
-          }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answer: answer,
+          question_id: questions[currentIndex]?.question_id,
+          session_id: sessionId
+        }),
+      });
 
       const data = await response.json();
+
       if (response.ok) {
-        const score = Number(data.predicted_score || 0);
+
+        const score = Number(data.prediction?.expected_class || 0);
+
         setTotalScore((prev) => prev + score);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
 
+        // 🔥 LIVE UPDATE (IMPORTANT)
+        await fetch("http://localhost:5000/api/live", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email,
+            // status: "In Interview",
+            currentQuestion: Math.min(currentIndex + 2, questions.length)
+          })
+        });
+
+        // 👉 NEXT QUESTION OR END
         if (currentIndex < questions.length - 1) {
           setCurrentIndex((prev) => prev + 1);
         } else {
+          try {
+            // SAVE FINAL RESULT
+            await fetch("http://localhost:5000/api/save-user", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: user?.name,
+                email: user?.email,
+                score: totalScore
+              })
+            });
+
+
+
+            // UPDATE STATUS (FIXED)
+            await fetch(`${API_BASE_URL}/api/live`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: user?.name,
+                email: user?.email,
+                status: "Completed",
+                currentQuestion: questions.length,
+                isCompleted: true,
+                lastActive: new Date().toISOString()
+              })
+            });
+
+          } catch (err) {
+            console.error("Final save error:", err);
+          }
+
           setShowResult(true);
         }
       }
+
     } catch (error) {
       console.error("Submission failed", error);
     } finally {
       setLoading(false);
     }
   };
-
-  const handleSkip = () => {
+  const handleSkip = async () => {
     setAnswer("");
+    await fetch("http://localhost:5000/api/live", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: user?.name,
+        email: user?.email,
+        // status: "In Interview",
+        currentQuestion: Math.min(currentIndex + 2, questions.length)
+      })
+    });
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
+      fetch("http://localhost:5000/api/save-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user?.name,
+          email: user?.email,
+          score: totalScore
+        })
+      });
       setShowResult(true);
     }
   };
@@ -164,8 +327,29 @@ const AvatarDisplay = () => {
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
+  const captureAndSend = async () => {
+    if (!webcamRef.current) return;
+
+    const imageSrc = webcamRef.current.getScreenshot();
+
+    try {
+      await fetch("http://localhost:5000/api/upload-frame", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          image: imageSrc,
+          name: user?.name,
+          email: user?.email,
+        })
+      });
 
 
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
   // ================= START SCREEN / PORTAL =================
   if (!interviewStarted) {
     return (
@@ -285,7 +469,43 @@ const AvatarDisplay = () => {
                 </p>
 
                 <button
-                  onClick={() => setInterviewStarted(true)}
+                  // onClick={() => {
+                  //   console.log("START CLICKED");
+                  //   setInterviewStarted(true);
+                  // }}
+                  //   onClick={() => {
+                  //   setInterviewStarted(true);
+
+                  //   fetch("http://localhost:5000/api/live", {
+                  //     method: "POST",
+                  //     headers: {"Content-Type": "application/json"},
+                  //     body: JSON.stringify({
+                  //       name: user?.name,
+                  // email: user?.email,
+                  //       status: "Started",
+                  //       currentQuestion: 1
+                  //     })
+                  //   });
+
+                  // }}
+                  onClick={() => {
+                    setInterviewStarted(true);
+
+                    // const user = JSON.parse(localStorage.getItem("user"));
+
+                    fetch("http://localhost:5000/api/live", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                        isCompleted: false,
+                        status: "In Interview",
+                        currentQuestion: 1,
+                        lastActive: new Date().toISOString()
+                      })
+                    });
+                  }}
                   className="w-full h-14 rounded-xl text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition"
                 >
                   Start My Interview
@@ -380,7 +600,22 @@ const AvatarDisplay = () => {
 
               {/* NO BUTTON */}
               <button
-                onClick={() => navigate("/login")}
+                onClick={async () => {
+                  await fetch("http://localhost:5000/api/live", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: user?.name,
+                      email: user?.email,
+                      // status: "Completed",
+                      currentQuestion: questions.length,
+                      isCompleted: true,
+                      lastActive: new Date().toISOString()
+                    })
+                  });
+
+                  navigate("/login");
+                }}
                 className="flex-1 h-12 rounded-xl bg-gray-500 hover:bg-gray-600 text-white font-bold transition"
               >
                 No
@@ -389,7 +624,21 @@ const AvatarDisplay = () => {
 
             {/* Back Home (optional) */}
             <button
-              onClick={() => navigate("/login")}
+              onClick={async () => {
+                await fetch("http://localhost:5000/api/live", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    name: user?.name,
+                    email: user?.email,
+                    isCompleted: true,
+                    status: "Exited",
+                    lastActive: new Date().toISOString()
+                  })
+                });
+
+                navigate("/login");
+              }}
               className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold mt-2"
             >
               Back to Home
@@ -404,46 +653,50 @@ const AvatarDisplay = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-sans bg-[#0f172a] text-white">
       {/* Left Branding Sidebar (Same as Start screen) */}
-      <div className="absolute top-55 right-15 z-20 w-48 h-36 rounded-xl overflow-hidden border-2 border-white shadow-lg bg-black">
+      <div className="absolute top-45 right-10 z-20 w-48 h-36 rounded-xl overflow-hidden border-2 border-white shadow-lg bg-black">
         <Webcam
+          // audio={false}
+          // mirrored={false}
+          // className="w-full h-full object-cover"
+          // videoConstraints={{
+          //   width: 400,
+          //   height: 300,
+          //   facingMode: "user"
+          // }}
+          ref={webcamRef}
           audio={false}
-          mirrored={false}
+          screenshotFormat="image/jpeg"
           className="w-full h-full object-cover"
-          videoConstraints={{
-            width: 400,
-            height: 300,
-            facingMode: "user"
-          }}
         />
       </div>
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="hidden lg:flex md:w-[22%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-10 flex-col justify-between border-r border-white/5 relative overflow-hidden"
+        className="hidden lg:flex md:w-[20%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-10 flex-col justify-between border-r border-white/5 relative overflow-hidden"
       >
         <div className="absolute top-10 right-20 w-full h-full opacity-30 pointer-events-none">
           <div className="absolute top-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-1 mb-2">
+          <div className="flex items-center gap-1 mb-10">
             <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <BrainCircuit className="text-white w-4 h-4" />
             </div>
             <span className="text-xl font-black text-white tracking-tight">HireVision</span>
           </div>
 
-          <div className="space-y-10">
-            <div className="space-y-4">
+          <div className="space-y-2">
+            <div className="space-y-2">
               <h2 className="text-4xl font-black text-white leading-tight">Session <span className="text-blue-400">Live</span></h2>
               <p className="text-slate-400 leading-relaxed italic uppercase font-bold tracking-widest text-[10px]">
                 Please maintain professional conduct throughout the session.
               </p>
             </div>
 
-            <div className="p-4 rounded-3xl bg-white/5 border border-white/5 space-y-2 backdrop-blur-sm">
+            <div className="p-2 rounded-3xl bg-white/5 border border-white/5 space-y-4 backdrop-blur-sm">
               <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Live Progress</h3>
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {questions.map((_, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-colors ${idx === currentIndex ? 'bg-blue-600 text-white ring-4 ring-blue-600/20 shadow-lg shadow-blue-500/20' : idx < currentIndex ? 'bg-green-600/20 text-green-500 border border-green-600/30' : 'bg-white/5 text-slate-500 border border-white/5'}`}>
@@ -461,12 +714,12 @@ const AvatarDisplay = () => {
       </motion.div>
 
       {/* Main Content Area (White background style) */}
-      <div className="flex-1 bg-slate-50 flex items-center justify-left p-2 relative">
+      <div className="flex-1 bg-slate-50 flex items-center justify-left p-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-4xl top-0 relative z-10 flex flex-col items-center"
+          className="w-full max-w-7xl relative z-10 flex flex-col items-center"
         >
 
           <div className="w-full bg-white rounded-[2.5rem] p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
@@ -511,17 +764,17 @@ const AvatarDisplay = () => {
             <div className="flex-1 p-8 md:p-12 flex flex-col gap-8 bg-white relative">
               {/* Question Bubble */}
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2 text-blue-600">
+                <div className="flex items-left gap-2 mb-2 text-blue-600">
                   <MessageSquare className="w-4 h-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">Inquiry</span>
                 </div>
-                <div className="p-8 rounded-[2rem] rounded-tl-none bg-blue-50/50 border border-blue-100/50 text-slate-800 text-xl font-medium leading-relaxed shadow-sm">
+                <div className="p-8 rounded-[2rem] rounded-tl-none bg-blue-50/50 border border-blue-100/50 text-slate-800 text-xl font-medium leading-relaxed shadow-sm w-170">
                   {questions[currentIndex]?.question || "Loading question..."}
                 </div>
               </div>
 
               {/* Answer Input */}
-              <div className="flex-1 flex flex-col gap-4">
+              <div className="flex-1 flex flex-col gap-4 w-180">
                 <div className="flex items-center gap-2 mb-1 text-slate-400">
                   <Send className="w-6 h-4 rotate-45" />
                   <span className="text-[10px] font-black uppercase tracking-widest">Your Response</span>
@@ -576,9 +829,9 @@ const AvatarDisplay = () => {
 
         </motion.div>
       </div>
-      <div className="absolute top-97 right-32 z-20 flex items-center gap-5 bg-white border border-slate-200 px-5 py-2 rounded-full shadow-md">
-        <Timer className="w-10 h-10 text-red-500 animate-pulse" />
-        <span className={`font-mono font-bold ${isLowTime ? "text-red-500" : "text-slate-900"}`}>
+      <div className="absolute top-6 right-8 z-20 flex items-center gap-2 bg-white border border-slate-200 px-5 py-2 rounded-full shadow-md">
+        <Timer className="w-4 h-4 text-red-500 animate-pulse" />
+        <span className={`font-mono font-bold ${isLowTime ? "text-red-600" : "text-slate-700"}`}>
           {formatTime(timeLeft)}
         </span>
       </div>

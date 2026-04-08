@@ -1,6 +1,9 @@
+
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib, os
+    
 from utils.preprocessing import clean_text
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,12 +11,18 @@ from dotenv import load_dotenv
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 import pandas as pd
-import random
+import base64
+from PIL import Image
+import io
 import numpy as np
 import uuid
-
+from datetime import datetime , timedelta
 load_dotenv()
+import certifi
 
+
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 BASE_DIR = os.path.dirname(__file__)
@@ -35,6 +44,10 @@ MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
 db = client['user_database']
 users_collection = db['users']
+
+
+
+
 
 # Google Client ID
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "467984197043-d455hh4reb5sse2m3adkddhp6jdufef3.apps.googleusercontent.com")
@@ -221,23 +234,55 @@ def google_login():
     token = data.get('credential')
     
     try:
-        # Verify the token
-        idinfo = id_token.verify_oauth2_token(token, google_requests.Request(), GOOGLE_CLIENT_ID)
+        req = google_requests.Request()
+        idinfo = id_token.verify_oauth2_token(token, req, GOOGLE_CLIENT_ID)
 
-        # ID token is valid. Get user information from ID token.
         email = idinfo['email']
         name = idinfo.get('name', '')
-        
-        # Check if user exists, if not create one
+
         user = users_collection.find_one({"email": email})
+
         if not user:
-            user_data = {
+            users_collection.insert_one({
                 "name": name,
                 "email": email,
                 "google_id": idinfo['sub']
-            }
-            users_collection.insert_one(user_data)
-        
+            })
+
+        now = datetime.now()
+
+        last_login = db.login_history.find_one(
+            {"email": email},
+            sort=[("loginTime", -1)]
+        )
+
+        should_insert = True
+
+        if last_login and "loginTime" in last_login:
+            last_time = last_login["loginTime"]
+
+            # 🔥 HANDLE STRING FORMAT SAFELY
+            if isinstance(last_time, str):
+                try:
+                    last_time = datetime.fromisoformat(last_time)
+                except:
+                    try:
+                        last_time = datetime.strptime(last_time, "%Y-%m-%d %H:%M:%S")
+                    except:
+                        last_time = None
+
+            if last_time:
+                diff = (now - last_time).total_seconds()
+                if diff < 60:
+                    should_insert = False
+
+        if should_insert:
+            db.login_history.insert_one({
+                "name": name,
+                "email": email,
+                "loginTime": now
+            })
+
         return jsonify({
             "message": "Google Login successful",
             "user": {
@@ -245,9 +290,10 @@ def google_login():
                 "email": email
             }
         }), 200
+
     except Exception as e:
         print(f"Google Login Error: {e}")
-        return jsonify({"error": f"Google login failed: {str(e)}"}), 400
+        return jsonify({"error": str(e)}), 400
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -284,6 +330,41 @@ def login():
     user = users_collection.find_one({"email": email})
 
     if user and check_password_hash(user['password'], password):
+
+        now = datetime.now()
+
+        last_login = db.login_history.find_one(
+            {"email": email},
+            sort=[("loginTime", -1)]
+        )
+
+        should_insert = True
+
+        if last_login and "loginTime" in last_login:
+            last_time = last_login["loginTime"]
+
+            # 🔥 HANDLE STRING FORMAT SAFELY
+            if isinstance(last_time, str):
+                try:
+                    last_time = datetime.fromisoformat(last_time)
+                except:
+                    try:
+                        last_time = datetime.strptime(last_time, "%Y-%m-%d %H:%M:%S")
+                    except:
+                        last_time = None
+
+            if last_time:
+                diff = (now - last_time).total_seconds()
+                if diff < 60:
+                    should_insert = False
+
+        if should_insert:
+            db.login_history.insert_one({
+            "name": user['name'],
+            "email": user['email'],
+            "loginTime": now
+        })
+
         return jsonify({
             "message": "Login successful",
             "user": {
@@ -291,9 +372,136 @@ def login():
                 "email": user['email']
             }
         }), 200
+        
     else:
         return jsonify({"error": "Invalid email or password"}), 401
 
+@app.route('/api/live', methods=['POST'])
+def update_live():
+    data = request.json
+
+    if not data.get("email"):
+        return jsonify({"error": "Email required"}), 400
+
+    # ✅ GET EXISTING USER
+    # existing = db.live.find_one({"email": data.get("email")})
+
+    # if existing and existing.get("isCompleted"):
+    #     return jsonify({"message": "already completed"})
+
+    # ✅ UPDATE LAST ACTIVE
+    data["lastActive"] = datetime.now().isoformat()
+
+    # ✅ UPDATE DATABASE
+    db.live.update_one(
+        {"email": data.get("email")},
+        {"$set": data},
+        upsert=True
+    )
+
+    return jsonify({"message": "updated"})
+
+@app.route('/api/all-users', methods=['GET'])
+def get_all_users():
+    users = list(db.login_history.find({}, {"_id": 0}))
+    return jsonify(users)
+
+@app.route('/api/upload-frame', methods=['POST'])
+def upload_frame():
+    data = request.json
+
+    record = {
+        "name": data.get("name"),
+        "email": data.get("email"),
+        "image": data.get("image"),
+        "time": datetime.now().isoformat()
+    }
+
+    db.frames.insert_one(record)
+
+    return jsonify({"message": "Frame saved"})
+@app.route('/api/frames', methods=['GET'])
+def get_frames():
+    frames = list(db.frames.find({}, {"_id": 0}))
+    return jsonify(frames)
+
+
+
+@app.route('/api/live', methods=['GET'])
+def get_live():
+    users = list(db.live.find({}, {"_id": 0}))
+    frames = list(db.frames.find({}, {"_id": 0}))
+
+    # 🔥 Get latest frame per user
+    frame_map = {}
+    for f in frames:
+        frame_map[f["email"]] = f["image"]
+
+    active_users = []
+    completed_users = []
+
+    for u in users:
+        last_active = u.get("lastActive")
+        is_completed = u.get("isCompleted", False)
+
+        u["image"] = frame_map.get(u["email"])
+
+    # ✅ INSIDE LOOP (FIXED)
+        
+        if last_active:
+            try:
+                last_active_time = datetime.fromisoformat(last_active.replace("Z", ""))
+
+                if datetime.now() - last_active_time < timedelta(seconds=20):
+                    active_users.append(u)
+
+            except Exception as e:
+                print("Time parse error:", e)
+
+    return jsonify(active_users)
+@app.route('/api/save-user', methods=['POST'])
+def save_user():
+    data = request.json
+
+    db.final_results.insert_one({
+        "name": data.get("name"),
+        "email": data.get("email"),
+        "score": data.get("score")
+    })
+
+    return jsonify({"message": "saved"})
+# @app.route('/api/upload-frame', methods=['POST'])
+# def upload_frame():
+#     data = request.json
+
+#     db.frames.insert_one({
+#         "name": data.get("name"),
+#         "email": data.get("email"),
+#         "image": data.get("image")
+#     })
+
+#     return jsonify({"message": "frame saved"})
+@app.route('/api/completed', methods=['GET'])
+def get_completed():
+    users = list(db.live.find({"status": "Completed"}, {"_id": 0}))
+    return jsonify(users)
+
+
+
+
+
+@app.route('/api/admin-stop', methods=['POST'])
+def admin_stop():
+    data = request.json
+    email = data.get("email")
+
+    db.live.update_one(
+        {"email": email},
+        {"$set": {"isCompleted": True, "status": "Stopped by Admin"}},
+        upsert=True
+    )
+
+    return jsonify({"message": "Interview stopped"})
 if __name__ == '__main__':
   
     app.run(debug=True, port=5000)

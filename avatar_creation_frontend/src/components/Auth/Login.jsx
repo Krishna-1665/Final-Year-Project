@@ -28,10 +28,17 @@ const Login = () => {
 
             const data = await response.json();
 
-            if (response.ok) {
-                console.log('Google Login successful:', data);
-                navigate('/avatar');
-            } else {
+           if (response.ok) {
+    console.log('Google Login successful:', data);
+
+    // 🔥 ADD THIS (VERY IMPORTANT)
+    localStorage.setItem("user", JSON.stringify({
+        name: data.user.name,
+        email: data.user.email
+    }));
+
+    navigate('/avatar');
+} else {
                 setError(data.error || 'Google login failed.');
             }
         } catch (err) {
@@ -69,10 +76,17 @@ const Login = () => {
 
             const data = await response.json();
 
-            if (response.ok) {
-                console.log('Login successful:', data);
-                navigate('/avatar');
-            } else {
+           if (response.ok) {
+    console.log('Login successful:', data);
+
+    // 🔥 ADD THIS (VERY IMPORTANT)
+    localStorage.setItem("user", JSON.stringify({
+        name: data.user.name,
+        email: data.user.email
+    }));
+
+    navigate('/avatar');
+} else {
                 setError(data.error || 'Login failed. Please check your credentials.');
             }
         } catch (err) {
