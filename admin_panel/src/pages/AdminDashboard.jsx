@@ -8,7 +8,7 @@ const [allUsers, setAllUsers] = useState([]);
 const [activeTab, setActiveTab] = useState("dashboard");
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch("http://localhost:5000/api/live")
+      fetch(`http://${window.location.hostname}:5000/api/live`)
         .then(res => res.json())
         .then(data => setUsers(data))
         .catch(err => console.error(err));
@@ -18,7 +18,7 @@ const [activeTab, setActiveTab] = useState("dashboard");
   }, []);
   useEffect(() => {
   const interval = setInterval(() => {
-    fetch("http://localhost:5000/api/all-users")
+    fetch(`http://${window.location.hostname}:5000/api/all-users`)
       .then(res => res.json())
       .then(data => setAllUsers(data))
       .catch(err => console.error(err));
@@ -138,20 +138,39 @@ return (
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Login Date and Time</th>
+                  <th>Login Date</th>
                 </tr>
               </thead>
 
               <tbody>
                 {[...allUsers]
-                  .sort((a, b) => new Date(b.loginTime) - new Date(a.loginTime))
+                  .sort((a, b) => {
+                    const getTime = (t) => {
+                      if (!t) return 0;
+                      const s = String(t);
+                      const d = new Date(s.endsWith('Z') ? s : `${s}Z`);
+                      return isNaN(d.getTime()) ? 0 : d.getTime();
+                    };
+                    return getTime(b.loginTime) - getTime(a.loginTime);
+                  })
                   .map((u, i) => (
                     <tr key={i}>
                       <td>{u.name}</td>
                       <td>{u.email}</td>
                       <td>
-                        {new Date(u.loginTime).toLocaleDateString()} <br />
-                        {new Date(u.loginTime).toLocaleTimeString()}
+                        {u.loginTime ? (() => {
+                          const dateStr = String(u.loginTime);
+                          const dateObj = new Date(dateStr.endsWith('Z') ? dateStr : `${dateStr}Z`);
+                          if (isNaN(dateObj.getTime())) return "Invalid Date";
+                          const day = String(dateObj.getDate()).padStart(2, '0');
+                          const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                          const year = dateObj.getFullYear();
+                          return (
+                            <>
+                              {day}-{month}-{year}
+                            </>
+                          );
+                        })() : "N/A"}
                       </td>
                     </tr>
                   ))}
@@ -204,7 +223,7 @@ return (
         cursor: "pointer"
       }}
       onClick={async () => {
-  await fetch("http://localhost:5000/api/admin-stop", {
+  await fetch(`http://${window.location.hostname}:5000/api/admin-stop`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
