@@ -1,4 +1,4 @@
-const BASE = "http://localhost:5000";
+const BASE = `http://${window.location.hostname}:5000`;
 
 export const loginAdmin = async (data) => {
   const res = await fetch(`${BASE}/api/admin-login`, {

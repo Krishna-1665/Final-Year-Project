@@ -249,7 +249,7 @@ def google_login():
                 "google_id": idinfo['sub']
             })
 
-        now = datetime.now()
+        now = datetime.utcnow()
 
         last_login = db.login_history.find_one(
             {"email": email},
@@ -331,7 +331,7 @@ def login():
 
     if user and check_password_hash(user['password'], password):
 
-        now = datetime.now()
+        now = datetime.utcnow()
 
         last_login = db.login_history.find_one(
             {"email": email},
@@ -404,6 +404,9 @@ def update_live():
 @app.route('/api/all-users', methods=['GET'])
 def get_all_users():
     users = list(db.login_history.find({}, {"_id": 0}))
+    for u in users:
+        if "loginTime" in u and hasattr(u["loginTime"], "isoformat"):
+            u["loginTime"] = u["loginTime"].isoformat() + "Z"
     return jsonify(users)
 
 @app.route('/api/upload-frame', methods=['POST'])
@@ -504,5 +507,5 @@ def admin_stop():
     return jsonify({"message": "Interview stopped"})
 if __name__ == '__main__':
   
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
 

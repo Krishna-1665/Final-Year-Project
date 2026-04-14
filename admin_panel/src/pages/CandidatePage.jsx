@@ -13,7 +13,7 @@ export default function CandidatePage() {
     intervalRef.current = setInterval(() => {
       captureFrame();
    // ✅ UPDATE LIVE USER STATUS
-fetch("http://localhost:5000/api/live", {
+fetch(`http://${window.location.hostname}:5000/api/live`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -36,7 +36,7 @@ const captureFrame = () => {
   if (!imageSrc) return;
 
   // ✅ 1. SEND FRAME TO BACKEND (SAVE IMAGE)
-  fetch("http://localhost:5000/api/upload-frame", {
+  fetch(`http://${window.location.hostname}:5000/api/upload-frame`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
