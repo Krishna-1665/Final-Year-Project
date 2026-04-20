@@ -28,7 +28,11 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
+<<<<<<< HEAD
   const [answers, setAnswers] = useState({});
+=======
+  const [voices, setVoices] = useState([]);
+>>>>>>> 4fd1bdd3797ebf1954b1131f617622b2e8d1e350
   const isLowTime = timeLeft < 60;
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -39,32 +43,38 @@ const AvatarDisplay = () => {
     {
       name: "Rashita",
       role: "HR Interviewer",
-      image: avatarInterviewer
+      image: avatarInterviewer,
+      gender:"female"
     },
     {
       name: "Sweta",
       role: "Technical Interviewer",
-      image: TechAvatar
+      image: TechAvatar,
+      gender:"female"
     },
     {
       name: "Krishna",
       role: "Database Interviewer",
-      image: DatasetAvatar
+      image: DatasetAvatar,
+      gender:"male"
+
     },
     {
       name: "Rahul",
       role: "AI/ML Interviewer",
-      image: AiMLAvatar
+      image: AiMLAvatar,
+      gender:"male"
     },
     {
       name: "Arpita",
       role: "Programming Interviewer",
-      image: ProgrammingAvatar
+      image: ProgrammingAvatar,
+      gender:"female"
     }
   ];
   const [activeAvatar, setActiveAvatar] = useState(0);
   const currentAvatar = interviewPanel[activeAvatar] || interviewPanel[0];
-
+  const [isListening, setIsListening] = useState(false);
 
   console.log("INDEX:", activeAvatar);
   console.log("CATEGORY:", questions[currentIndex]?.category || "Loading...");
@@ -77,6 +87,17 @@ const AvatarDisplay = () => {
     "AI/ML": 3,
     Programming: 4
   };
+  //Get voice of avatar
+  useEffect(() => {
+  const loadVoices = () => {
+    const v = speechSynthesis.getVoices();
+    setVoices(v);
+  };
+
+  loadVoices();
+
+  speechSynthesis.onvoiceschanged = loadVoices;
+}, []);
   // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
     if (interviewStarted) fetchQuestions();
@@ -192,14 +213,20 @@ const AvatarDisplay = () => {
     };
   }, [interviewStarted]);
   useEffect(() => {
-    if (questions.length > 0) {
-      const category = questions[currentIndex]?.category;
+  if (questions.length > 0) {
+    const category = questions[currentIndex]?.category;
 
-      if (category in categoryAvatarMap) {
-        setActiveAvatar(categoryAvatarMap[category]);
-      }
+    if (category in categoryAvatarMap) {
+      const avatarIndex = categoryAvatarMap[category];
+      setActiveAvatar(avatarIndex);
+
+      const currentQ = questions[currentIndex]?.question;
+      const gender = interviewPanel[avatarIndex]?.gender;
+
+      speak(currentQ, gender); // 🔥 SPEAK HERE
     }
-  }, [currentIndex, questions]);
+  }
+}, [currentIndex, questions]);
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
@@ -299,7 +326,43 @@ const AvatarDisplay = () => {
       setLoading(false);
     }
   };
+<<<<<<< HEAD
 
+=======
+  const speak = (text, gender = "male") => {
+  if (!text) return;
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  // Stop previous speech
+  speechSynthesis.cancel();
+
+  let selectedVoice;
+
+  if (gender === "female") {
+    selectedVoice = voices.find(v =>
+      v.name.toLowerCase().includes("zira") ||
+      v.name.toLowerCase().includes("female")
+    );
+  } else {
+    selectedVoice = voices.find(v =>
+      v.name.toLowerCase().includes("david") ||
+      v.name.toLowerCase().includes("male")
+    );
+  }
+
+  // fallback
+  if (!selectedVoice && voices.length > 0) {
+    selectedVoice = voices[0];
+  }
+
+  utterance.voice = selectedVoice;
+  utterance.rate = 1;
+  utterance.pitch = gender === "female" ? 1.2 : 0.9;
+
+  speechSynthesis.speak(utterance);
+};
+>>>>>>> 4fd1bdd3797ebf1954b1131f617622b2e8d1e350
   const handleSkip = async () => {
     setAnswer("");
 
@@ -355,6 +418,44 @@ const AvatarDisplay = () => {
       console.error("Skip failed:", error);
     }
   };
+  const startListening = () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Speech Recognition not supported in this browser");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.continuous = false;
+  recognition.interimResults = true;
+
+  setIsListening(true);
+
+  recognition.onresult = (event) => {
+    let transcript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+
+    setAnswer(transcript); // 🔥 auto-fill textarea
+  };
+
+  recognition.onend = () => {
+    setIsListening(false);
+  };
+
+  recognition.onerror = (err) => {
+    console.error("Speech error:", err);
+    setIsListening(false);
+  };
+
+  recognition.start();
+};
 
   const handleFinalSubmit = async () => {
     try {
@@ -861,9 +962,15 @@ const AvatarDisplay = () => {
                   className="w-full h-full min-h-[150px] p-8 rounded-[2rem] bg-slate-50/50 border border-slate-200 text-slate-800 text-base placeholder:text-slate-400 placeholder:italic focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600/20 transition-all duration-300 resize-none leading-relaxed shadow-inner"
                   required
                 />
+                {isListening && (
+               <p className="text-red-500 text-sm mt-2">
+                                 Listening... 🎤
+                 </p>
+                )}
               </div>
 
               {/* Actions */}
+<<<<<<< HEAD
               <div className="flex flex-col gap-4 w-full">
                 <div className="flex items-center gap-4">
                   <button
@@ -884,6 +991,33 @@ const AvatarDisplay = () => {
                       </>
                     )}
                   </button>
+=======
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading || !answer.trim()}
+                  className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
+                >
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>
+                      <span>Submit Answer</span>
+                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </button>
+                 {/* 🎤 MIC BUTTON  */}
+                 <button
+                     onClick={startListening}
+                     className={`w-14 h-14 flex items-center justify-center rounded-2xl ${
+                        isListening ? "bg-red-500" : "bg-blue-500"
+                         } text-white transition`}
+                             title="Speak Answer"
+                        >
+                                🎤
+                   </button>
+>>>>>>> 4fd1bdd3797ebf1954b1131f617622b2e8d1e350
 
 
                   <button
