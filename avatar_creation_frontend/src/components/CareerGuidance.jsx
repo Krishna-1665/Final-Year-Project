@@ -17,6 +17,7 @@ const CareerGuidance = () => {
     const [scores, setScores] = React.useState({});
     const [bestCategory, setBestCategory] = React.useState("");
     const [guidance, setGuidance] = React.useState("");
+    const totalScore = location.state?.totalScore || 0;
 
     React.useEffect(() => {
         const fetchGuidance = async () => {
@@ -60,10 +61,11 @@ const CareerGuidance = () => {
                     <p>Database: {scores?.Database || 0}</p>
                     <p>AI/ML: {scores?.["AI/ML"] || 0}</p>
                 </div>
-
-                <p className="text-green-400 font-bold mb-4">
-                    Strongest Area: {bestCategory}
-                </p>
+                {totalScore > 0 && bestCategory && (
+                    <p className="text-green-400 font-semibold mt-2">
+                        Strongest Area: {bestCategory}
+                    </p>
+                )}
 
                 <p className="text-slate-300 text-lg leading-relaxed mb-6">
                     {guidance}

@@ -28,8 +28,13 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
-
+  const [answers, setAnswers] = useState({});
   const isLowTime = timeLeft < 60;
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
   const interviewPanel = [
     {
       name: "Rashita",
@@ -211,121 +216,180 @@ const AvatarDisplay = () => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!answer.trim() || !sessionId) return;
+    if (!sessionId) return;
 
     setLoading(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          answer: answer,
+          answer: answer.trim(),
           question_id: questions[currentIndex]?.question_id,
-          session_id: sessionId
+          session_id: sessionId,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-
         const score = Number(data.prediction?.expected_class || 0);
+        const updatedScore = totalScore + score;
 
-        setTotalScore((prev) => prev + score);
+        setTotalScore(updatedScore);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
 
-        // 🔥 LIVE UPDATE (IMPORTANT)
-        await fetch("http://localhost:5000/api/live", {
+        // ✅ Live progress update
+        await fetch(`${API_BASE_URL}/api/live`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             name: user?.name,
             email: user?.email,
-            // status: "In Interview",
-            currentQuestion: Math.min(currentIndex + 2, questions.length)
-          })
+            currentQuestion: Math.min(currentIndex + 2, questions.length),
+          }),
         });
 
-        // 👉 NEXT QUESTION OR END
+        // ✅ Next question or finish interview
         if (currentIndex < questions.length - 1) {
           setCurrentIndex((prev) => prev + 1);
         } else {
-          try {
-            // SAVE FINAL RESULT
-            await fetch("http://localhost:5000/api/save-user", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name: user?.name,
-                email: user?.email,
-                score: totalScore
-              })
-            });
+          // ✅ Save final score
+          await fetch(`${API_BASE_URL}/api/save-user`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: user?.name,
+              email: user?.email,
+              score: updatedScore,
+            }),
+          });
 
+          // ✅ Mark completed
+          await fetch(`${API_BASE_URL}/api/live`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: user?.name,
+              email: user?.email,
+              status: "Completed",
+              currentQuestion: questions.length,
+              isCompleted: true,
+              lastActive: new Date().toISOString(),
+            }),
+          });
 
-
-            // UPDATE STATUS (FIXED)
-            await fetch(`${API_BASE_URL}/api/live`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name: user?.name,
-                email: user?.email,
-                status: "Completed",
-                currentQuestion: questions.length,
-                isCompleted: true,
-                lastActive: new Date().toISOString()
-              })
-            });
-
-          } catch (err) {
-            console.error("Final save error:", err);
-          }
 
           setShowResult(true);
         }
       }
-
     } catch (error) {
-      console.error("Submission failed", error);
+      console.error("Submission failed:", error);
     } finally {
       setLoading(false);
     }
   };
+
   const handleSkip = async () => {
     setAnswer("");
-    await fetch("http://localhost:5000/api/live", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: user?.name,
-        email: user?.email,
-        // status: "In Interview",
-        currentQuestion: Math.min(currentIndex + 2, questions.length)
-      })
-    });
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      fetch("http://localhost:5000/api/save-user", {
+
+    try {
+      await fetch(`${API_BASE_URL}/api/live`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           name: user?.name,
           email: user?.email,
-          score: totalScore
-        })
+          currentQuestion: Math.min(currentIndex + 2, questions.length),
+        }),
       });
-      setShowResult(true);
+
+      // ✅ If NOT last question
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex((prev) => prev + 1);
+      } else {
+        // ✅ If 15th question skipped
+
+        await fetch(`${API_BASE_URL}/api/save-user`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email,
+            score: totalScore,
+          }),
+        });
+
+        await fetch(`${API_BASE_URL}/api/live`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email,
+            status: "Completed",
+            currentQuestion: questions.length,
+            isCompleted: true,
+            lastActive: new Date().toISOString(),
+          }),
+        });
+
+        setShowResult(true);
+      }
+    } catch (error) {
+      console.error("Skip failed:", error);
     }
   };
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  const handleFinalSubmit = async () => {
+    try {
+      await fetch(`${API_BASE_URL}/api/save-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user?.name,
+          email: user?.email,
+          score: totalScore,
+        }),
+      });
+
+      await fetch(`${API_BASE_URL}/api/live`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user?.name,
+          email: user?.email,
+          status: "Completed",
+          currentQuestion: questions.length,
+          isCompleted: true,
+          lastActive: new Date().toISOString(),
+        }),
+      });
+      // ✅ END INTERVIEW
+      setShowResult(true);
+
+    } catch (error) {
+      console.error("Final submit error:", error);
+    }
   };
   const captureAndSend = async () => {
     if (!webcamRef.current) return;
@@ -344,8 +408,6 @@ const AvatarDisplay = () => {
           email: user?.email,
         })
       });
-
-
     } catch (err) {
       console.error("Error:", err);
     }
@@ -560,7 +622,7 @@ const AvatarDisplay = () => {
             </div>
             <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
               <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Total Score</p>
-              <p className="text-2xl font-black text-blue-400">{totalScore}</p>
+              <p className="text-2xl font-black text-blue-400">{Number(totalScore).toFixed(2)}</p>
             </div>
           </div>
 
@@ -782,7 +844,14 @@ const AvatarDisplay = () => {
                 <textarea
                   placeholder="Type your response here..."
                   value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
+                  onChange={(e) => {
+                    setAnswer(e.target.value);
+
+                    setAnswers((prev) => ({
+                      ...prev,
+                      [currentIndex]: e.target.value
+                    }));
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
@@ -795,30 +864,38 @@ const AvatarDisplay = () => {
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={handleSubmit}
-                  disabled={loading || !answer.trim()}
-                  className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
-                >
-                  {loading ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  ) : (
-                    <>
-                      <span>Submit Answer</span>
-                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </button>
+              <div className="flex flex-col gap-4 w-full">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={
+                      loading || !answer.trim()
+                    }
+                    className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
+                  >
+                    {loading ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    ) : (
+                      <>
+                        <span>
+                          submit answer
+                        </span>
+                        <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
 
-                <button
-                  onClick={handleSkip}
-                  disabled={loading}
-                  className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
-                  title="Skip Question"
-                >
-                  <FastForward className="w-5 h-5" />
-                </button>
+
+                  <button
+                    onClick={handleSkip}
+                    //disabled={isLastActionDone}
+                    className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
+                    title="Skip Question"
+                  >
+                    <FastForward className="w-5 h-5" />
+                  </button>
+
+                </div>
               </div>
             </div>
           </div>

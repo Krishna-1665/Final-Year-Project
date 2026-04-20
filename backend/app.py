@@ -126,6 +126,11 @@ def submit_answer():
     session_id = data.get("session_id")
     answer = data.get("answer")
     question_id = data.get("question_id")
+    if not answer.strip():
+        return jsonify({
+            "prediction": {"expected_class": 0},
+            "message": "Skipped"
+        })
 
     if not answer or not question_id or not session_id:
         return jsonify({"error": "Missing answer or question_id"}), 400
