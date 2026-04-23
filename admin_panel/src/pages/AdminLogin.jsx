@@ -8,7 +8,7 @@ const AdminLogin = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
@@ -17,8 +17,32 @@ const AdminLogin = () => {
       return;
     }
 
-    // 👉 You can connect backend later
-    navigate("/dashboard");
+    if (!email.endsWith("@gmail.com")) {
+      alert("Email must end with @gmail.com");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://${window.location.hostname}:5000/api/admin-login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("adminAuth", "true");
+        navigate("/dashboard");
+      } else {
+        alert(data.error || "Invalid Admin Credentials");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Server error. Please try again later.");
+    }
   };
 
   return (

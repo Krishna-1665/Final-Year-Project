@@ -359,14 +359,14 @@ const AvatarDisplay = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-[25%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
+          className="md:w-[30%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
-            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
+            <div className="absolute top-[-30%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
           </div>
 
           <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-16">
+            <div className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
                 <BrainCircuit className="text-white w-5 h-5" />
               </div>
@@ -374,11 +374,11 @@ const AvatarDisplay = () => {
             </div>
 
             <div className="max-w-md">
-              <h1 className="text-5xl font-black text-white leading-tight mb-8">
+              <h1 className="text-4xl font-black text-white leading-tight mb-6">
                 Interview <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Portal</span>
               </h1>
-              <p className="text-slate-400 text-lg leading-relaxed mb-10">
-                Experience our professional AI-driven interview assessment. Your path to excellence starts here.
+              <p className="text-slate-50 text-lg leading-relaxed mb-6">
+                Guidelines for the interview
               </p>
 
               <div className="space-y-6">
@@ -386,19 +386,31 @@ const AvatarDisplay = () => {
                   <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-blue-500" />
                   </div>
-                  <span className="font-semibold">Real-time AI Feedback</span>
+                  <span className="font-semibold">Ensure Your Webcam Remains On and Your Face Should be clearly Visible Throughout the Interview</span>
                 </div>
                 <div className="flex items-center gap-4 text-slate-300">
                   <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-blue-500" />
                   </div>
-                  <span className="font-semibold">Behavioral Analysis</span>
+                  <span className="font-semibold">The Session is Monitored Live by The Admin. Any malpractice leads to immediate disqualification</span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">This is a live AI Interview so returning to previous question is not allowed. If Needed you may choose to skip the question </span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">Your score is evaluated by ML Model based on answer quality(Good,Average,Poor),so answer clearly and professionally.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="relative z-10 pt-10 border-t border-white/10">
+          <div className="relative z-10 pt-5 border-t border-white/10">
             <p className="text-slate-500 text-sm">
               &copy; 2026 HireVision AI. Professional Suite.
             </p>

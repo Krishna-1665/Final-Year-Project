@@ -40,13 +40,15 @@ DATASET_PATH = os.path.join(BASE_DIR, 'data', 'dataset.xlsx')
 df = pd.read_excel(DATASET_PATH)
 
 # MongoDB Configuration
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+# MongoDB Configuration
+MONGO_URI = os.getenv("MONGO_URI")
+print("Mongo URI:", MONGO_URI)
+if not MONGO_URI:
+    raise Exception("❌ MONGO_URI not found in .env file")
+
 client = MongoClient(MONGO_URI)
 db = client['user_database']
 users_collection = db['users']
-
-
-
 
 
 # Google Client ID
@@ -376,6 +378,23 @@ def login():
     else:
         return jsonify({"error": "Invalid email or password"}), 401
 
+@app.route('/api/admin-login', methods=['POST'])
+def admin_login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({"error": "Missing credentials"}), 400
+
+    if not email.endswith('@gmail.com'):
+        return jsonify({"error": "Invalid email format"}), 400
+
+    if email == 'admin@gmail.com' and password == 'admin123':
+        return jsonify({"message": "Login successful"}), 200
+    else:
+        return jsonify({"error": "Invalid Admin Credentials"}), 401
+
 @app.route('/api/live', methods=['POST'])
 def update_live():
     data = request.json
@@ -384,10 +403,19 @@ def update_live():
         return jsonify({"error": "Email required"}), 400
 
     # ✅ GET EXISTING USER
-    # existing = db.live.find_one({"email": data.get("email")})
+    existing = db.live.find_one({"email": data.get("email")})
 
-    # if existing and existing.get("isCompleted"):
-    #     return jsonify({"message": "already completed"})
+    if existing and existing.get("isCompleted"):
+        # If this is a fresh start (Start Interview button), it sends isCompleted: false
+        if "isCompleted" in data and data["isCompleted"] is False:
+            pass # Allow full update to restart
+        else:
+            # It's just a heartbeat from a stopped/completed interview, so only update lastActive
+            db.live.update_one(
+                {"email": data.get("email")},
+                {"$set": {"lastActive": datetime.now().isoformat()}}
+            )
+            return jsonify({"message": "kept as completed"})
 
     # ✅ UPDATE LAST ACTIVE
     data["lastActive"] = datetime.now().isoformat()
@@ -500,7 +528,7 @@ def admin_stop():
 
     db.live.update_one(
         {"email": email},
-        {"$set": {"isCompleted": True, "status": "Stopped by Admin"}},
+        {"$set": {"isCompleted": True, "status": "Stopped by Admin", "lastActive": datetime.now().isoformat()}},
         upsert=True
     )
 
