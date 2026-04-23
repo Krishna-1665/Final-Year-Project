@@ -7,6 +7,7 @@ import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
 import ProgrammingAvatar from "../assets/avatars/Arpita.png";
 import Careerguide from "../assets/avatars/Prakash.png";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import Webcam from "react-webcam";
 
@@ -21,6 +22,8 @@ const AvatarDisplay = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [answers, setAnswers] = useState({});
   const [sessionId, setSessionId] = useState("");
   const [totalScore, setTotalScore] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
@@ -28,38 +31,49 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
-
+  const [voices, setVoices] = useState([]);
   const isLowTime = timeLeft < 60;
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
   const interviewPanel = [
     {
       name: "Rashita",
       role: "HR Interviewer",
-      image: avatarInterviewer
+      image: avatarInterviewer,
+      gender:"female"
     },
     {
       name: "Sweta",
       role: "Technical Interviewer",
-      image: TechAvatar
+      image: TechAvatar,
+      gender:"female"
     },
     {
       name: "Krishna",
       role: "Database Interviewer",
-      image: DatasetAvatar
+      image: DatasetAvatar,
+      gender:"male"
+
     },
     {
       name: "Rahul",
       role: "AI/ML Interviewer",
-      image: AiMLAvatar
+      image: AiMLAvatar,
+      gender:"male"
     },
     {
       name: "Arpita",
       role: "Programming Interviewer",
-      image: ProgrammingAvatar
+      image: ProgrammingAvatar,
+      gender:"female"
     }
   ];
   const [activeAvatar, setActiveAvatar] = useState(0);
   const currentAvatar = interviewPanel[activeAvatar] || interviewPanel[0];
-
+  const [isListening, setIsListening] = useState(false);
 
   console.log("INDEX:", activeAvatar);
   console.log("CATEGORY:", questions[currentIndex]?.category || "Loading...");
@@ -72,6 +86,17 @@ const AvatarDisplay = () => {
     "AI/ML": 3,
     Programming: 4
   };
+  //Get voice of avatar
+  useEffect(() => {
+  const loadVoices = () => {
+    const v = speechSynthesis.getVoices();
+    setVoices(v);
+  };
+
+  loadVoices();
+
+  speechSynthesis.onvoiceschanged = loadVoices;
+}, []);
   // ✅ FETCH QUESTIONS ONLY AFTER INTERVIEW STARTS
   useEffect(() => {
     if (interviewStarted) fetchQuestions();
@@ -187,14 +212,20 @@ const AvatarDisplay = () => {
     };
   }, [interviewStarted]);
   useEffect(() => {
-    if (questions.length > 0) {
-      const category = questions[currentIndex]?.category;
+  if (questions.length > 0) {
+    const category = questions[currentIndex]?.category;
 
-      if (category in categoryAvatarMap) {
-        setActiveAvatar(categoryAvatarMap[category]);
-      }
+    if (category in categoryAvatarMap) {
+      const avatarIndex = categoryAvatarMap[category];
+      setActiveAvatar(avatarIndex);
+
+      const currentQ = questions[currentIndex]?.question;
+      const gender = interviewPanel[avatarIndex]?.gender;
+
+      speak(currentQ, gender); // 🔥 SPEAK HERE
     }
-  }, [currentIndex, questions]);
+  }
+}, [currentIndex, questions]);
   const fetchQuestions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/questions`);
@@ -211,122 +242,217 @@ const AvatarDisplay = () => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!answer.trim() || !sessionId) return;
+    if (!sessionId) return;
 
     setLoading(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          answer: answer,
+          answer: answer.trim(),
           question_id: questions[currentIndex]?.question_id,
-          session_id: sessionId
+          session_id: sessionId,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-
         const score = Number(data.prediction?.expected_class || 0);
+        const updatedScore = totalScore + score;
 
-        setTotalScore((prev) => prev + score);
+        setTotalScore(updatedScore);
         setAnsweredCount((prev) => prev + 1);
         setAnswer("");
 
-        // 🔥 LIVE UPDATE (IMPORTANT)
-        await fetch("http://localhost:5000/api/live", {
+        // ✅ Live progress update
+        await fetch(`${API_BASE_URL}/api/live`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             name: user?.name,
             email: user?.email,
-            // status: "In Interview",
-            currentQuestion: Math.min(currentIndex + 2, questions.length)
-          })
+            currentQuestion: Math.min(currentIndex + 2, questions.length),
+          }),
         });
 
-        // 👉 NEXT QUESTION OR END
+        // ✅ Next question or finish interview
         if (currentIndex < questions.length - 1) {
           setCurrentIndex((prev) => prev + 1);
         } else {
-          try {
-            // SAVE FINAL RESULT
-            await fetch("http://localhost:5000/api/save-user", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name: user?.name,
-                email: user?.email,
-                score: totalScore
-              })
-            });
+          // ✅ Save final score
+          await fetch(`${API_BASE_URL}/api/save-user`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: user?.name,
+              email: user?.email,
+              score: updatedScore,
+            }),
+          });
 
+          // ✅ Mark completed
+          await fetch(`${API_BASE_URL}/api/live`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: user?.name,
+              email: user?.email,
+              status: "Completed",
+              currentQuestion: questions.length,
+              isCompleted: true,
+              lastActive: new Date().toISOString(),
+            }),
+          });
 
-
-            // UPDATE STATUS (FIXED)
-            await fetch(`${API_BASE_URL}/api/live`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name: user?.name,
-                email: user?.email,
-                status: "Completed",
-                currentQuestion: questions.length,
-                isCompleted: true,
-                lastActive: new Date().toISOString()
-              })
-            });
-
-          } catch (err) {
-            console.error("Final save error:", err);
-          }
 
           setShowResult(true);
         }
       }
-
     } catch (error) {
-      console.error("Submission failed", error);
+      console.error("Submission failed:", error);
     } finally {
       setLoading(false);
     }
   };
+  const speak = (text, gender = "male") => {
+  if (!text) return;
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  // Stop previous speech
+  speechSynthesis.cancel();
+
+  let selectedVoice;
+
+  if (gender === "female") {
+    selectedVoice = voices.find(v =>
+      v.name.toLowerCase().includes("zira") ||
+      v.name.toLowerCase().includes("female")
+    );
+  } else {
+    selectedVoice = voices.find(v =>
+      v.name.toLowerCase().includes("david") ||
+      v.name.toLowerCase().includes("male")
+    );
+  }
+
+  // fallback
+  if (!selectedVoice && voices.length > 0) {
+    selectedVoice = voices[0];
+  }
+
+  utterance.voice = selectedVoice;
+  utterance.rate = 1;
+  utterance.pitch = gender === "female" ? 1.2 : 0.9;
+
+  speechSynthesis.speak(utterance);
+};
   const handleSkip = async () => {
     setAnswer("");
-    await fetch("http://localhost:5000/api/live", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: user?.name,
-        email: user?.email,
-        // status: "In Interview",
-        currentQuestion: Math.min(currentIndex + 2, questions.length)
-      })
-    });
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      fetch("http://localhost:5000/api/save-user", {
+
+    try {
+      await fetch(`${API_BASE_URL}/api/live`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           name: user?.name,
           email: user?.email,
-          score: totalScore
-        })
+          currentQuestion: Math.min(currentIndex + 2, questions.length),
+        }),
       });
-      setShowResult(true);
+
+      // ✅ If NOT last question
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex((prev) => prev + 1);
+      } else {
+        // ✅ If 15th question skipped
+
+        await fetch(`${API_BASE_URL}/api/save-user`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email,
+            score: totalScore,
+          }),
+        });
+
+        await fetch(`${API_BASE_URL}/api/live`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email,
+            status: "Completed",
+            currentQuestion: questions.length,
+            isCompleted: true,
+            lastActive: new Date().toISOString(),
+          }),
+        });
+
+        setShowResult(true);
+      }
+    } catch (error) {
+      console.error("Skip failed:", error);
     }
   };
+  const startListening = () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  if (!SpeechRecognition) {
+    alert("Speech Recognition not supported in this browser");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.continuous = false;
+  recognition.interimResults = true;
+
+  setIsListening(true);
+
+  recognition.onresult = (event) => {
+    let transcript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+
+    setAnswer(transcript); // 🔥 auto-fill textarea
   };
+
+  recognition.onend = () => {
+    setIsListening(false);
+  };
+
+  recognition.onerror = (err) => {
+    console.error("Speech error:", err);
+    setIsListening(false);
+  };
+
+  recognition.start();
+};
+
+
   const captureAndSend = async () => {
     if (!webcamRef.current) return;
 
@@ -344,8 +470,6 @@ const AvatarDisplay = () => {
           email: user?.email,
         })
       });
-
-
     } catch (err) {
       console.error("Error:", err);
     }
@@ -572,7 +696,7 @@ const AvatarDisplay = () => {
             </div>
             <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
               <p className="text-slate-500 text-sm mb-1 uppercase tracking-wider font-bold">Total Score</p>
-              <p className="text-2xl font-black text-blue-400">{totalScore}</p>
+              <p className="text-2xl font-black text-blue-400">{Number(totalScore).toFixed(2)}</p>
             </div>
           </div>
 
@@ -794,7 +918,14 @@ const AvatarDisplay = () => {
                 <textarea
                   placeholder="Type your response here..."
                   value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
+                  onChange={(e) => {
+                    setAnswer(e.target.value);
+
+                    setAnswers((prev) => ({
+                      ...prev,
+                      [currentIndex]: e.target.value
+                    }));
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
@@ -804,6 +935,11 @@ const AvatarDisplay = () => {
                   className="w-full h-full min-h-[150px] p-8 rounded-[2rem] bg-slate-50/50 border border-slate-200 text-slate-800 text-base placeholder:text-slate-400 placeholder:italic focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600/20 transition-all duration-300 resize-none leading-relaxed shadow-inner"
                   required
                 />
+                {isListening && (
+               <p className="text-red-500 text-sm mt-2">
+                                 Listening... 🎤
+                 </p>
+                )}
               </div>
 
               {/* Actions */}
@@ -822,18 +958,30 @@ const AvatarDisplay = () => {
                     </>
                   )}
                 </button>
+                 {/* 🎤 MIC BUTTON  */}
+                 <button
+                     onClick={startListening}
+                     className={`w-14 h-14 flex items-center justify-center rounded-2xl ${
+                        isListening ? "bg-red-500" : "bg-blue-500"
+                         } text-white transition`}
+                             title="Speak Answer"
+                        >
+                                🎤
+                   </button>
 
-                <button
-                  onClick={handleSkip}
-                  disabled={loading}
-                  className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
-                  title="Skip Question"
-                >
-                  <FastForward className="w-5 h-5" />
-                </button>
+
+                  <button
+                    onClick={handleSkip}
+                    //disabled={isLastActionDone}
+                    className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
+                    title="Skip Question"
+                  >
+                    <FastForward className="w-5 h-5" />
+                  </button>
+
+                </div>
               </div>
             </div>
-          </div>
 
           <p className="mt-8 text-slate-400 font-bold tracking-widest uppercase text-[9px]">
             Professional Assessment Interface &bull; Powered by HireVision AI
