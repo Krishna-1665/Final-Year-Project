@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-const [allUsers, setAllUsers] = useState([]);
-const [activeTab, setActiveTab] = useState("dashboard");
+  const [allUsers, setAllUsers] = useState([]);
+  const [activeTab, setActiveTab] = useState("dashboard");
+
+  useEffect(() => {
+    const auth = localStorage.getItem("adminAuth");
+    if (!auth) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       fetch(`http://${window.location.hostname}:5000/api/live`)

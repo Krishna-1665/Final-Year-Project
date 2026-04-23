@@ -7,6 +7,7 @@ import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
 import ProgrammingAvatar from "../assets/avatars/Arpita.png";
 import Careerguide from "../assets/avatars/Prakash.png";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import Webcam from "react-webcam";
 
@@ -21,6 +22,8 @@ const AvatarDisplay = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [answers, setAnswers] = useState({});
   const [sessionId, setSessionId] = useState("");
   const [totalScore, setTotalScore] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
@@ -28,11 +31,7 @@ const AvatarDisplay = () => {
   const [showResult, setShowResult] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
-
-  const [answers, setAnswers] = useState({});
-
   const [voices, setVoices] = useState([]);
-
   const isLowTime = timeLeft < 60;
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -326,7 +325,6 @@ const AvatarDisplay = () => {
       setLoading(false);
     }
   };
-
   const speak = (text, gender = "male") => {
     if (!text) return;
 
@@ -360,7 +358,6 @@ const AvatarDisplay = () => {
 
     speechSynthesis.speak(utterance);
   };
-
   const handleSkip = async () => {
     setAnswer("");
 
@@ -455,41 +452,7 @@ const AvatarDisplay = () => {
     recognition.start();
   };
 
-  const handleFinalSubmit = async () => {
-    try {
-      await fetch(`${API_BASE_URL}/api/save-user`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user?.name,
-          email: user?.email,
-          score: totalScore,
-        }),
-      });
 
-      await fetch(`${API_BASE_URL}/api/live`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user?.name,
-          email: user?.email,
-          status: "Completed",
-          currentQuestion: questions.length,
-          isCompleted: true,
-          lastActive: new Date().toISOString(),
-        }),
-      });
-      // ✅ END INTERVIEW
-      setShowResult(true);
-
-    } catch (error) {
-      console.error("Final submit error:", error);
-    }
-  };
   const captureAndSend = async () => {
     if (!webcamRef.current) return;
 
@@ -520,14 +483,14 @@ const AvatarDisplay = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-[25%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
+          className="md:w-[30%] bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#1e1b4b] p-12 flex flex-col justify-between border-r border-white/5 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
-            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
+            <div className="absolute top-[-30%] right-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[120px]"></div>
           </div>
 
           <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-16">
+            <div className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
                 <BrainCircuit className="text-white w-5 h-5" />
               </div>
@@ -535,11 +498,11 @@ const AvatarDisplay = () => {
             </div>
 
             <div className="max-w-md">
-              <h1 className="text-5xl font-black text-white leading-tight mb-8">
+              <h1 className="text-4xl font-black text-white leading-tight mb-6">
                 Interview <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Portal</span>
               </h1>
-              <p className="text-slate-400 text-lg leading-relaxed mb-10">
-                Experience our professional AI-driven interview assessment. Your path to excellence starts here.
+              <p className="text-slate-50 text-lg leading-relaxed mb-6">
+                Guidelines for the interview
               </p>
 
               <div className="space-y-6">
@@ -547,19 +510,31 @@ const AvatarDisplay = () => {
                   <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-blue-500" />
                   </div>
-                  <span className="font-semibold">Real-time AI Feedback</span>
+                  <span className="font-semibold">Ensure Your Webcam Remains On and Your Face Should be clearly Visible Throughout the Interview</span>
                 </div>
                 <div className="flex items-center gap-4 text-slate-300">
                   <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-blue-500" />
                   </div>
-                  <span className="font-semibold">Behavioral Analysis</span>
+                  <span className="font-semibold">The Session is Monitored Live by The Admin. Any malpractice leads to immediate disqualification</span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">This is a live AI Interview so returning to previous question is not allowed. If Needed you may choose to skip the question </span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-300">
+                  <div className="w-6 h-6 rounded-full border border-blue-500/50 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                  </div>
+                  <span className="font-semibold">Your score is evaluated by ML Model based on answer quality(Good,Average,Poor),so answer clearly and professionally.</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="relative z-10 pt-10 border-t border-white/10">
+          <div className="relative z-10 pt-5 border-t border-white/10">
             <p className="text-slate-500 text-sm">
               &copy; 2026 HireVision AI. Professional Suite.
             </p>
@@ -967,42 +942,44 @@ const AvatarDisplay = () => {
               </div>
 
               {/* Actions */}
-              <div className="flex flex-col gap-4 w-full">
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={handleSubmit}
-                    disabled={loading || !answer.trim()}
-                    className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
-                  >
-                    {loading ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    ) : (
-                      <>
-                        <span>Submit Answer</span>
-                        <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </>
-                    )}
-                  </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading || !answer.trim()}
+                  className="flex-1 h-14 flex items-center justify-center rounded-2xl text-base font-black tracking-tight text-white bg-[#e11d48] hover:bg-[#be123c] shadow-lg shadow-rose-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none group"
+                >
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>
+                      <span>Submit Answer</span>
+                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </button>
+                {/* 🎤 MIC BUTTON  */}
+                <button
+                  onClick={startListening}
+                  className={`w-14 h-14 flex items-center justify-center rounded-2xl ${isListening ? "bg-red-500" : "bg-blue-500"
+                    } text-white transition`}
+                  title="Speak Answer"
+                >
+                  🎤
+                </button>
 
-                  <button
-                    onClick={startListening}
-                    className={`w-14 h-14 flex items-center justify-center rounded-2xl ${isListening ? "bg-red-500" : "bg-blue-500"} text-white transition`}
-                    title="Speak Answer"
-                  >
-                    🎤
-                  </button>
 
-                  <button
-                    onClick={handleSkip}
-                    className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
-                    title="Skip Question"
-                  >
-                    <FastForward className="w-5 h-5" />
-                  </button>
-                </div>
+                <button
+                  onClick={handleSkip}
+                  className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
+                  title="Skip Question"
+                >
+                  <FastForward className="w-5 h-5" />
+                </button>
+
               </div>
             </div>
           </div>
+
           <p className="mt-8 text-slate-400 font-bold tracking-widest uppercase text-[9px]">
             Professional Assessment Interface &bull; Powered by HireVision AI
           </p>

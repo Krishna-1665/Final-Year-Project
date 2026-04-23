@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TechAvatar from "../assets/avatars/Sweta.png";
 import DatasetAvatar from "../assets/avatars/Krishna.png";
 import AiMLAvatar from "../assets/avatars/Rahul.png";
+// eslint-disable-next-line no-unused-vars
 import managerAvatar from "../assets/avatars/Arpita.png";
 import Careerguide from "../assets/avatars/Prakash.png";
 
