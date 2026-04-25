@@ -3,7 +3,19 @@ import { useNavigate, Link } from "react-router-dom";
 import { Mail, Lock, LogIn, Github, ArrowRight, Eye, EyeOff, BrainCircuit, CheckCircle2 } from "lucide-react"; // Kept CheckCircle2 as it's used in JSX
 import { GoogleLogin } from "@react-oauth/google";
 import { motion, AnimatePresence } from "framer-motion";
+const allowedDomains = [
+    "gmail.com",
+    "yahoo.com",
+    "outlook.com",
+    "hotmail.com",
+    "icloud.com",
+    "live.com"
+];
 
+const isValidEmailProvider = (email) => {
+    const domain = email.split("@")[1]?.toLowerCase();
+    return allowedDomains.includes(domain);
+};
 const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -28,17 +40,17 @@ const Login = () => {
 
             const data = await response.json();
 
-           if (response.ok) {
-    console.log('Google Login successful:', data);
+            if (response.ok) {
+                console.log('Google Login successful:', data);
 
-    // 🔥 ADD THIS (VERY IMPORTANT)
-    localStorage.setItem("user", JSON.stringify({
-        name: data.user.name,
-        email: data.user.email
-    }));
+                // 🔥 ADD THIS (VERY IMPORTANT)
+                localStorage.setItem("user", JSON.stringify({
+                    name: data.user.name,
+                    email: data.user.email
+                }));
 
-    navigate('/avatar');
-} else {
+                navigate('/avatar');
+            } else {
                 setError(data.error || 'Google login failed.');
             }
         } catch (err) {
@@ -64,6 +76,12 @@ const Login = () => {
         e.preventDefault();
         setError('');
         setLoading(true);
+        if (!isValidEmailProvider(formData.email)) {
+            setError("Use a valid verified email provider.");
+            setLoading(false);
+            return;
+        }
+
 
         try {
             const response = await fetch('http://127.0.0.1:5000/login', {
@@ -76,17 +94,17 @@ const Login = () => {
 
             const data = await response.json();
 
-           if (response.ok) {
-    console.log('Login successful:', data);
+            if (response.ok) {
+                console.log('Login successful:', data);
 
-    // 🔥 ADD THIS (VERY IMPORTANT)
-    localStorage.setItem("user", JSON.stringify({
-        name: data.user.name,
-        email: data.user.email
-    }));
+                // 🔥 ADD THIS (VERY IMPORTANT)
+                localStorage.setItem("user", JSON.stringify({
+                    name: data.user.name,
+                    email: data.user.email
+                }));
 
-    navigate('/avatar');
-} else {
+                navigate('/avatar');
+            } else {
                 setError(data.error || 'Login failed. Please check your credentials.');
             }
         } catch (err) {

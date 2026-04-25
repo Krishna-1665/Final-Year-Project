@@ -32,6 +32,8 @@ const AvatarDisplay = () => {
   const [isStopped, setIsStopped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1200); // 20 minutes
   const [voices, setVoices] = useState([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [skippedQuestions, setSkippedQuestions] = useState([]);
   const isLowTime = timeLeft < 60;
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -262,6 +264,7 @@ const AvatarDisplay = () => {
       const data = await response.json();
 
       if (response.ok) {
+        setAnsweredQuestions((prev) => [...prev, currentIndex]);
         const score = Number(data.prediction?.expected_class || 0);
         const updatedScore = totalScore + score;
 
@@ -361,6 +364,9 @@ const AvatarDisplay = () => {
   const handleSkip = async () => {
     setAnswer("");
 
+    // ✅ Mark current question as skipped
+    setSkippedQuestions((prev) => [...prev, currentIndex]);
+
     try {
       await fetch(`${API_BASE_URL}/api/live`, {
         method: "POST",
@@ -378,7 +384,7 @@ const AvatarDisplay = () => {
       if (currentIndex < questions.length - 1) {
         setCurrentIndex((prev) => prev + 1);
       } else {
-        // ✅ If 15th question skipped
+        // ✅ If last question skipped
 
         await fetch(`${API_BASE_URL}/api/save-user`, {
           method: "POST",
@@ -835,7 +841,16 @@ const AvatarDisplay = () => {
               <div className="space-y-2">
                 {questions.map((_, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-colors ${idx === currentIndex ? 'bg-blue-600 text-white ring-4 ring-blue-600/20 shadow-lg shadow-blue-500/20' : idx < currentIndex ? 'bg-green-600/20 text-green-500 border border-green-600/30' : 'bg-white/5 text-slate-500 border border-white/5'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-colors ${idx === currentIndex
+                      ? 'bg-blue-600 text-white ring-4 ring-blue-600/20'
+
+                      : answeredQuestions.includes(idx)
+                        ? 'bg-green-600 text-white'
+
+                        : skippedQuestions.includes(idx)
+                          ? 'bg-slate-200 text-slate-600'
+
+                          : 'bg-white/5 text-slate-500 border border-white/5'}`}>
                       {idx < currentIndex ? <CheckCircle2 className="w-4 h-4" /> : idx + 1}
                     </div>
                     <span className={`text-xs font-bold tracking-tight ${idx === currentIndex ? 'text-white' : 'text-slate-500'}`}>Question {idx + 1}</span>

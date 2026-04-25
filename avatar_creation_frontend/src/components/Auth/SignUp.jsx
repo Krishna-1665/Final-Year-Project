@@ -3,7 +3,19 @@ import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Lock, UserPlus, Github, ArrowRight, Eye, EyeOff, BrainCircuit } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
+const allowedDomains = [
+    "gmail.com",
+    "yahoo.com",
+    "outlook.com",
+    "hotmail.com",
+    "icloud.com",
+    "live.com"
+];
 
+const isValidEmailProvider = (email) => {
+    const domain = email.split("@")[1]?.toLowerCase();
+    return allowedDomains.includes(domain);
+};
 const SignUp = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -58,6 +70,11 @@ const SignUp = () => {
         e.preventDefault();
         setError('');
         setLoading(true);
+        if (!isValidEmailProvider(formData.email)) {
+            setError("Use a valid verified email provider.");
+            setLoading(false);
+            return;
+        }
 
         try {
             const response = await fetch('http://127.0.0.1:5000/signup', {
