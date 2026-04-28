@@ -109,7 +109,25 @@ def predict_score_dict(answer_text):
     Returns: expected_class (float), score_0_5 (float), probabilities (list)
     """
     cleaned = clean_text(answer_text)
+    
+    # If the text is empty after cleaning
+    if not cleaned.strip():
+        return {
+            "expected_class": 0.0,
+            "score_0_5": 0.0,
+            "probabilities": [1.0, 0.0, 0.0]
+        }
+
     X = VEC.transform([cleaned])
+    
+    # If no recognized words are found (e.g., gibberish like 'jj,kk')
+    if X.nnz == 0:
+        return {
+            "expected_class": 0.0,
+            "score_0_5": 0.0,
+            "probabilities": [1.0, 0.0, 0.0]
+        }
+        
     proba = MODEL.predict_proba(X)[0]                # probabilities for classes [0,1,2]
     classes = np.array(sorted(MODEL.classes_), dtype=float)
     expected = float((proba * classes).sum())
