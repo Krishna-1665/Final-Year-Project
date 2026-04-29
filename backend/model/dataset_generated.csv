@@ -1,0 +1,915 @@
+﻿category,question_id,question,answer,score
+HR,q1,Tell me about yourself.,I am a self-motivated student passionate about web development.,2
+HR,q1,Tell me about yourself.,i am a self-motivated bca student passionate about web development,2
+HR,q1,Tell me about yourself.,I am a self-motivated BCA student passionate about web development.,2
+HR,q1,Tell me about yourself.,I would say that i am a self-motivated bca student passionate about web development.,2
+HR,q1,Tell me about yourself.,I am a BCA student.,1
+HR,q1,Tell me about yourself.,i am a bca student,1
+HR,q1,Tell me about yourself.,am a BCA student.,1
+HR,q1,Tell me about yourself.,I would say that i am a bca student.,1
+HR,q1,Tell me about yourself.,i am a student,0
+HR,q1,Tell me about yourself.,I would say that i am a student.,0
+HR,q1,Tell me about yourself.,I am a student.,0
+HR,q2,What are your strengths?,i am a good communicator and a quick learner,2
+HR,q2,What are your strengths?,I am a good communicator and a quick learner.,2
+HR,q2,What are your strengths?,I would say that i am a good communicator and a quick learner.,2
+HR,q2,What are your strengths?,am a good communicator and a quick learner.,2
+HR,q2,What are your strengths?,I would say that i am honest.,1
+HR,q2,What are your strengths?,i am honest,1
+HR,q2,What are your strengths?,I am honest.,1
+HR,q2,What are your strengths?,I like watching movies.,0
+HR,q2,What are your strengths?,i like watching movies,0
+HR,q2,What are your strengths?,I would say that i like watching movies.,0
+HR,q3,What are your weaknesses?,"One of my weaknesses means that I sometimes focus too much on details, but I’m learning to balance perfection with efficiency by setting clear priorities and timelines.",2
+HR,q3,What are your weaknesses?,one of my weaknesses is that i sometimes focus too much on details but i’m learning to balance perfection with efficiency by setting clear priorities and timelines,2
+HR,q3,What are your weaknesses?,"I would say that one of my weaknesses is that i sometimes focus too much on details, but i’m learning to balance perfection with efficiency by setting clear priorities and timelines.",2
+HR,q3,What are your weaknesses?,"One of my weaknesses is that I sometimes too much details, but I’m learning to balance perfection with efficiency by setting clear priorities and timelines.",2
+HR,q3,What are your weaknesses?,"One of my weaknesses is that I sometimes focus too much on details, but I’m learning to balance perfection with efficiency by setting clear priorities and timelines.",2
+HR,q3,What are your weaknesses?,"I would say that sometimes get nervous when speaking in front of large groups, but i try to improve by practicing presentations.",1
+HR,q3,What are your weaknesses?,"sometimes get nervous when speaking in front of large groups, but I try to improve by practicing presentations.",1
+HR,q3,What are your weaknesses?,sometimes get nervous when speaking in front of large groups but i try to improve by practicing presentations,1
+HR,q3,What are your weaknesses?,"sometimes nervous speaking in front of large groups, but I try to improve by practicing presentations.",1
+HR,q3,What are your weaknesses?,i don’t have any weaknesses,0
+HR,q3,What are your weaknesses?,I don’t have any weaknesses.,0
+HR,q3,What are your weaknesses?,I don’t any weaknesses.,0
+HR,q3,What are your weaknesses?,I would say that i don’t have any weaknesses.,0
+HR,q4,Why do you want to work with us?,I would say that your innovation in web development aligns with my career goals.,2
+HR,q4,Why do you want to work with us?,Your innovation in web development aligns with my career goals.,2
+HR,q4,Why do you want to work with us?,your innovation in web development aligns with my career goals,2
+HR,q4,Why do you want to work with us?,I would say that i like your company culture and want a new challenge.,1
+HR,q4,Why do you want to work with us?,i like your company culture and want a new challenge,1
+HR,q4,Why do you want to work with us?,I like your and want a challenge.,1
+HR,q4,Why do you want to work with us?,I like your company culture and want a new challenge.,1
+HR,q4,Why do you want to work with us?,i really need a job and the pay looks good,0
+HR,q4,Why do you want to work with us?,really need a and looks,0
+HR,q4,Why do you want to work with us?,I would say that i really need a job and the pay looks good.,0
+HR,q4,Why do you want to work with us?,I really need a job and the pay looks good.,0
+HR,q5,Where do you see yourself in 5 years?,Leading impactful projects while mastering advanced full-stack development skills.,2
+HR,q5,Where do you see yourself in 5 years?,Leading impactful projects while advanced full-stack development skills.,2
+HR,q5,Where do you see yourself in 5 years?,I would say that leading impactful projects while mastering advanced full-stack development skills.,2
+HR,q5,Where do you see yourself in 5 years?,leading impactful projects while mastering advanced full-stack development skills,2
+HR,q5,Where do you see yourself in 5 years?,in a senior role here having grown with the company,1
+HR,q5,Where do you see yourself in 5 years?,"I would say that in a senior role here, having grown with the company.",1
+HR,q5,Where do you see yourself in 5 years?,"In a senior role here, having grown with the company.",1
+HR,q5,Where do you see yourself in 5 years?,"In a senior role here, having grown with the",1
+HR,q5,Where do you see yourself in 5 years?,I hope to be retired running my own business.,0
+HR,q5,Where do you see yourself in 5 years?,I would say that i hope to be retired or running my own business.,0
+HR,q5,Where do you see yourself in 5 years?,i hope to be retired or running my own business,0
+HR,q5,Where do you see yourself in 5 years?,I hope to be retired or running my own business.,0
+HR,q6,Describe a challenge you faced and how you handled it.,in a recent research project i struggled with organizing massive amounts of data on digital well-being to handle it i implemented a structured categorization system and used project management tools to break the data into manageable themes this turned a chaotic workflow into a clear academic structure ensuring the paper stayed on track and met every deadline,2
+HR,q6,Describe a challenge you faced and how you handled it.,"In a recent research project, I struggled with organizing massive amounts of data on digital well-being. To handle it, I implemented a structured categorization system and used project management tools to break the data into manageable themes. This turned a chaotic workflow into a clear, academic structure, ensuring the paper stayed on track and met every deadline.",2
+HR,q6,Describe a challenge you faced and how you handled it.,"I would say that in a recent research project, i struggled with organizing massive amounts of data on digital well-being. to handle it, i implemented a structured categorization system and used project management tools to break the data into manageable themes. this turned a chaotic workflow into a clear, academic structure, ensuring the paper stayed on track and met every deadline.",2
+HR,q6,Describe a challenge you faced and how you handled it.,"In a recent research project, with organizing massive of data on well-being. To handle it, I implemented a structured categorization system and used project management tools to break the data into manageable themes. This turned a chaotic workflow into clear, academic structure, the paper stayed on track met every",2
+HR,q6,Describe a challenge you faced and how you handled it.,"""I faced a very tight deadline for a report on cyberbullying. I handled it by cutting out distractions and working extra hours until it was finished. It was stressful, but I learned that staying focused and managing my time better is the way to get through heavy workloads without losing quality.",1
+HR,q6,Describe a challenge you faced and how you handled it.,"I would say that ""i once faced a very tight deadline for a report on cyberbullying. i handled it by cutting out distractions and working extra hours until it was finished. it was stressful, but i learned that staying focused and managing my time better is the only way to get through heavy workloads without losing quality.",1
+HR,q6,Describe a challenge you faced and how you handled it.,"""I once faced a very tight deadline for a report on cyberbullying. I handled it by cutting out distractions and working extra hours until it was finished. It was stressful, but I learned that staying focused and managing my time better is the only way to get through heavy workloads without losing quality.",1
+HR,q6,Describe a challenge you faced and how you handled it.,"""I once faced a very tight deadline for a report on cyberbullying. I handled it by cutting out distractions and working extra hours until it was finished. It was stressful, but I learned that staying focused and managing my time better means the only way to get through heavy workloads without losing quality.",1
+HR,q6,Describe a challenge you faced and how you handled it.,"""i once faced a very tight deadline for a report on cyberbullying i handled it by cutting out distractions and working extra hours until it was finished it was stressful but i learned that staying focused and managing my time better is the only way to get through heavy workloads without losing quality",1
+HR,q6,Describe a challenge you faced and how you handled it.,"I had a difficult teammate who wasn't doing any of their work. I basically ended up doing the whole project myself because I didn't want to fail. I handled it by just staying quiet and finishing it, but I made sure to tell the boss later that I did all the work.",0
+HR,q6,Describe a challenge you faced and how you handled it.,i had a difficult teammate who wasn't doing any of their work i basically ended up doing the whole project myself because i didn't want to fail i handled it by just staying quiet and finishing it but i made sure to tell the boss later that i did all the work,0
+HR,q6,Describe a challenge you faced and how you handled it.,"I had a difficult teammate who any of their work. I basically ended up doing the project myself I didn't want fail. I handled it by just staying quiet and finishing it, but I made sure to tell the boss later that I did all the work.",0
+HR,q6,Describe a challenge you faced and how you handled it.,"I would say that i had a difficult teammate who wasn't doing any of their work. i basically ended up doing the whole project myself because i didn't want to fail. i handled it by just staying quiet and finishing it, but i made sure to tell the boss later that i did all the work.",0
+HR,q7,How do you handle stress and pressure?,i break the project into small wins it keeps me from feeling overwhelmed and ensures the quality doesn't drop when things get fast,2
+HR,q7,How do you handle stress and pressure?,I break the project into small wins. It keeps me from feeling overwhelmed and ensures the quality doesn't drop when things get fast.,2
+HR,q7,How do you handle stress and pressure?,I would say that i break the project into small wins. it keeps me from feeling overwhelmed and ensures the quality doesn't drop when things get fast.,2
+HR,q7,How do you handle stress and pressure?,I break the project into small wins. It me from feeling and ensures the doesn't drop when things fast.,2
+HR,q7,How do you handle stress and pressure?,I would say that i stay organized and focus on my checklist. taking short breaks also helps me keep a clear head during busy weeks.,1
+HR,q7,How do you handle stress and pressure?,i stay organized and focus on my checklist taking short breaks also helps me keep a clear head during busy weeks,1
+HR,q7,How do you handle stress and pressure?,stay organized and focus on checklist. short also helps me keep a clear head during busy weeks.,1
+HR,q7,How do you handle stress and pressure?,I stay organized and focus on my checklist. Taking short breaks also helps me keep a clear head during busy weeks.,1
+HR,q7,How do you handle stress and pressure?,i don't really get stressed i just work faster and stay late until the work is finished,0
+HR,q7,How do you handle stress and pressure?,I would say that i don't really get stressed. i just work faster and stay late until the work is finished.,0
+HR,q7,How do you handle stress and pressure?,I don't get stressed. I just work faster and stay late until the work is,0
+HR,q7,How do you handle stress and pressure?,I don't really get stressed. I just work faster and stay late until the work is finished.,0
+HR,q7,How do you handle stress and pressure?,I don't really get stressed. I just work faster and stay late until the work means finished.,0
+HR,q8,Describe a time you worked successfully in a team.,"I would say that in my college project, i worked with four teammates to build a web app. i handled the frontend and ensured good communication, which helped us complete the project on time.",2
+HR,q8,Describe a time you worked successfully in a team.,"In my college project, I worked with four teammates to build a web app. I handled the frontend and ensured good communication, which helped us complete the project on time.",2
+HR,q8,Describe a time you worked successfully in a team.,"In my college project, I worked with four teammates to build a web app. handled the frontend ensured good communication, which helped us complete the project on time.",2
+HR,q8,Describe a time you worked successfully in a team.,in my college project i worked with four teammates to build a web app i handled the frontend and ensured good communication which helped us complete the project on time,2
+HR,q8,Describe a time you worked successfully in a team.,I usually work well with others when given clear tasks.,1
+HR,q8,Describe a time you worked successfully in a team.,I would say that i usually work well with others when given clear tasks.,1
+HR,q8,Describe a time you worked successfully in a team.,i usually work well with others when given clear tasks,1
+HR,q8,Describe a time you worked successfully in a team.,I prefer working alone; don’t like group work.,0
+HR,q8,Describe a time you worked successfully in a team.,I prefer working alone; I don’t like group work.,0
+HR,q8,Describe a time you worked successfully in a team.,i prefer working alone; i don’t like group work,0
+HR,q8,Describe a time you worked successfully in a team.,I would say that i prefer working alone; i don’t like group work.,0
+HR,q9,Why should we hire you?,I have the right combination of technical skills and eagerness to learn. I’m confident that I can adapt quickly and contribute to your team’s success,2
+HR,q9,Why should we hire you?,I would say that i have the right combination of technical skills and eagerness to learn. i’m confident that i can adapt quickly and contribute to your team’s success,2
+HR,q9,Why should we hire you?,i have the right combination of technical skills and eagerness to learn i’m confident that i can adapt quickly and contribute to your team’s success,2
+HR,q9,Why should we hire you?,I the combination of technical skills and eagerness to learn. I’m confident that I can adapt quickly and contribute to your team’s success,2
+HR,q9,Why should we hire you?,Because I’ll try to do my best and follow instructions.,1
+HR,q9,Why should we hire you?,Because I’ll try to do my best and instructions.,1
+HR,q9,Why should we hire you?,because i’ll try to do my best and follow instructions,1
+HR,q9,Why should we hire you?,I would say that because i’ll try to do my best and follow instructions.,1
+HR,q9,Why should we hire you?,because i really need a job,0
+HR,q9,Why should we hire you?,Because I really need a job.,0
+HR,q9,Why should we hire you?,I would say that because i really need a job.,0
+HR,q10,What motivates you at work?,Learning new things and seeing my work make an impact motivates me. I like when my efforts lead to visible improvements or user satisfaction.,2
+HR,q10,What motivates you at work?,new things and seeing my work make an impact motivates me. I like when my lead to visible improvements or user satisfaction.,2
+HR,q10,What motivates you at work?,I would say that learning new things and seeing my work make an impact motivates me. i like when my efforts lead to visible improvements or user satisfaction.,2
+HR,q10,What motivates you at work?,learning new things and seeing my work make an impact motivates me i like when my efforts lead to visible improvements or user satisfaction,2
+HR,q10,What motivates you at work?,appreciation from others motivates me,1
+HR,q10,What motivates you at work?,Appreciation from others motivates me.,1
+HR,q10,What motivates you at work?,I would say that appreciation from others motivates me.,1
+HR,q10,What motivates you at work?,I would say that i just work for salary.,0
+HR,q10,What motivates you at work?,just work for salary.,0
+HR,q10,What motivates you at work?,i just work for salary,0
+HR,q10,What motivates you at work?,I just work for salary.,0
+HR,q11,How do you prioritize tasks?,i prioritize tasks by urgency and importance often using techniques like the eisenhower matrix to ensure critical deadlines are met,2
+HR,q11,How do you prioritize tasks?,"I prioritize tasks by urgency and importance, often using techniques like the Eisenhower Matrix, to ensure critical deadlines are met.",2
+HR,q11,How do you prioritize tasks?,"I prioritize tasks by urgency and importance, often using techniques like the Eisenhower Matrix, to ensure critical deadlines refer to met.",2
+HR,q11,How do you prioritize tasks?,"I prioritize tasks by urgency and importance, often using techniques like the Eisenhower Matrix, to ensure deadlines are met.",2
+HR,q11,How do you prioritize tasks?,"I would say that i prioritize tasks by urgency and importance, often using techniques like the eisenhower matrix, to ensure critical deadlines are met.",2
+HR,q11,How do you prioritize tasks?,I usually make a to-do list do the most important things first.,1
+HR,q11,How do you prioritize tasks?,I would say that i usually make a to-do list and do the most important things first.,1
+HR,q11,How do you prioritize tasks?,i usually make a to-do list and do the most important things first,1
+HR,q11,How do you prioritize tasks?,I usually make a to-do list and do the most important things first.,1
+HR,q11,How do you prioritize tasks?,I just do whatever comes to my mind,0
+HR,q11,How do you prioritize tasks?,I just do whatever task comes to my mind first.,0
+HR,q11,How do you prioritize tasks?,i just do whatever task comes to my mind first,0
+HR,q11,How do you prioritize tasks?,I would say that i just do whatever task comes to my mind first.,0
+HR,q12,Tell me about a mistake you made and what you learned.,i once missed a project deadline due to poor estimation i learned to break tasks into smaller parts and buffer my estimates for unexpected issues,2
+HR,q12,Tell me about a mistake you made and what you learned.,I once missed a project deadline due to poor estimation. I learned to break tasks into smaller parts and buffer my estimates for unexpected issues.,2
+HR,q12,Tell me about a mistake you made and what you learned.,I once missed a project deadline due to poor estimation. I learned break tasks into parts and buffer estimates for unexpected issues.,2
+HR,q12,Tell me about a mistake you made and what you learned.,I would say that i once missed a project deadline due to poor estimation. i learned to break tasks into smaller parts and buffer my estimates for unexpected issues.,2
+HR,q12,Tell me about a mistake you made and what you learned.,I made a coding error that broke the build. I learned to be more careful and double-check my work.,1
+HR,q12,Tell me about a mistake you made and what you learned.,I would say that i made a coding error that broke the build. i learned to be more careful and double-check my work.,1
+HR,q12,Tell me about a mistake you made and what you learned.,i made a coding error that broke the build i learned to be more careful and double-check my work,1
+HR,q12,Tell me about a mistake you made and what you learned.,i don't really make mistakes at work,0
+HR,q12,Tell me about a mistake you made and what you learned.,I would say that i don't really make mistakes at work.,0
+HR,q12,Tell me about a mistake you made and what you learned.,I don't really make mistakes at work.,0
+HR,q13,Do you prefer working alone or in a team?,"I would say that i am adaptable depending on the project. i enjoy team collaboration for brainstorming and design, but i also excel at focused, independent work when coding.",2
+HR,q13,Do you prefer working alone or in a team?,"I am adaptable depending on the project. I enjoy team collaboration for brainstorming and design, but I also excel at focused, independent work when coding.",2
+HR,q13,Do you prefer working alone or in a team?,i am adaptable depending on the project i enjoy team collaboration for brainstorming and design but i also excel at focused independent work when coding,2
+HR,q13,Do you prefer working alone or in a team?,"I am adaptable depending on the project. I enjoy collaboration for brainstorming and design, but I also excel at focused, independent work when coding.",2
+HR,q13,Do you prefer working alone or in a team?,i like working in a team because it's easier to get help,1
+HR,q13,Do you prefer working alone or in a team?,I like working in a team because it's easier to get help.,1
+HR,q13,Do you prefer working alone or in a team?,I would say that i like working in a team because it's easier to get help.,1
+HR,q13,Do you prefer working alone or in a team?,I would say that i prefer working alone because other people slow me down.,0
+HR,q13,Do you prefer working alone or in a team?,I prefer working alone because other people slow me down.,0
+HR,q13,Do you prefer working alone or in a team?,I prefer alone because people slow me down.,0
+HR,q13,Do you prefer working alone or in a team?,i prefer working alone because other people slow me down,0
+HR,q14,Do you have any questions for us?,"I would say that yes, i was wondering what the key priorities are for the person stepping into this role over the first 90 days?",2
+HR,q14,Do you have any questions for us?,"Yes, I was wondering what the key priorities are for the person stepping into this role over the first days?",2
+HR,q14,Do you have any questions for us?,"Yes, I was wondering what the key priorities refer to for the person stepping into this role over the first 90 days?",2
+HR,q14,Do you have any questions for us?,yes i was wondering what the key priorities are for the person stepping into this role over the first 90 days?,2
+HR,q14,Do you have any questions for us?,"Yes, I was wondering what the key priorities are for the person stepping into this role over the first 90 days?",2
+HR,q14,Do you have any questions for us?,What are the working hours and benefits?,1
+HR,q14,Do you have any questions for us?,I would say that what are the working hours and benefits?,1
+HR,q14,Do you have any questions for us?,what are the working hours and benefits?,1
+HR,q14,Do you have any questions for us?,What refer to the working hours and benefits?,1
+HR,q14,Do you have any questions for us?,no i don't have any questions right now,0
+HR,q14,Do you have any questions for us?,"No, I don't have any questions right now.",0
+HR,q14,Do you have any questions for us?,I don't have any questions right now.,0
+HR,q14,Do you have any questions for us?,"I would say that no, i don't have any questions right now.",0
+Technical,q15,What is HTML?,html stands for hypertext markup language it provides the standard logical structure and core content for building web pages,2
+Technical,q15,What is HTML?,I would say that html stands for hypertext markup language. it provides the standard logical structure and core content for building web pages.,2
+Technical,q15,What is HTML?,HTML for HyperText Markup Language. It provides the standard logical structure and core content for building web pages.,2
+Technical,q15,What is HTML?,HTML stands for HyperText Markup Language. It provides the standard logical structure and core content for building web pages.,2
+Technical,q15,What is HTML?,HTML is the language used to make web,1
+Technical,q15,What is HTML?,html is the language used to make web pages,1
+Technical,q15,What is HTML?,HTML is the language used to make web pages.,1
+Technical,q15,What is HTML?,HTML means the language used to make web pages.,1
+Technical,q15,What is HTML?,I would say that html is the language used to make web pages.,1
+Technical,q15,What is HTML?,HTML is an operating system for the internet.,0
+Technical,q15,What is HTML?,HTML an operating system for the internet.,0
+Technical,q15,What is HTML?,HTML means an operating system for the internet.,0
+Technical,q15,What is HTML?,html is an operating system for the internet,0
+Technical,q15,What is HTML?,I would say that html is an operating system for the internet.,0
+Technical,q16,What is CSS and how is it used?,css (cascading style sheets) is used to style and layout web pages altering fonts colors spacing and responsive designs separately from the html structure,2
+Technical,q16,What is CSS and how is it used?,"CSS (Cascading Style Sheets) is used to style and layout web pages, altering fonts, colors, spacing, and responsive designs separately from the HTML structure.",2
+Technical,q16,What is CSS and how is it used?,"CSS (Cascading Style Sheets) means used to style and layout web pages, altering fonts, colors, spacing, and responsive designs separately from the HTML structure.",2
+Technical,q16,What is CSS and how is it used?,"CSS (Cascading Style is used to style and layout pages, altering fonts, colors, spacing, and responsive designs separately from the HTML structure.",2
+Technical,q16,What is CSS and how is it used?,"I would say that css (cascading style sheets) is used to style and layout web pages, altering fonts, colors, spacing, and responsive designs separately from the html structure.",2
+Technical,q16,What is CSS and how is it used?,css is used to add colors and make the website look pretty,1
+Technical,q16,What is CSS and how is it used?,CSS is used to add colors and make the website look pretty.,1
+Technical,q16,What is CSS and how is it used?,I would say that css is used to add colors and make the website look pretty.,1
+Technical,q16,What is CSS and how is it used?,CSS is used to add colors and make website pretty.,1
+Technical,q16,What is CSS and how is it used?,CSS means used to add colors and make the website look pretty.,1
+Technical,q16,What is CSS and how is it used?,css is a programming language used for databases,0
+Technical,q16,What is CSS and how is it used?,CSS means a programming language used for databases.,0
+Technical,q16,What is CSS and how is it used?,CSS is a programming language used for databases.,0
+Technical,q16,What is CSS and how is it used?,I would say that css is a programming language used for databases.,0
+Technical,q17,What is JavaScript and why is it important?,javascript is a versatile programming language primarily used to create interactive and dynamic content on web pages it is essential for modern web development,2
+Technical,q17,What is JavaScript and why is it important?,I would say that javascript is a versatile programming language primarily used to create interactive and dynamic content on web pages. it is essential for modern web development.,2
+Technical,q17,What is JavaScript and why is it important?,JavaScript is a versatile programming to create interactive and dynamic content on web It essential for modern web development.,2
+Technical,q17,What is JavaScript and why is it important?,JavaScript means a versatile programming language primarily used to create interactive and dynamic content on web pages. It means essential for modern web development.,2
+Technical,q17,What is JavaScript and why is it important?,JavaScript is a versatile programming language primarily used to create interactive and dynamic content on web pages. It is essential for modern web development.,2
+Technical,q17,What is JavaScript and why is it important?,I would say that javascript is what makes websites interactive and do things when you click.,1
+Technical,q17,What is JavaScript and why is it important?,javascript is what makes websites interactive and do things when you click,1
+Technical,q17,What is JavaScript and why is it important?,JavaScript what websites interactive and do things when you click.,1
+Technical,q17,What is JavaScript and why is it important?,JavaScript is what makes websites interactive and do things when you click.,1
+Technical,q17,What is JavaScript and why is it important?,JavaScript means what makes websites interactive and do things when you click.,1
+Technical,q17,What is JavaScript and why is it important?,javascript is the same thing as java but for scripts,0
+Technical,q17,What is JavaScript and why is it important?,JavaScript means the same thing as Java but for scripts.,0
+Technical,q17,What is JavaScript and why is it important?,JavaScript is the same thing as Java but for scripts.,0
+Technical,q17,What is JavaScript and why is it important?,I would say that javascript is the same thing as java but for scripts.,0
+Technical,q18,What is the DOM?,"The DOM (Document Object Model) is a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content.",2
+Technical,q18,What is the DOM?,"I would say that the dom (document object model) is a programming interface for web documents. it represents the page so that programs can change the document structure, style, and content.",2
+Technical,q18,What is the DOM?,the dom (document object model) is a programming interface for web documents it represents the page so that programs can change the document structure style and content,2
+Technical,q18,What is the DOM?,"The DOM (Document Object Model) means a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content.",2
+Technical,q18,What is the DOM?,"The DOM (Document Object Model) is a programming interface for web documents. represents the page so that programs can change the document structure, style, and content.",2
+Technical,q18,What is the DOM?,The DOM means the tree of HTML elements on the page.,1
+Technical,q18,What is the DOM?,The DOM is tree of HTML on the page.,1
+Technical,q18,What is the DOM?,The DOM is the tree of HTML elements on the page.,1
+Technical,q18,What is the DOM?,I would say that the dom is the tree of html elements on the page.,1
+Technical,q18,What is the DOM?,the dom is the tree of html elements on the page,1
+Technical,q18,What is the DOM?,I would say that dom stands for document origin machine.,0
+Technical,q18,What is the DOM?,DOM stands for Document Origin Machine.,0
+Technical,q18,What is the DOM?,dom stands for document origin machine,0
+Technical,q19,What is the difference between frontend and backend?,"I would say that frontend is the user interface and client-side logic that users interact with directly. backend is the server-side architecture, databases, and application logic that powers the frontend.",2
+Technical,q19,What is the difference between frontend and backend?,"Frontend is the user interface and client-side logic that users interact with directly. Backend is the server-side architecture, databases, and application logic that powers the frontend.",2
+Technical,q19,What is the difference between frontend and backend?,"Frontend means the user interface and client-side logic that users interact with directly. Backend means the server-side architecture, databases, and application logic that powers the frontend.",2
+Technical,q19,What is the difference between frontend and backend?,"Frontend is the user interface and client-side logic that users interact with directly. Backend is the server-side architecture, databases, and powers the frontend.",2
+Technical,q19,What is the difference between frontend and backend?,frontend is the user interface and client-side logic that users interact with directly backend is the server-side architecture databases and application logic that powers the frontend,2
+Technical,q19,What is the difference between frontend and backend?,frontend is what you see on the screen backend is the server and database,1
+Technical,q19,What is the difference between frontend and backend?,"Frontend is what see on the screen, backend is the server and database.",1
+Technical,q19,What is the difference between frontend and backend?,"Frontend means what you see on the screen, backend means the server and database.",1
+Technical,q19,What is the difference between frontend and backend?,"I would say that frontend is what you see on the screen, backend is the server and database.",1
+Technical,q19,What is the difference between frontend and backend?,"Frontend is what you see on the screen, backend is the server and database.",1
+Technical,q19,What is the difference between frontend and backend?,Frontend is easy and backend is hard.,0
+Technical,q19,What is the difference between frontend and backend?,frontend is easy and backend is hard,0
+Technical,q19,What is the difference between frontend and backend?,I would say that frontend is easy and backend is hard.,0
+Technical,q19,What is the difference between frontend and backend?,Frontend means easy and backend means hard.,0
+Technical,q20,What are HTTP methods?,http methods denote actions to be performed on a resource common ones include get (retrieve) post (create) put (update) and delete (remove),2
+Technical,q20,What are HTTP methods?,"HTTP methods denote actions to be performed on a resource. Common ones include GET (retrieve), POST (create), PUT (update), and DELETE (remove).",2
+Technical,q20,What are HTTP methods?,"HTTP methods denote actions to be performed on a resource. Common ones include GET (retrieve), (create), PUT (update), DELETE (remove).",2
+Technical,q20,What are HTTP methods?,"I would say that http methods denote actions to be performed on a resource. common ones include get (retrieve), post (create), put (update), and delete (remove).",2
+Technical,q20,What are HTTP methods?,I would say that http methods are things like get and post to send data.,1
+Technical,q20,What are HTTP methods?,HTTP methods are things like GET and POST to send data.,1
+Technical,q20,What are HTTP methods?,http methods are things like get and post to send data,1
+Technical,q20,What are HTTP methods?,HTTP methods refer to things like GET and POST to send data.,1
+Technical,q20,What are HTTP methods?,http methods are used to secure websites,0
+Technical,q20,What are HTTP methods?,HTTP methods are used to secure websites.,0
+Technical,q20,What are HTTP methods?,HTTP methods refer to used to secure websites.,0
+Technical,q20,What are HTTP methods?,I would say that http methods are used to secure websites.,0
+Technical,q21,What is an API?,An API (Application Programming Interface) is a set rules and protocols that allows different software applications to communicate and share data with each other.,2
+Technical,q21,What is an API?,An API (Application Programming Interface) means a set of rules and protocols that allows different software applications to communicate and share data with each other.,2
+Technical,q21,What is an API?,I would say that an api (application programming interface) is a set of rules and protocols that allows different software applications to communicate and share data with each other.,2
+Technical,q21,What is an API?,an api (application programming interface) is a set of rules and protocols that allows different software applications to communicate and share data with each other,2
+Technical,q21,What is an API?,An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and share data with each other.,2
+Technical,q21,What is an API?,An API is a way for apps to to get from a server.,1
+Technical,q21,What is an API?,An API means a way for apps to to get data from a server.,1
+Technical,q21,What is an API?,an api is a way for apps to to get data from a server,1
+Technical,q21,What is an API?,I would say that an api is a way for apps to to get data from a server.,1
+Technical,q21,What is an API?,An API is a way for apps to to get data from a server.,1
+Technical,q21,What is an API?,An API is a type of website program.,0
+Technical,q21,What is an API?,an api is a type of website program,0
+Technical,q21,What is an API?,I would say that an api is a type of website program.,0
+Technical,q21,What is an API?,is a type website program.,0
+Technical,q21,What is an API?,An API means a type of website program.,0
+Technical,q22,What is JSON?,"JSON (JavaScript Object Notation) is a lightweight data query and interchange format that is easy for humans to read and write, and easy for machines to parse.",2
+Technical,q22,What is JSON?,"I would say that json (javascript object notation) is a lightweight data query and interchange format that is easy for humans to read and write, and easy for machines to parse.",2
+Technical,q22,What is JSON?,"JSON (JavaScript Object Notation) means a lightweight data query and interchange format that means easy for humans to read and write, and easy for machines to parse.",2
+Technical,q22,What is JSON?,"JSON (JavaScript Object Notation) is a lightweight data and interchange format that is easy for humans to read and write, and easy for machines to parse.",2
+Technical,q22,What is JSON?,json (javascript object notation) is a lightweight data query and interchange format that is easy for humans to read and write and easy for machines to parse,2
+Technical,q22,What is JSON?,I would say that json is a format to store data in key-value pairs.,1
+Technical,q22,What is JSON?,JSON is a format to store data in key-value pairs.,1
+Technical,q22,What is JSON?,json is a format to store data in key-value pairs,1
+Technical,q22,What is JSON?,JSON a format to store data in pairs.,1
+Technical,q22,What is JSON?,JSON means a format to store data in key-value pairs.,1
+Technical,q22,What is JSON?,JSON is the creator of JavaScript.,0
+Technical,q22,What is JSON?,I would say that json is the creator of javascript.,0
+Technical,q22,What is JSON?,json is the creator of javascript,0
+Technical,q22,What is JSON?,JSON means the creator of JavaScript.,0
+Technical,q22,What is JSON?,is the creator of JavaScript.,0
+Technical,q23,What is responsive web design?,I would say that responsive web design is an approach that ensures web pages render well on a variety of devices and window or screen sizes using fluid grids and media queries.,2
+Technical,q23,What is responsive web design?,Responsive web design means an approach that ensures web pages render well on a variety of devices and window or screen sizes using fluid grids and media queries.,2
+Technical,q23,What is responsive web design?,responsive web design is an approach that ensures web pages render well on a variety of devices and window or screen sizes using fluid grids and media queries,2
+Technical,q23,What is responsive web design?,Responsive web design is an approach that ensures web pages render well on a variety of devices and window or screen sizes using fluid grids and media queries.,2
+Technical,q23,What is responsive web design?,Responsive web design is an approach that ensures web pages render well on a of devices window or screen sizes using fluid and media queries.,2
+Technical,q23,What is responsive web design?,responsive design means a website works on mobile phones and computers',1
+Technical,q23,What is responsive web design?,"I would say that responsive design means a website works on mobile phones and computers.',",1
+Technical,q23,What is responsive web design?,"Responsive design means a website works on mobile phones and computers.',",1
+Technical,q23,What is responsive web design?,"Responsive design means a website works on phones and computers.',",1
+Technical,q23,What is responsive web design?,I would say that responsive design means the website loads very fast.,0
+Technical,q23,What is responsive web design?,Responsive design means the website loads very fast.,0
+Technical,q23,What is responsive web design?,responsive design means the website loads very fast,0
+Technical,q24,What is the difference between == and === in JavaScript?,"I would say that in javascript, '==' performs type coercion before checking for equality, while '===' checks for strict equality, meaning both value and type must match exactly.",2
+Technical,q24,What is the difference between == and === in JavaScript?,"In JavaScript, '==' performs type checking for equality, while '===' checks for strict equality, meaning both value and type must match exactly.",2
+Technical,q24,What is the difference between == and === in JavaScript?,in javascript '==' performs type coercion before checking for equality while '===' checks for strict equality meaning both value and type must match exactly,2
+Technical,q24,What is the difference between == and === in JavaScript?,"In JavaScript, '==' performs type coercion before checking for equality, while '===' checks for strict equality, meaning both value and type must match exactly.",2
+Technical,q24,What is the difference between == and === in JavaScript?,"'==' checks value, and '===' checks value and type.",1
+Technical,q24,What is the difference between == and === in JavaScript?,'==' checks value and '===' checks value and type,1
+Technical,q24,What is the difference between == and === in JavaScript?,"I would say that '==' checks value, and '===' checks value and type.",1
+Technical,q24,What is the difference between == and === in JavaScript?,"'==' value, and '===' checks value and type.",1
+Technical,q24,What is the difference between == and === in JavaScript?,there is no difference they both check if things are equal,0
+Technical,q24,What is the difference between == and === in JavaScript?,"I would say that there is no difference, they both check if things are equal.",0
+Technical,q24,What is the difference between == and === in JavaScript?,"There means no difference, they both check if things refer to equal.",0
+Technical,q24,What is the difference between == and === in JavaScript?,"There is no difference, they both check if things are equal.",0
+Technical,q24,What is the difference between == and === in JavaScript?,"is no difference, they both check if things are",0
+Technical,q25,What is a closure in JavaScript?,a closure is a function that remembers and can access variables from its outer lexical scope even after that outer scope has finished executing,2
+Technical,q25,What is a closure in JavaScript?,A closure a function that remembers and can access variables from outer lexical scope even after that outer scope has finished executing.,2
+Technical,q25,What is a closure in JavaScript?,A closure means a function that remembers and can access variables from its outer lexical scope even after that outer scope has finished executing.,2
+Technical,q25,What is a closure in JavaScript?,I would say that a closure is a function that remembers and can access variables from its outer lexical scope even after that outer scope has finished executing.,2
+Technical,q25,What is a closure in JavaScript?,A closure is a function that remembers and can access variables from its outer lexical scope even after that outer scope has finished executing.,2
+Technical,q25,What is a closure in JavaScript?,I would say that it’s when a function uses variables from outside its scope.,1
+Technical,q25,What is a closure in JavaScript?,It’s when function uses variables from outside its scope.,1
+Technical,q25,What is a closure in JavaScript?,it’s when a function uses variables from outside its scope,1
+Technical,q25,What is a closure in JavaScript?,It’s when a function uses variables from outside its scope.,1
+Technical,q25,What is a closure in JavaScript?,I would say that i don’t know what closure is.,0
+Technical,q25,What is a closure in JavaScript?,I don’t know what closure is.,0
+Technical,q25,What is a closure in JavaScript?,i don’t know what closure is,0
+Technical,q26,What is React?,react is a declarative efficient and flexible javascript library created by facebook for building dynamic user interfaces using component-based architecture,2
+Technical,q26,What is React?,"React is a declarative, efficient, and flexible JavaScript library created by Facebook for building dynamic user interfaces using component-based architecture.",2
+Technical,q26,What is React?,"I would say that react is a declarative, efficient, and flexible javascript library created by facebook for building dynamic user interfaces using component-based architecture.",2
+Technical,q26,What is React?,"React means a declarative, efficient, and flexible JavaScript library created by Facebook for building dynamic user interfaces using component-based architecture.",2
+Technical,q26,What is React?,React means a framework for building frontend web applications.,1
+Technical,q26,What is React?,React is a framework for building frontend web applications.,1
+Technical,q26,What is React?,I would say that react is a framework for building frontend web applications.,1
+Technical,q26,What is React?,is a framework for building frontend web applications.,1
+Technical,q26,What is React?,react is a framework for building frontend web applications,1
+Technical,q26,What is React?,I would say that react is a database management system.,0
+Technical,q26,What is React?,react is a database management system,0
+Technical,q26,What is React?,React means a database management system.,0
+Technical,q26,What is React?,React is a database management,0
+Technical,q26,What is React?,React is a database management system.,0
+Technical,q27,What is JSX?,"JSX is a syntax extension for JavaScript used in React. It allows developers to write HTML-like markup directly inside JavaScript files, simplifying component rendering.",2
+Technical,q27,What is JSX?,"JSX is a syntax for JavaScript used in React. allows to write directly inside JavaScript files, simplifying component",2
+Technical,q27,What is JSX?,"JSX means a syntax extension for JavaScript used in React. It allows developers to write HTML-like markup directly inside JavaScript files, simplifying component rendering.",2
+Technical,q27,What is JSX?,"I would say that jsx is a syntax extension for javascript used in react. it allows developers to write html-like markup directly inside javascript files, simplifying component rendering.",2
+Technical,q27,What is JSX?,jsx is a syntax extension for javascript used in react it allows developers to write html-like markup directly inside javascript files simplifying component rendering,2
+Technical,q27,What is JSX?,JSX is HTML written inside JavaScript for React components.,1
+Technical,q27,What is JSX?,jsx is html written inside javascript for react components,1
+Technical,q27,What is JSX?,JSX means HTML written inside JavaScript for React components.,1
+Technical,q27,What is JSX?,I would say that jsx is html written inside javascript for react components.,1
+Technical,q27,What is JSX?,JSX is written inside JavaScript for React components.,1
+Technical,q27,What is JSX?,jsx is a new version of javascript,0
+Technical,q27,What is JSX?,JSX means a new version of JavaScript.,0
+Technical,q27,What is JSX?,JSX is a new version of JavaScript.,0
+Technical,q27,What is JSX?,I would say that jsx is a new version of javascript.,0
+Technical,q28,What is a component in React?,"A component in React is an independent, reusable of the UI. Components accept props and React detailing what should appear on the screen.",2
+Technical,q28,What is a component in React?,"A component in React means an independent, reusable piece of the UI. Components accept props and return React elements detailing what should appear on the screen.",2
+Technical,q28,What is a component in React?,"I would say that a component in react is an independent, reusable piece of the ui. components accept props and return react elements detailing what should appear on the screen.",2
+Technical,q28,What is a component in React?,a component in react is an independent reusable piece of the ui components accept props and return react elements detailing what should appear on the screen,2
+Technical,q28,What is a component in React?,"A component in React is an independent, reusable piece of the UI. Components accept props and return React elements detailing what should appear on the screen.",2
+Technical,q28,What is a component in React?,"I would say that a component is a part of the website, like a button or a header.",1
+Technical,q28,What is a component in React?,"A component means a part of the website, like a button or a header.",1
+Technical,q28,What is a component in React?,"A component is a part of the website, like a button or a header.",1
+Technical,q28,What is a component in React?,a component is a part of the website like a button or a header,1
+Technical,q28,What is a component in React?,"A component is a of the website, like a button or a header.",1
+Technical,q28,What is a component in React?,A component is a type of,0
+Technical,q28,What is a component in React?,A component is a type of variable.,0
+Technical,q28,What is a component in React?,I would say that a component is a type of variable.,0
+Technical,q28,What is a component in React?,A component means a type of variable.,0
+Technical,q28,What is a component in React?,a component is a type of variable,0
+Technical,q29,What is state and props in React?,"'Props' are read-only arguments passed to a component, while 'state' is a local, mutable data store managed within the component itself that drives rendering.",2
+Technical,q29,What is state and props in React?,"I would say that 'props' are read-only arguments passed to a component, while 'state' is a local, mutable data store managed within the component itself that drives rendering.",2
+Technical,q29,What is state and props in React?,'props' are read-only arguments passed to a component while 'state' is a local mutable data store managed within the component itself that drives rendering,2
+Technical,q29,What is state and props in React?,"'Props' refer to read-only arguments passed to a component, while 'state' means a local, mutable data store managed within the component itself that drives rendering.",2
+Technical,q29,What is state and props in React?,"'Props' are read-only arguments passed to a component, 'state' a mutable data store managed the component itself that rendering.",2
+Technical,q29,What is state and props in React?,"Props refer to passed to components, state means data kept inside the component.",1
+Technical,q29,What is state and props in React?,"I would say that props are passed to components, state is data kept inside the component.",1
+Technical,q29,What is state and props in React?,"Props are passed to components, state is data kept inside the component.",1
+Technical,q29,What is state and props in React?,Props are passed to state is data kept inside the component.,1
+Technical,q29,What is state and props in React?,props are passed to components state is data kept inside the component,1
+Technical,q29,What is state and props in React?,"State is what city you live in, props are properties of CSS.",0
+Technical,q29,What is state and props in React?,"State means what city you live in, props refer to properties of CSS.",0
+Technical,q29,What is state and props in React?,"I would say that state is what city you live in, props are properties of css.",0
+Technical,q29,What is state and props in React?,state is what city you live in props are properties of css,0
+Technical,q30,What is event bubbling?,I would say that event bubbling is an event propagation phase in the dom where an event triggered on an element propagates up the dom tree from the target element to its ancestors.,2
+Technical,q30,What is event bubbling?,event bubbling is an event propagation phase in the dom where an event triggered on an element propagates up the dom tree from the target element to its ancestors,2
+Technical,q30,What is event bubbling?,Event bubbling is an event propagation phase in the DOM where an event triggered on an element propagates up the DOM tree from the target element to its ancestors.,2
+Technical,q30,What is event bubbling?,Event bubbling an propagation phase in the DOM where an triggered on an element propagates up the DOM tree from the target element its ancestors.,2
+Technical,q30,What is event bubbling?,Event bubbling means an event propagation phase in the DOM where an event triggered on an element propagates up the DOM tree from the target element to its ancestors.,2
+Technical,q30,What is event bubbling?,it's when an event goes upwards through parent elements in html,1
+Technical,q30,What is event bubbling?,I would say that it's when an event goes upwards through parent elements in html.,1
+Technical,q30,What is event bubbling?,It's when an event goes upwards through parent elements in HTML.,1
+Technical,q30,What is event bubbling?,Event means creating lot of events,0
+Technical,q30,What is event bubbling?,Event bubbling means creating a lot of events quickly.,0
+Technical,q30,What is event bubbling?,I would say that event bubbling means creating a lot of events quickly.,0
+Technical,q30,What is event bubbling?,event bubbling means creating a lot of events quickly,0
+Technical,q31,What is CORS and why does it matter?,CORS (Cross-Origin Resource Sharing) is a security mechanism that restricts a webpage from making requests to a different domain than the one that served the web page.,2
+Technical,q31,What is CORS and why does it matter?,CORS (Cross-Origin Resource Sharing) means a security mechanism that restricts a webpage from making requests to a different domain than the one that served the web page.,2
+Technical,q31,What is CORS and why does it matter?,cors (cross-origin resource sharing) is a security mechanism that restricts a webpage from making requests to a different domain than the one that served the web page,2
+Technical,q31,What is CORS and why does it matter?,CORS (Cross-Origin Resource Sharing) is a security mechanism that restricts a webpage from making requests to different domain than the one that served the web page.,2
+Technical,q31,What is CORS and why does it matter?,I would say that cors (cross-origin resource sharing) is a security mechanism that restricts a webpage from making requests to a different domain than the one that served the web page.,2
+Technical,q31,What is CORS and why does it matter?,cors is a security feature that stops websites from accessing other website's data,1
+Technical,q31,What is CORS and why does it matter?,I would say that cors is a security feature that stops websites from accessing other website's data.,1
+Technical,q31,What is CORS and why does it matter?,CORS means a security feature that stops websites from accessing other website's data.,1
+Technical,q31,What is CORS and why does it matter?,CORS is a security feature that stops websites from accessing other website's data.,1
+Technical,q31,What is CORS and why does it matter?,CORS is a security that stops websites from accessing other website's data.,1
+Technical,q31,What is CORS and why does it matter?,CORS is an error get when making APIs.,0
+Technical,q31,What is CORS and why does it matter?,CORS is an error you get when making APIs.,0
+Technical,q31,What is CORS and why does it matter?,CORS means an error you get when making APIs.,0
+Technical,q31,What is CORS and why does it matter?,I would say that cors is an error you get when making apis.,0
+Technical,q31,What is CORS and why does it matter?,cors is an error you get when making apis,0
+Technical,q32,What is RESTful API?,"A RESTful API means an architectural style that uses standard HTTP methods, stateless communication, and URLs to access and manipulate data representations (usually JSON).",2
+Technical,q32,What is RESTful API?,"A RESTful API is an architectural style that uses standard HTTP methods, stateless communication, and URLs to access and manipulate data representations (usually JSON).",2
+Technical,q32,What is RESTful API?,a restful api is an architectural style that uses standard http methods stateless communication and urls to access and manipulate data representations (usually json),2
+Technical,q32,What is RESTful API?,"A RESTful API is an architectural style that uses standard HTTP methods, stateless communication, and URLs to access data representations (usually JSON).",2
+Technical,q32,What is RESTful API?,"I would say that a restful api is an architectural style that uses standard http methods, stateless communication, and urls to access and manipulate data representations (usually json).",2
+Technical,q32,What is RESTful API?,"I would say that it's an api that follows rest rules, using get, post, put, delete.",1
+Technical,q32,What is RESTful API?,it's an api that follows rest rules using get post put delete,1
+Technical,q32,What is RESTful API?,"It's an API that follows REST rules, using GET, POST, PUT, DELETE.",1
+Technical,q32,What is RESTful API?,I would say that restful api means the api takes rests between requests.,0
+Technical,q32,What is RESTful API?,RESTful API means API takes rests between requests.,0
+Technical,q32,What is RESTful API?,RESTful API means the API takes rests between requests.,0
+Technical,q32,What is RESTful API?,restful api means the api takes rests between requests,0
+Programming,q33,What is a variable?,I would say that a variable is a named storage location in a program's memory that holds data which can be modified during script execution.,2
+Programming,q33,What is a variable?,A is a named location in a program's memory that holds data which modified during script execution.,2
+Programming,q33,What is a variable?,A variable means a named storage location in a program's memory that holds data which can be modified during script execution.,2
+Programming,q33,What is a variable?,a variable is a named storage location in a program's memory that holds data which can be modified during script execution,2
+Programming,q33,What is a variable?,A variable is a named storage location in a program's memory that holds data which can be modified during script execution.,2
+Programming,q33,What is a variable?,I would say that a variable is a container for storing data values.,1
+Programming,q33,What is a variable?,A variable means a container for storing data values.,1
+Programming,q33,What is a variable?,A variable is a container for data values.,1
+Programming,q33,What is a variable?,a variable is a container for storing data values,1
+Programming,q33,What is a variable?,A variable is a container for storing data values.,1
+Programming,q33,What is a variable?,A variable means a mathematical equation.,0
+Programming,q33,What is a variable?,A variable is a mathematical equation.,0
+Programming,q33,What is a variable?,I would say that a variable is a mathematical equation.,0
+Programming,q33,What is a variable?,a variable is a mathematical equation,0
+Programming,q34,What are data types?,"I would say that data types define the kind of value a variable can hold, such as integers, strings, booleans, arrays, or objects, dictating how the data is stored and manipulated.",2
+Programming,q34,What are data types?,"Data define the kind of value a variable can hold, such as integers, strings, booleans, arrays, or objects, dictating how data is stored and manipulated.",2
+Programming,q34,What are data types?,data types define the kind of value a variable can hold such as integers strings booleans arrays or objects dictating how the data is stored and manipulated,2
+Programming,q34,What are data types?,"Data types define the kind of value a variable can hold, such as integers, strings, booleans, arrays, or objects, dictating how the data means stored and manipulated.",2
+Programming,q34,What are data types?,"Data types define the kind of value a variable can hold, such as integers, strings, booleans, arrays, or objects, dictating how the data is stored and manipulated.",2
+Programming,q34,What are data types?,"Data are things like numbers, text, true/false values.",1
+Programming,q34,What are data types?,"Data types refer to things like numbers, text, and true/false values.",1
+Programming,q34,What are data types?,"I would say that data types are things like numbers, text, and true/false values.",1
+Programming,q34,What are data types?,data types are things like numbers text and true/false values,1
+Programming,q34,What are data types?,"Data types are things like numbers, text, and true/false values.",1
+Programming,q34,What are data types?,data types are how fast data transfers,0
+Programming,q34,What are data types?,Data types refer to how fast data transfers.,0
+Programming,q34,What are data types?,Data types are how fast transfers.,0
+Programming,q34,What are data types?,I would say that data types are how fast data transfers.,0
+Programming,q34,What are data types?,Data types are how fast data transfers.,0
+Programming,q35,What is a function?,"A function means a reusable block of code designed to perform a specific task, which executes when called, taking optional inputs and returning optional outputs.",2
+Programming,q35,What is a function?,"I would say that a function is a reusable block of code designed to perform a specific task, which executes when called, taking optional inputs and returning optional outputs.",2
+Programming,q35,What is a function?,"A function is a reusable block of code designed to perform a specific task, which executes when called, taking optional inputs and returning optional outputs.",2
+Programming,q35,What is a function?,a function is a reusable block of code designed to perform a specific task which executes when called taking optional inputs and returning optional outputs,2
+Programming,q35,What is a function?,A function means code that you write once and run many times.,1
+Programming,q35,What is a function?,A function is code that you write and run many,1
+Programming,q35,What is a function?,I would say that a function is code that you write once and run many times.,1
+Programming,q35,What is a function?,A function is code that you write once and run many times.,1
+Programming,q35,What is a function?,a function is code that you write once and run many times,1
+Programming,q35,What is a function?,A function is hardware piece in a computer.,0
+Programming,q35,What is a function?,I would say that a function is a hardware piece in a computer.,0
+Programming,q35,What is a function?,a function is a hardware piece in a computer,0
+Programming,q35,What is a function?,A function is a hardware piece in a computer.,0
+Programming,q35,What is a function?,A function means a hardware piece in a computer.,0
+Programming,q36,What is object-oriented programming (OOP)?,"OOP is a programming based on the concept of which contain data fields (attributes) and methods, focusing on structure rather than pure logic.",2
+Programming,q36,What is object-oriented programming (OOP)?,"OOP is a programming paradigm based on the concept of 'objects', which contain data fields (attributes) and methods, focusing on structure rather than pure logic.",2
+Programming,q36,What is object-oriented programming (OOP)?,oop is a programming paradigm based on the concept of 'objects' which contain data fields (attributes) and methods focusing on structure rather than pure logic,2
+Programming,q36,What is object-oriented programming (OOP)?,"OOP means a programming paradigm based on the concept of 'objects', which contain data fields (attributes) and methods, focusing on structure rather than pure logic.",2
+Programming,q36,What is object-oriented programming (OOP)?,"I would say that oop is a programming paradigm based on the concept of 'objects', which contain data fields (attributes) and methods, focusing on structure rather than pure logic.",2
+Programming,q36,What is object-oriented programming (OOP)?,OOP is programming using classes and objects.,1
+Programming,q36,What is object-oriented programming (OOP)?,oop is programming using classes and objects,1
+Programming,q36,What is object-oriented programming (OOP)?,OOP means programming using classes and objects.,1
+Programming,q36,What is object-oriented programming (OOP)?,OOP programming using classes and objects.,1
+Programming,q36,What is object-oriented programming (OOP)?,I would say that oop is programming using classes and objects.,1
+Programming,q36,What is object-oriented programming (OOP)?,OOP means when things go wrong in your code.,0
+Programming,q36,What is object-oriented programming (OOP)?,OOP is when things go wrong in your code.,0
+Programming,q36,What is object-oriented programming (OOP)?,OOP is when things go in your code.,0
+Programming,q36,What is object-oriented programming (OOP)?,I would say that oop is when things go wrong in your code.,0
+Programming,q36,What is object-oriented programming (OOP)?,oop is when things go wrong in your code,0
+Programming,q37,What are the four pillars of OOP?,"The four pillars of are encapsulation (hiding state), abstraction (hiding implementation), inheritance (reusing and polymorphism (multiple forms of",2
+Programming,q37,What are the four pillars of OOP?,"The four pillars of OOP refer to encapsulation (hiding state), abstraction (hiding implementation), inheritance (reusing code), and polymorphism (multiple forms of interfaces).",2
+Programming,q37,What are the four pillars of OOP?,"I would say that the four pillars of oop are encapsulation (hiding state), abstraction (hiding implementation), inheritance (reusing code), and polymorphism (multiple forms of interfaces).",2
+Programming,q37,What are the four pillars of OOP?,the four pillars of oop are encapsulation (hiding state) abstraction (hiding implementation) inheritance (reusing code) and polymorphism (multiple forms of interfaces),2
+Programming,q37,What are the four pillars of OOP?,"The four pillars of OOP are encapsulation (hiding state), abstraction (hiding implementation), inheritance (reusing code), and polymorphism (multiple forms of interfaces).",2
+Programming,q37,What are the four pillars of OOP?,"They are encapsulation, inheritance, polymorphism, and abstraction.",1
+Programming,q37,What are the four pillars of OOP?,"I would say that they are encapsulation, inheritance, polymorphism, and abstraction.",1
+Programming,q37,What are the four pillars of OOP?,"They refer to encapsulation, inheritance, polymorphism, and abstraction.",1
+Programming,q37,What are the four pillars of OOP?,they are encapsulation inheritance polymorphism and abstraction,1
+Programming,q37,What are the four pillars of OOP?,"They encapsulation, inheritance, polymorphism, and abstraction.",1
+Programming,q37,What are the four pillars of OOP?,"I would say that variables, functions, arrays, and loops.",0
+Programming,q37,What are the four pillars of OOP?,variables functions arrays and loops,0
+Programming,q37,What are the four pillars of OOP?,"Variables, functions, arrays, and loops.",0
+Programming,q38,What is inheritance?,"Inheritance in OOP allows a new to properties and methods from an parent class, promoting code reusability and structure.",2
+Programming,q38,What is inheritance?,inheritance in oop allows a new class to inherit properties and methods from an existing parent class promoting code reusability and hierarchical structure,2
+Programming,q38,What is inheritance?,"I would say that inheritance in oop allows a new class to inherit properties and methods from an existing, parent class, promoting code reusability and hierarchical structure.",2
+Programming,q38,What is inheritance?,"Inheritance in OOP allows a new class to inherit properties and methods from an existing, parent class, promoting code reusability and hierarchical structure.",2
+Programming,q38,What is inheritance?,I would say that inheritance is when one class gets the features of another class.,1
+Programming,q38,What is inheritance?,inheritance is when one class gets the features of another class,1
+Programming,q38,What is inheritance?,Inheritance means when one class gets the features of another class.,1
+Programming,q38,What is inheritance?,Inheritance is when one class gets the features of another class.,1
+Programming,q38,What is inheritance?,I would say that inheritance is getting money from a relative.,0
+Programming,q38,What is inheritance?,Inheritance is getting money from a relative.,0
+Programming,q38,What is inheritance?,inheritance is getting money from a relative,0
+Programming,q38,What is inheritance?,Inheritance means getting money from a relative.,0
+Programming,q39,What is polymorphism?,"I would say that polymorphism allows objects of different classes to be treated as instances of the same superclass, typically utilizing method overriding or overloading.",2
+Programming,q39,What is polymorphism?,"Polymorphism allows objects of different classes to be treated as instances of the same superclass, typically utilizing method overriding or overloading.",2
+Programming,q39,What is polymorphism?,polymorphism allows objects of different classes to be treated as instances of the same superclass typically utilizing method overriding or overloading,2
+Programming,q39,What is polymorphism?,it means many forms letting different things use the same function names,1
+Programming,q39,What is polymorphism?,"It means many forms, letting different things use the same function names.",1
+Programming,q39,What is polymorphism?,"I would say that it means many forms, letting different things use the same function names.",1
+Programming,q39,What is polymorphism?,"It means many forms, letting things use the same function names.",1
+Programming,q39,What is polymorphism?,Polymorphism means drawing many shapes.,0
+Programming,q39,What is polymorphism?,Polymorphism is many shapes.,0
+Programming,q39,What is polymorphism?,Polymorphism is drawing many shapes.,0
+Programming,q39,What is polymorphism?,I would say that polymorphism is drawing many shapes.,0
+Programming,q39,What is polymorphism?,polymorphism is drawing many shapes,0
+Programming,q40,What is encapsulation?,"Encapsulation is the bundling of data and the methods that on that data into a single unit (class), restricting direct access to the object's components.",2
+Programming,q40,What is encapsulation?,"Encapsulation is the bundling of data and the methods that operate on that data into a single unit (class), restricting direct access to some of the object's components.",2
+Programming,q40,What is encapsulation?,"I would say that encapsulation is the bundling of data and the methods that operate on that data into a single unit (class), restricting direct access to some of the object's components.",2
+Programming,q40,What is encapsulation?,"Encapsulation means the bundling of data and the methods that operate on that data into a single unit (class), restricting direct access to some of the object's components.",2
+Programming,q40,What is encapsulation?,encapsulation is the bundling of data and the methods that operate on that data into a single unit (class) restricting direct access to some of the object's components,2
+Programming,q40,What is encapsulation?,I would say that encapsulation hides the data inside a class so outside code can't change it.,1
+Programming,q40,What is encapsulation?,encapsulation hides the data inside a class so outside code can't change it,1
+Programming,q40,What is encapsulation?,Encapsulation hides the data inside a class so outside code can't change it.,1
+Programming,q40,What is encapsulation?,It means putting things in a capsule.,0
+Programming,q40,What is encapsulation?,I would say that it means putting things in a capsule.,0
+Programming,q40,What is encapsulation?,it means putting things in a capsule,0
+Programming,q41,What is abstraction?,"Abstraction involves complex implementation details a system and only the essential features to the user, reducing complexity.",2
+Programming,q41,What is abstraction?,"Abstraction involves hiding complex implementation details of a system and only exposing the essential features to the user, reducing complexity.",2
+Programming,q41,What is abstraction?,abstraction involves hiding complex implementation details of a system and only exposing the essential features to the user reducing complexity,2
+Programming,q41,What is abstraction?,"I would say that abstraction involves hiding complex implementation details of a system and only exposing the essential features to the user, reducing complexity.",2
+Programming,q41,What is abstraction?,I would say that abstraction means hiding how things work and only showing what they do.,1
+Programming,q41,What is abstraction?,Abstraction means hiding how things work and only showing what they do.,1
+Programming,q41,What is abstraction?,abstraction means hiding how things work and only showing what they do,1
+Programming,q41,What is abstraction?,Abstraction means making abstract art using code.,0
+Programming,q41,What is abstraction?,I would say that abstraction means making abstract art using code.,0
+Programming,q41,What is abstraction?,abstraction means making abstract art using code,0
+Programming,q42,What is recursion?,"Recursion is technique where a function itself directly or to solve a of the same problem, requiring a base case to terminate.",2
+Programming,q42,What is recursion?,"Recursion means a technique where a function calls itself directly or indirectly to solve a smaller instance of the same problem, requiring a base case to terminate.",2
+Programming,q42,What is recursion?,"I would say that recursion is a technique where a function calls itself directly or indirectly to solve a smaller instance of the same problem, requiring a base case to terminate.",2
+Programming,q42,What is recursion?,recursion is a technique where a function calls itself directly or indirectly to solve a smaller instance of the same problem requiring a base case to terminate,2
+Programming,q42,What is recursion?,"Recursion is a technique where a function calls itself directly or indirectly to solve a smaller instance of the same problem, requiring a base case to terminate.",2
+Programming,q42,What is recursion?,Recursion is a function calling itself over and over.,1
+Programming,q42,What is recursion?,I would say that recursion is a function calling itself over and over.,1
+Programming,q42,What is recursion?,recursion is a function calling itself over and over,1
+Programming,q42,What is recursion?,Recursion means a function calling itself over and over.,1
+Programming,q42,What is recursion?,Recursion bolding text.,0
+Programming,q42,What is recursion?,Recursion means bolding text.,0
+Programming,q42,What is recursion?,recursion means bolding text,0
+Programming,q42,What is recursion?,I would say that recursion means bolding text.,0
+Programming,q43,What is an algorithm?,"An algorithm is a finite, step-by-step sequence of unambiguous instructions used to solve a specific problem or perform a computation.",2
+Programming,q43,What is an algorithm?,"I would say that an algorithm is a finite, step-by-step sequence of unambiguous instructions used to solve a specific problem or perform a computation.",2
+Programming,q43,What is an algorithm?,"An algorithm means a finite, step-by-step sequence of unambiguous instructions used to solve a specific problem or perform a computation.",2
+Programming,q43,What is an algorithm?,"algorithm is a finite, sequence unambiguous instructions used to specific problem or perform a computation.",2
+Programming,q43,What is an algorithm?,an algorithm is a finite step-by-step sequence of unambiguous instructions used to solve a specific problem or perform a computation,2
+Programming,q43,What is an algorithm?,An algorithm is a set of rules to solve a problem.,1
+Programming,q43,What is an algorithm?,an algorithm is a set of rules to solve a problem,1
+Programming,q43,What is an algorithm?,An algorithm means a set of rules to solve a problem.,1
+Programming,q43,What is an algorithm?,I would say that an algorithm is a set of rules to solve a problem.,1
+Programming,q43,What is an algorithm?,algorithms are magic computer brains,0
+Programming,q43,What is an algorithm?,Algorithms are magic computer brains.,0
+Programming,q43,What is an algorithm?,I would say that algorithms are magic computer brains.,0
+Programming,q43,What is an algorithm?,Algorithms refer to magic computer brains.,0
+Programming,q44,What is time complexity?,"I would say that time complexity, often expressed in big o notation, quantifies the amount of time an algorithm takes to run as a function of the length of the input.",2
+Programming,q44,What is time complexity?,time complexity often expressed in big o notation quantifies the amount of time an algorithm takes to run as a function of the length of the input,2
+Programming,q44,What is time complexity?,"Time complexity, often expressed in Big O notation, quantifies the amount of time an algorithm takes to run as a function of the length of the input.",2
+Programming,q44,What is time complexity?,"Time complexity, often expressed in Big O notation, quantifies the amount of time an algorithm takes to run as a function of the of the input.",2
+Programming,q44,What is time complexity?,I would say that time complexity describes how fast an algorithm runs based on input size.,1
+Programming,q44,What is time complexity?,Time complexity describes how fast an algorithm runs based on input size.,1
+Programming,q44,What is time complexity?,time complexity describes how fast an algorithm runs based on input size,1
+Programming,q44,What is time complexity?,Time complexity you what time it is.,0
+Programming,q44,What is time complexity?,Time complexity tells you what time it is.,0
+Programming,q44,What is time complexity?,time complexity tells you what time it is,0
+Programming,q44,What is time complexity?,I would say that time complexity tells you what time it is.,0
+Programming,q45,What is a loop?,I would say that a loop is a control flow statement that allows a block of code to be executed repeatedly based on a given boolean condition.,2
+Programming,q45,What is a loop?,a loop is a control flow statement that allows a block of code to be executed repeatedly based on a given boolean condition,2
+Programming,q45,What is a loop?,A loop is a control flow statement that allows a block of code to be executed repeatedly based on a given boolean condition.,2
+Programming,q45,What is a loop?,A loop means a control flow statement that allows a block of code to be executed repeatedly based on a given boolean condition.,2
+Programming,q45,What is a loop?,A loop repeats code multiple until a condition met.,1
+Programming,q45,What is a loop?,A loop repeats code multiple times until a condition is met.,1
+Programming,q45,What is a loop?,A loop repeats code multiple times until a condition means met.,1
+Programming,q45,What is a loop?,a loop repeats code multiple times until a condition is met,1
+Programming,q45,What is a loop?,I would say that a loop repeats code multiple times until a condition is met.,1
+Programming,q45,What is a loop?,A loop is a circle of wire.,0
+Programming,q45,What is a loop?,A loop means a circle of wire.,0
+Programming,q45,What is a loop?,a loop is a circle of wire,0
+Programming,q45,What is a loop?,A loop is a circle wire.,0
+Programming,q45,What is a loop?,I would say that a loop is a circle of wire.,0
+Programming,q46,What is an array?,"An array is a data structure consisting of a collection elements, each identified by an index or in contiguous memory locations.",2
+Programming,q46,What is an array?,"An array means a data structure consisting of a collection of elements, each identified by an array index or key, stored in contiguous memory locations.",2
+Programming,q46,What is an array?,"An array is a data structure consisting of a collection of elements, each identified by an array index or key, stored in contiguous memory locations.",2
+Programming,q46,What is an array?,"I would say that an array is a data structure consisting of a collection of elements, each identified by an array index or key, stored in contiguous memory locations.",2
+Programming,q46,What is an array?,an array is a data structure consisting of a collection of elements each identified by an array index or key stored in contiguous memory locations,2
+Programming,q46,What is an array?,an array is a list of items stored in variables,1
+Programming,q46,What is an array?,An array is a list of items stored in variables.,1
+Programming,q46,What is an array?,I would say that an array is a list of items stored in variables.,1
+Programming,q46,What is an array?,An array means a list of items stored in variables.,1
+Programming,q46,What is an array?,An array is a list items stored in,1
+Programming,q46,What is an array?,An array means a ray of sunshine.,0
+Programming,q46,What is an array?,I would say that an array is a ray of sunshine.,0
+Programming,q46,What is an array?,An array is a ray of sunshine.,0
+Programming,q46,What is an array?,an array is a ray of sunshine,0
+Programming,q47,What is a stack?,"A stack means a linear data structure that follows the Last-In-First-Out (LIFO) principle, where elements refer to added and removed from the same end, called the top.",2
+Programming,q47,What is a stack?,a stack is a linear data structure that follows the last-in-first-out (lifo) principle where elements are added and removed from the same end called the top,2
+Programming,q47,What is a stack?,"I would say that a stack is a linear data structure that follows the last-in-first-out (lifo) principle, where elements are added and removed from the same end, called the top.",2
+Programming,q47,What is a stack?,"A stack is a linear data structure that follows the Last-In-First-Out (LIFO) where elements added and removed from the same end, called the top.",2
+Programming,q47,What is a stack?,"A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle, where elements are added and removed from the same end, called the top.",2
+Programming,q47,What is a stack?,A stack means a data structure where the last item added means the first one taken out.,1
+Programming,q47,What is a stack?,A stack is a data structure where the last item added is the first one taken out.,1
+Programming,q47,What is a stack?,I would say that a stack is a data structure where the last item added is the first one taken out.,1
+Programming,q47,What is a stack?,A stack is a data structure where the last item added is the first out.,1
+Programming,q47,What is a stack?,a stack is a data structure where the last item added is the first one taken out,1
+Programming,q47,What is a stack?,A is a pile books.,0
+Programming,q47,What is a stack?,A stack means a pile of books.,0
+Programming,q47,What is a stack?,I would say that a stack is a pile of books.,0
+Programming,q47,What is a stack?,a stack is a pile of books,0
+Programming,q47,What is a stack?,A stack is a pile of books.,0
+Programming,q48,What is a queue?,"A queue means a linear data structure operating on the First-In-First-Out (FIFO) principle, meaning the first element added will be the first one removed.",2
+Programming,q48,What is a queue?,a queue is a linear data structure operating on the first-in-first-out (fifo) principle meaning the first element added will be the first one removed,2
+Programming,q48,What is a queue?,"A queue is a linear data operating on the First-In-First-Out (FIFO) principle, meaning first element added will be the first one removed.",2
+Programming,q48,What is a queue?,"A queue is a linear data structure operating on the First-In-First-Out (FIFO) principle, meaning the first element added will be the first one removed.",2
+Programming,q48,What is a queue?,"I would say that a queue is a linear data structure operating on the first-in-first-out (fifo) principle, meaning the first element added will be the first one removed.",2
+Programming,q48,What is a queue?,a queue is like a line of people first in is first out,1
+Programming,q48,What is a queue?,"I would say that a queue is like a line of people, first in is first out.",1
+Programming,q48,What is a queue?,"A queue means like a line of people, first in means first out.",1
+Programming,q48,What is a queue?,"A queue is like a line of people, first in is first out.",1
+Programming,q48,What is a queue?,"A queue is like a line of people, first is first out.",1
+Programming,q48,What is a queue?,A queue means a letter in the alphabet.,0
+Programming,q48,What is a queue?,I would say that a queue is a letter in the alphabet.,0
+Programming,q48,What is a queue?,A queue is a letter in alphabet.,0
+Programming,q48,What is a queue?,A queue is a letter in the alphabet.,0
+Programming,q48,What is a queue?,a queue is a letter in the alphabet,0
+Programming,q49,What is a hash table?,"A hash table a data structure maps to values using a hash function, allowing for highly efficient insertion, deletion, and lookup operations.",2
+Programming,q49,What is a hash table?,a hash table is a data structure that maps keys to values using a hash function allowing for highly efficient insertion deletion and lookup operations,2
+Programming,q49,What is a hash table?,"I would say that a hash table is a data structure that maps keys to values using a hash function, allowing for highly efficient insertion, deletion, and lookup operations.",2
+Programming,q49,What is a hash table?,"A hash table means a data structure that maps keys to values using a hash function, allowing for highly efficient insertion, deletion, and lookup operations.",2
+Programming,q49,What is a hash table?,"A hash table is a data structure that maps keys to values using a hash function, allowing for highly efficient insertion, deletion, and lookup operations.",2
+Programming,q49,What is a hash table?,a hash table stores key-value pairs using hashes for fast lookups,1
+Programming,q49,What is a hash table?,A hash table stores key-value pairs using hashes for fast lookups.,1
+Programming,q49,What is a hash table?,I would say that a hash table stores key-value pairs using hashes for fast lookups.,1
+Programming,q49,What is a hash table?,I would say that a hash table is a table made of hash browns.,0
+Programming,q49,What is a hash table?,A hash table means a table made of hash browns.,0
+Programming,q49,What is a hash table?,A hash table is a table made of hash browns.,0
+Programming,q49,What is a hash table?,A table is a table made of browns.,0
+Programming,q49,What is a hash table?,a hash table is a table made of hash browns,0
+Programming,q50,What is exception handling?,exception handling is a mechanism to gracefully manage runtime errors allowing the program to respond to anomalies and maintain normal execution flow without crashing,2
+Programming,q50,What is exception handling?,"handling is mechanism to gracefully manage runtime errors, allowing the program to to anomalies and maintain normal execution flow crashing.",2
+Programming,q50,What is exception handling?,"Exception handling means a mechanism to gracefully manage runtime errors, allowing the program to respond to anomalies and maintain normal execution flow without crashing.",2
+Programming,q50,What is exception handling?,"I would say that exception handling is a mechanism to gracefully manage runtime errors, allowing the program to respond to anomalies and maintain normal execution flow without crashing.",2
+Programming,q50,What is exception handling?,"Exception handling is a mechanism to gracefully manage runtime errors, allowing the program to respond to anomalies and maintain normal execution flow without crashing.",2
+Programming,q50,What is exception handling?,It is using blocks handle errors so app close.,1
+Programming,q50,What is exception handling?,It means using try-catch blocks to handle errors so the app doesn't close.,1
+Programming,q50,What is exception handling?,I would say that it is using try-catch blocks to handle errors so the app doesn't close.,1
+Programming,q50,What is exception handling?,It is using try-catch blocks to handle errors so the app doesn't close.,1
+Programming,q50,What is exception handling?,it is using try-catch blocks to handle errors so the app doesn't close,1
+Programming,q50,What is exception handling?,it means making exceptions when writing code,0
+Programming,q50,What is exception handling?,I would say that it means making exceptions when writing code.,0
+Programming,q50,What is exception handling?,It means making exceptions when writing code.,0
+Database,q51,What is a database?,a database is a securely structured and organized collection of data designed to allow easy data retrieval manipulation management and long-term persistence,2
+Database,q51,What is a database?,"A database is a securely structured and organized collection of data, designed to allow easy data retrieval, manipulation, management, and long-term persistence.",2
+Database,q51,What is a database?,"A database is a securely structured and organized collection of data, designed to easy data retrieval, manipulation, management, and long-term persistence.",2
+Database,q51,What is a database?,"I would say that a database is a securely structured and organized collection of data, designed to allow easy data retrieval, manipulation, management, and long-term persistence.",2
+Database,q51,What is a database?,"A database means a securely structured and organized collection of data, designed to allow easy data retrieval, manipulation, management, and long-term persistence.",2
+Database,q51,What is a database?,A database means a place where apps store all their data.,1
+Database,q51,What is a database?,a database is a place where apps store all their data,1
+Database,q51,What is a database?,I would say that a database is a place where apps store all their data.,1
+Database,q51,What is a database?,A database is a place where apps store all their data.,1
+Database,q51,What is a database?,A database is a place where apps all their data.,1
+Database,q51,What is a database?,A database means a computer base of operations.,0
+Database,q51,What is a database?,I would say that a database is a computer base of operations.,0
+Database,q51,What is a database?,a database is a computer base of operations,0
+Database,q51,What is a database?,A database is a computer base of operations.,0
+Database,q51,What is a database?,A database is a computer operations.,0
+Database,q52,What is SQL?,"SQL (Structured Query Language) means the standard declarative domain-specific language used for managing, querying, and manipulating relational databases.",2
+Database,q52,What is SQL?,"I would say that sql (structured query language) is the standard declarative domain-specific language used for managing, querying, and manipulating relational databases.",2
+Database,q52,What is SQL?,"SQL (Structured Query Language) is the standard declarative domain-specific language used managing, querying, and manipulating relational databases.",2
+Database,q52,What is SQL?,sql (structured query language) is the standard declarative domain-specific language used for managing querying and manipulating relational databases,2
+Database,q52,What is SQL?,"SQL (Structured Query Language) is the standard declarative domain-specific language used for managing, querying, and manipulating relational databases.",2
+Database,q52,What is SQL?,I would say that sql is the code you use to talk to databases and get data.,1
+Database,q52,What is SQL?,SQL is the code you use to talk to databases and get data.,1
+Database,q52,What is SQL?,SQL means the code you use to talk to databases and get data.,1
+Database,q52,What is SQL?,sql is the code you use to talk to databases and get data,1
+Database,q52,What is SQL?,I would say that sql means sequel to a movie.,0
+Database,q52,What is SQL?,sql means sequel to a movie,0
+Database,q52,What is SQL?,SQL means Sequel to a movie.,0
+Database,q53,What is NoSQL and how is it different from SQL?,nosql databases store unstructured or semi-structured data in non-tabular formats like document key-value or graph networks providing flexible schemas compared to sql,2
+Database,q53,What is NoSQL and how is it different from SQL?,"NoSQL databases store unstructured or semi-structured data in non-tabular formats like document, key-value, or graph networks, providing flexible schemas compared to SQL.",2
+Database,q53,What is NoSQL and how is it different from SQL?,"I would say that nosql databases store unstructured or semi-structured data in non-tabular formats like document, key-value, or graph networks, providing flexible schemas compared to sql.",2
+Database,q53,What is NoSQL and how is it different from SQL?,"NoSQL databases store unstructured or semi-structured data in non-tabular formats like or graph networks, flexible schemas compared to SQL.",2
+Database,q53,What is NoSQL and how is it different from SQL?,NoSQL stores data in documents instead of tables like SQL does.,1
+Database,q53,What is NoSQL and how is it different from SQL?,nosql stores data in documents instead of tables like sql does,1
+Database,q53,What is NoSQL and how is it different from SQL?,I would say that nosql stores data in documents instead of tables like sql does.,1
+Database,q53,What is NoSQL and how is it different from SQL?,NoSQL stores data in documents instead tables SQL does.,1
+Database,q53,What is NoSQL and how is it different from SQL?,NoSQL means having zero SQL skills.,0
+Database,q53,What is NoSQL and how is it different from SQL?,I would say that nosql means having zero sql skills.,0
+Database,q53,What is NoSQL and how is it different from SQL?,NoSQL means having zero,0
+Database,q53,What is NoSQL and how is it different from SQL?,nosql means having zero sql skills,0
+Database,q54,What is a primary key?,"A primary key is a unique identifier constraint a specific record in database table, ensuring no duplicate or null values exist in specific",2
+Database,q54,What is a primary key?,"A primary key is a unique identifier constraint for a specific record in a database table, ensuring no duplicate or null values exist in that specific column.",2
+Database,q54,What is a primary key?,a primary key is a unique identifier constraint for a specific record in a database table ensuring no duplicate or null values exist in that specific column,2
+Database,q54,What is a primary key?,"A primary key means a unique identifier constraint for a specific record in a database table, ensuring no duplicate or null values exist in that specific column.",2
+Database,q54,What is a primary key?,"I would say that a primary key is a unique identifier constraint for a specific record in a database table, ensuring no duplicate or null values exist in that specific column.",2
+Database,q54,What is a primary key?,a primary key gives a unique id to every row in a table,1
+Database,q54,What is a primary key?,I would say that a primary key gives a unique id to every row in a table.,1
+Database,q54,What is a primary key?,A primary key gives a unique ID to every row a,1
+Database,q54,What is a primary key?,A primary key gives a unique ID to every row in a table.,1
+Database,q54,What is a primary key?,A primary the key to start server.,0
+Database,q54,What is a primary key?,A primary key is the key to start the server.,0
+Database,q54,What is a primary key?,I would say that a primary key is the key to start the server.,0
+Database,q54,What is a primary key?,a primary key is the key to start the server,0
+Database,q54,What is a primary key?,A primary key means the key to start the server.,0
+Database,q55,What is a foreign key?,a foreign key is a relational constraint attribute in a table that links to the primary key of another table ensuring referential integrity between the two sets of data,2
+Database,q55,What is a foreign key?,"A foreign key means a relational constraint attribute in a table that links to the primary key of another table, ensuring referential integrity between the two sets of data.",2
+Database,q55,What is a foreign key?,"A foreign key is a relational constraint attribute in a table that links to primary key of another table, ensuring referential integrity between the two sets",2
+Database,q55,What is a foreign key?,"A foreign key is a relational constraint attribute in a table that links to the primary key of another table, ensuring referential integrity between the two sets of data.",2
+Database,q55,What is a foreign key?,"I would say that a foreign key is a relational constraint attribute in a table that links to the primary key of another table, ensuring referential integrity between the two sets of data.",2
+Database,q55,What is a foreign key?,a foreign key is a column that links one table to another table,1
+Database,q55,What is a foreign key?,A foreign key means a column that links one table to another table.,1
+Database,q55,What is a foreign key?,A foreign key is a column that links one table to another table.,1
+Database,q55,What is a foreign key?,I would say that a foreign key is a column that links one table to another table.,1
+Database,q55,What is a foreign key?,A foreign key is used in other countries.,0
+Database,q55,What is a foreign key?,foreign key is used in other countries.,0
+Database,q55,What is a foreign key?,a foreign key is used in other countries,0
+Database,q55,What is a foreign key?,I would say that a foreign key is used in other countries.,0
+Database,q55,What is a foreign key?,A foreign key means used in other countries.,0
+Database,q56,What is normalization?,"Normalization is the process of structuring a relational database to minimize data and improve data integrity, usually achieved by dividing larger tables.",2
+Database,q56,What is normalization?,"Normalization means the process of structuring a relational database to minimize data redundancy and improve data integrity, usually achieved by dividing larger tables.",2
+Database,q56,What is normalization?,normalization is the process of structuring a relational database to minimize data redundancy and improve data integrity usually achieved by dividing larger tables,2
+Database,q56,What is normalization?,"Normalization is the process of structuring a relational database to minimize data redundancy and improve data integrity, usually achieved by dividing larger tables.",2
+Database,q56,What is normalization?,"I would say that normalization is the process of structuring a relational database to minimize data redundancy and improve data integrity, usually achieved by dividing larger tables.",2
+Database,q56,What is normalization?,I would say that normalization means removing duplicate data from a database.,1
+Database,q56,What is normalization?,normalization means removing duplicate data from a database,1
+Database,q56,What is normalization?,Normalization means removing duplicate data from a database.,1
+Database,q56,What is normalization?,I would say that normalization is making things normal.,0
+Database,q56,What is normalization?,Normalization means making things normal.,0
+Database,q56,What is normalization?,normalization is making things normal,0
+Database,q56,What is normalization?,Normalization is making things normal.,0
+Database,q57,What are CRUD operations?,"CRUD represents the four foundational data management models for persistent storage: Create (insert), Read (select), Update (modify), and Delete (remove).",2
+Database,q57,What are CRUD operations?,"I would say that crud represents the four foundational data management models for persistent storage: create (insert), read (select), update (modify), and delete (remove).",2
+Database,q57,What are CRUD operations?,crud represents the four foundational data management models for persistent storage: create (insert) read (select) update (modify) and delete (remove),2
+Database,q57,What are CRUD operations?,crud stands for create read update delete,1
+Database,q57,What are CRUD operations?,"I would say that crud stands for create, read, update, delete.",1
+Database,q57,What are CRUD operations?,"CRUD stands for Create, Read, Update, Delete.",1
+Database,q57,What are CRUD operations?,CRUD is or grime.,0
+Database,q57,What are CRUD operations?,CRUD is dirt or grime.,0
+Database,q57,What are CRUD operations?,I would say that crud is dirt or grime.,0
+Database,q57,What are CRUD operations?,CRUD means dirt or grime.,0
+Database,q57,What are CRUD operations?,crud is dirt or grime,0
+Database,q58,What is indexing in databases?,indexing is a data structure technique used heavily in databases to dramatically speed up the data retrieval processes on specific columns at the cost of additional storage space,2
+Database,q58,What is indexing in databases?,"Indexing is a structure technique used in databases dramatically speed up the data retrieval processes on specific columns, at the cost of additional storage space.",2
+Database,q58,What is indexing in databases?,"Indexing is a data structure technique used heavily in databases to dramatically speed up the data retrieval processes on specific columns, at the cost of additional storage space.",2
+Database,q58,What is indexing in databases?,"Indexing means a data structure technique used heavily in databases to dramatically speed up the data retrieval processes on specific columns, at the cost of additional storage space.",2
+Database,q58,What is indexing in databases?,"I would say that indexing is a data structure technique used heavily in databases to dramatically speed up the data retrieval processes on specific columns, at the cost of additional storage space.",2
+Database,q58,What is indexing in databases?,Indexing makes searching the database much faster.,1
+Database,q58,What is indexing in databases?,indexing makes searching the database much faster,1
+Database,q58,What is indexing in databases?,Indexing searching the database faster.,1
+Database,q58,What is indexing in databases?,I would say that indexing makes searching the database much faster.,1
+Database,q58,What is indexing in databases?,indexing is picking items out of a box,0
+Database,q58,What is indexing in databases?,Indexing means picking items out of a box.,0
+Database,q58,What is indexing in databases?,Indexing is picking items out of a box.,0
+Database,q58,What is indexing in databases?,I would say that indexing is picking items out of a box.,0
+Database,q59,What is ACID?,"ACID (Atomicity, Consistency, Isolation, Durability) is a set of transaction properties that guarantee database transactions are processed reliably and without error.",2
+Database,q59,What is ACID?,"ACID (Atomicity, Consistency, Isolation, Durability) means a set of transaction properties that guarantee database transactions refer to processed reliably and without error.",2
+Database,q59,What is ACID?,"I would say that acid (atomicity, consistency, isolation, durability) is a set of transaction properties that guarantee database transactions are processed reliably and without error.",2
+Database,q59,What is ACID?,acid (atomicity consistency isolation durability) is a set of transaction properties that guarantee database transactions are processed reliably and without error,2
+Database,q59,What is ACID?,"ACID (Atomicity, Consistency, Isolation, Durability) a set of transaction properties that guarantee database transactions are processed reliably and without error.",2
+Database,q59,What is ACID?,ACID is a set of rules ensuring database transactions are safe.,1
+Database,q59,What is ACID?,I would say that acid is a set of rules ensuring database transactions are safe.,1
+Database,q59,What is ACID?,ACID means a set of rules ensuring database transactions refer to safe.,1
+Database,q59,What is ACID?,acid is a set of rules ensuring database transactions are safe,1
+Database,q59,What is ACID?,ACID is a set ensuring database transactions safe.,1
+Database,q59,What is ACID?,I would say that acid is a dangerous chemical.,0
+Database,q59,What is ACID?,ACID is dangerous chemical.,0
+Database,q59,What is ACID?,ACID means a dangerous chemical.,0
+Database,q59,What is ACID?,acid is a dangerous chemical,0
+Database,q59,What is ACID?,ACID is a dangerous chemical.,0
+Database,q60,What is a transaction?,a transaction is a logical atomic unit of database operations that must all succeed or all fail together reliably to maintain database integrity,2
+Database,q60,What is a transaction?,"I would say that a transaction is a logical, atomic unit of database operations that must all succeed or all fail together reliably to maintain database integrity.",2
+Database,q60,What is a transaction?,"A transaction is a logical, atomic unit of database operations that must all succeed or all fail together reliably to maintain database integrity.",2
+Database,q60,What is a transaction?,"A transaction means a logical, atomic unit of database operations that must all succeed or all fail together reliably to maintain database integrity.",2
+Database,q60,What is a transaction?,A transaction is a sequence of SQL as a single process.,1
+Database,q60,What is a transaction?,A transaction is a sequence of SQL queries run as a single process.,1
+Database,q60,What is a transaction?,A transaction means a sequence of SQL queries run as a single process.,1
+Database,q60,What is a transaction?,a transaction is a sequence of sql queries run as a single process,1
+Database,q60,What is a transaction?,I would say that a transaction is a sequence of sql queries run as a single process.,1
+Database,q60,What is a transaction?,A transaction is buying something online.,0
+Database,q60,What is a transaction?,a transaction is buying something online,0
+Database,q60,What is a transaction?,A transaction means buying something online.,0
+Database,q60,What is a transaction?,transaction is buying something online.,0
+Database,q60,What is a transaction?,I would say that a transaction is buying something online.,0
+AI/ML,q61,What is artificial intelligence?,"Artificial Intelligence means a field of computer science dedicated to creating systems capable of performing tasks that typically require human intelligence, like reasoning and learning.",2
+AI/ML,q61,What is artificial intelligence?,artificial intelligence is a field of computer science dedicated to creating systems capable of performing tasks that typically require human intelligence like reasoning and learning,2
+AI/ML,q61,What is artificial intelligence?,"Artificial Intelligence is a field of computer science dedicated to creating systems capable of performing tasks that typically require human intelligence, like reasoning and learning.",2
+AI/ML,q61,What is artificial intelligence?,Artificial Intelligence is a field of computer science to creating systems capable of performing tasks that typically require human like reasoning and learning.,2
+AI/ML,q61,What is artificial intelligence?,"I would say that artificial intelligence is a field of computer science dedicated to creating systems capable of performing tasks that typically require human intelligence, like reasoning and learning.",2
+AI/ML,q61,What is artificial intelligence?,ai is when computers can think and act like humans,1
+AI/ML,q61,What is artificial intelligence?,AI is when computers can think and act like humans.,1
+AI/ML,q61,What is artificial intelligence?,AI means when computers can think and act like humans.,1
+AI/ML,q61,What is artificial intelligence?,I would say that ai is when computers can think and act like humans.,1
+AI/ML,q61,What is artificial intelligence?,is robots taking the world.,0
+AI/ML,q61,What is artificial intelligence?,I would say that ai is robots taking over the world.,0
+AI/ML,q61,What is artificial intelligence?,AI means robots taking over the world.,0
+AI/ML,q61,What is artificial intelligence?,ai is robots taking over the world,0
+AI/ML,q61,What is artificial intelligence?,AI is robots taking over the world.,0
+AI/ML,q62,What is machine learning?,machine learning is a subset of ai focusing on the use of data and algorithms to continuously train artificial models improving their performance on specific tasks,2
+AI/ML,q62,What is machine learning?,"I would say that machine learning is a subset of ai focusing on the use of data and algorithms to continuously train artificial models, improving their performance on specific tasks.",2
+AI/ML,q62,What is machine learning?,"Machine is a subset of AI on the use of data and algorithms models, improving their on specific tasks.",2
+AI/ML,q62,What is machine learning?,"Machine learning means a subset of AI focusing on the use of data and algorithms to continuously train artificial models, improving their performance on specific tasks.",2
+AI/ML,q62,What is machine learning?,"Machine learning is a subset of AI focusing on the use of data and algorithms to continuously train artificial models, improving their performance on specific tasks.",2
+AI/ML,q62,What is machine learning?,Machine learning means algorithms that learn from data.,1
+AI/ML,q62,What is machine learning?,I would say that machine learning is algorithms that learn from data.,1
+AI/ML,q62,What is machine learning?,Machine learning is algorithms that learn from data.,1
+AI/ML,q62,What is machine learning?,machine learning is algorithms that learn from data,1
+AI/ML,q62,What is machine learning?,Machine is algorithms learn from,1
+AI/ML,q62,What is machine learning?,I would say that machine learning is when a laptop goes to school.,0
+AI/ML,q62,What is machine learning?,Machine learning is when a laptop goes to school.,0
+AI/ML,q62,What is machine learning?,Machine learning means when a laptop goes to school.,0
+AI/ML,q62,What is machine learning?,is when a laptop goes school.,0
+AI/ML,q62,What is machine learning?,machine learning is when a laptop goes to school,0
+AI/ML,q63,What is supervised learning?,Supervised learning means an ML approach where models refer to trained on distinct labeled datasets (where the desired output means known) to learn continuous patterns or classifications.,2
+AI/ML,q63,What is supervised learning?,I would say that supervised learning is an ml approach where models are trained on distinct labeled datasets (where the desired output is known) to learn continuous patterns or classifications.,2
+AI/ML,q63,What is supervised learning?,supervised learning is an ml approach where models are trained on distinct labeled datasets (where the desired output is known) to learn continuous patterns or classifications,2
+AI/ML,q63,What is supervised learning?,Supervised learning is an ML approach where models are trained on distinct labeled datasets (where the desired output is known) to learn continuous patterns or classifications.,2
+AI/ML,q63,What is supervised learning?,Supervised is an approach where are trained on distinct labeled datasets (where the desired output is known) to learn continuous patterns or classifications.,2
+AI/ML,q63,What is supervised learning?,I would say that supervised learning is training an ai with data that already has the answers.,1
+AI/ML,q63,What is supervised learning?,Supervised learning is training an data that already has the answers.,1
+AI/ML,q63,What is supervised learning?,supervised learning is training an ai with data that already has the answers,1
+AI/ML,q63,What is supervised learning?,Supervised learning means training an AI with data that already has the answers.,1
+AI/ML,q63,What is supervised learning?,Supervised learning is training an AI with data that already has the answers.,1
+AI/ML,q63,What is supervised learning?,I would say that it means an adult watches over you while you learn.,0
+AI/ML,q63,What is supervised learning?,it means an adult watches over you while you learn,0
+AI/ML,q63,What is supervised learning?,It means an adult watches over you while you learn.,0
+AI/ML,q64,What is unsupervised learning?,Unsupervised learning is a type of machine learning that analyzes and clusters unlabelled datasets to discover hidden patterns or groupings without human intervention.,2
+AI/ML,q64,What is unsupervised learning?,Unsupervised learning means a type of machine learning that analyzes and clusters unlabelled datasets to discover hidden patterns or groupings without human intervention.,2
+AI/ML,q64,What is unsupervised learning?,unsupervised learning is a type of machine learning that analyzes and clusters unlabelled datasets to discover hidden patterns or groupings without human intervention,2
+AI/ML,q64,What is unsupervised learning?,I would say that unsupervised learning is a type of machine learning that analyzes and clusters unlabelled datasets to discover hidden patterns or groupings without human intervention.,2
+AI/ML,q64,What is unsupervised learning?,I would say that it’s when ai finds patterns in data that isn't labeled.,1
+AI/ML,q64,What is unsupervised learning?,It’s when AI finds patterns in data that isn't labeled.,1
+AI/ML,q64,What is unsupervised learning?,it’s when ai finds patterns in data that isn't labeled,1
+AI/ML,q64,What is unsupervised learning?,Unsupervised means studying without a teacher.,0
+AI/ML,q64,What is unsupervised learning?,Unsupervised means a teacher.,0
+AI/ML,q64,What is unsupervised learning?,unsupervised means studying without a teacher,0
+AI/ML,q64,What is unsupervised learning?,I would say that unsupervised means studying without a teacher.,0
+AI/ML,q65,What is overfitting?,overfitting happens when a statistical model learns historical training data too precisely capturing noise and rendering it inaccurate against new unseen data points,2
+AI/ML,q65,What is overfitting?,"Overfitting happens when a statistical model learns historical training data too precisely, capturing noise and rendering inaccurate against new, unseen points.",2
+AI/ML,q65,What is overfitting?,"Overfitting happens when a statistical model learns historical training data too precisely, capturing noise and rendering it inaccurate against new, unseen data points.",2
+AI/ML,q65,What is overfitting?,"I would say that overfitting happens when a statistical model learns historical training data too precisely, capturing noise and rendering it inaccurate against new, unseen data points.",2
+AI/ML,q65,What is overfitting?,Overfitting is when an AI memorizes the training data but fails on new data.,1
+AI/ML,q65,What is overfitting?,I would say that overfitting is when an ai memorizes the training data but fails on new data.,1
+AI/ML,q65,What is overfitting?,overfitting is when an ai memorizes the training data but fails on new data,1
+AI/ML,q65,What is overfitting?,is when an AI memorizes the training data but fails on new data.,1
+AI/ML,q65,What is overfitting?,Overfitting means when an AI memorizes the training data but fails on new data.,1
+AI/ML,q65,What is overfitting?,overfitting is wearing clothes that are too tight,0
+AI/ML,q65,What is overfitting?,Overfitting wearing clothes that are too tight.,0
+AI/ML,q65,What is overfitting?,Overfitting is wearing clothes that are too tight.,0
+AI/ML,q65,What is overfitting?,Overfitting means wearing clothes that refer to too tight.,0
+AI/ML,q65,What is overfitting?,I would say that overfitting is wearing clothes that are too tight.,0
+AI/ML,q66,What is underfitting?,underfitting occurs when an algorithm cannot adequately capture the underlying structure or complexity of the data performing poorly on both training and generalized data,2
+AI/ML,q66,What is underfitting?,"Underfitting occurs when an algorithm cannot adequately capture the underlying structure complexity of the data, performing poorly both training and generalized data.",2
+AI/ML,q66,What is underfitting?,"Underfitting occurs when an algorithm cannot adequately capture the underlying structure or complexity of the data, performing poorly on both training and generalized data.",2
+AI/ML,q66,What is underfitting?,"I would say that underfitting occurs when an algorithm cannot adequately capture the underlying structure or complexity of the data, performing poorly on both training and generalized data.",2
+AI/ML,q66,What is underfitting?,underfitting is when the model is too simple and makes bad predictions,1
+AI/ML,q66,What is underfitting?,Underfitting is when the model is too simple and makes bad predictions.,1
+AI/ML,q66,What is underfitting?,Underfitting means when the model means too simple and makes bad predictions.,1
+AI/ML,q66,What is underfitting?,Underfitting is when the model is simple and makes bad predictions.,1
+AI/ML,q66,What is underfitting?,I would say that underfitting is when the model is too simple and makes bad predictions.,1
+AI/ML,q66,What is underfitting?,Underfitting means when there's extra room in a box.,0
+AI/ML,q66,What is underfitting?,I would say that underfitting is when there's extra room in a box.,0
+AI/ML,q66,What is underfitting?,underfitting is when there's extra room in a box,0
+AI/ML,q66,What is underfitting?,Underfitting is when there's extra room in a box.,0
+AI/ML,q67,What is a dataset?,"I would say that a dataset is an organized collection of structured or unstructured data, essentially serving as experiences that a machine learning model utilizes to derive its intelligence.",2
+AI/ML,q67,What is a dataset?,"A dataset means an organized collection of structured or unstructured data, essentially serving as experiences that a machine learning model utilizes to derive its intelligence.",2
+AI/ML,q67,What is a dataset?,"A dataset is an organized collection of structured or unstructured data, essentially serving experiences that a machine learning model utilizes to derive its intelligence.",2
+AI/ML,q67,What is a dataset?,a dataset is an organized collection of structured or unstructured data essentially serving as experiences that a machine learning model utilizes to derive its intelligence,2
+AI/ML,q67,What is a dataset?,"A dataset is an organized collection of structured or unstructured data, essentially serving as experiences that a machine learning model utilizes to derive its intelligence.",2
+AI/ML,q67,What is a dataset?,A dataset means a large group of data used to train AI models.,1
+AI/ML,q67,What is a dataset?,a dataset is a large group of data used to train ai models,1
+AI/ML,q67,What is a dataset?,A dataset is a large group of data used to train AI models.,1
+AI/ML,q67,What is a dataset?,A dataset is a large group of data train AI models.,1
+AI/ML,q67,What is a dataset?,I would say that a dataset is a large group of data used to train ai models.,1
+AI/ML,q67,What is a dataset?,A dataset means a setting on a device.,0
+AI/ML,q67,What is a dataset?,a dataset is a setting on a device,0
+AI/ML,q67,What is a dataset?,I would say that a dataset is a setting on a device.,0
+AI/ML,q67,What is a dataset?,A dataset is a setting on a device.,0
+AI/ML,q68,What is feature engineering?,"Feature engineering means the process of using domain knowledge to select, manipulate, and transform raw data attributes into features to improve the performance of predictive models.",2
+AI/ML,q68,What is feature engineering?,feature engineering is the process of using domain knowledge to select manipulate and transform raw data attributes into features to improve the performance of predictive models,2
+AI/ML,q68,What is feature engineering?,"I would say that feature engineering is the process of using domain knowledge to select, manipulate, and transform raw data attributes into features to improve the performance of predictive models.",2
+AI/ML,q68,What is feature engineering?,"Feature engineering is the of using domain knowledge to select, manipulate, and transform raw data attributes into features to the performance of predictive models.",2
+AI/ML,q68,What is feature engineering?,"Feature engineering is the process of using domain knowledge to select, manipulate, and transform raw data attributes into features to improve the performance of predictive models.",2
+AI/ML,q68,What is feature engineering?,Feature engineering means preparing and formatting data to make the AI work better.,1
+AI/ML,q68,What is feature engineering?,I would say that feature engineering is preparing and formatting data to make the ai work better.,1
+AI/ML,q68,What is feature engineering?,Feature engineering is preparing and formatting to make the AI work better.,1
+AI/ML,q68,What is feature engineering?,feature engineering is preparing and formatting data to make the ai work better,1
+AI/ML,q68,What is feature engineering?,Feature engineering is preparing and formatting data to make the AI work better.,1
+AI/ML,q68,What is feature engineering?,Feature engineering means building features on an app.,0
+AI/ML,q68,What is feature engineering?,I would say that feature engineering is building features on an app.,0
+AI/ML,q68,What is feature engineering?,feature engineering is building features on an app,0
+AI/ML,q68,What is feature engineering?,Feature engineering is building features on an app.,0
+AI/ML,q69,What is a model?,"I would say that a model is an artifact created computationally by algorithms training on complex datasets; it is designed to recognize patterns, make predictions, and generate new outputs.",2
+AI/ML,q69,What is a model?,"A is an artifact created computationally algorithms training complex datasets; it is designed to recognize patterns, make predictions, and new outputs.",2
+AI/ML,q69,What is a model?,"A model means an artifact created computationally by algorithms training on complex datasets; it means designed to recognize patterns, make predictions, and generate new outputs.",2
+AI/ML,q69,What is a model?,"A model is an artifact created computationally by algorithms training on complex datasets; it is designed to recognize patterns, make predictions, and generate new outputs.",2
+AI/ML,q69,What is a model?,a model is an artifact created computationally by algorithms training on complex datasets; it is designed to recognize patterns make predictions and generate new outputs,2
+AI/ML,q69,What is a model?,a model is the ai program created after training with a dataset,1
+AI/ML,q69,What is a model?,I would say that a model is the ai program created after training with a dataset.,1
+AI/ML,q69,What is a model?,A is the AI program created training with a dataset.,1
+AI/ML,q69,What is a model?,A model means the AI program created after training with a dataset.,1
+AI/ML,q69,What is a model?,A model is the AI program created after training with a dataset.,1
+AI/ML,q69,What is a model?,A model is a person walking down a runway.,0
+AI/ML,q69,What is a model?,I would say that a model is a person walking down a runway.,0
+AI/ML,q69,What is a model?,a model is a person walking down a runway,0
+AI/ML,q69,What is a model?,A model is a walking down runway.,0
+AI/ML,q69,What is a model?,A model means a person walking down a runway.,0
+AI/ML,q70,What is cross-validation?,"Cross-validation means a solid resampling procedure used inherently to evaluate machine learning models on limited data samples, mitigating overfitting and ensuring accurate metrics.",2
+AI/ML,q70,What is cross-validation?,"Cross-validation is a solid resampling procedure used inherently to evaluate machine learning models on limited data samples, mitigating overfitting and ensuring metrics.",2
+AI/ML,q70,What is cross-validation?,"Cross-validation is a solid resampling procedure used inherently to evaluate machine learning models on limited data samples, mitigating overfitting and ensuring accurate metrics.",2
+AI/ML,q70,What is cross-validation?,cross-validation is a solid resampling procedure used inherently to evaluate machine learning models on limited data samples mitigating overfitting and ensuring accurate metrics,2
+AI/ML,q70,What is cross-validation?,"I would say that cross-validation is a solid resampling procedure used inherently to evaluate machine learning models on limited data samples, mitigating overfitting and ensuring accurate metrics.",2
+AI/ML,q70,What is cross-validation?,It means a technique to test an AI by splitting the data into different training and testing groups.,1
+AI/ML,q70,What is cross-validation?,I would say that it is a technique to test an ai by splitting the data into different training and testing groups.,1
+AI/ML,q70,What is cross-validation?,is a technique to test an AI by splitting the data into different training and groups.,1
+AI/ML,q70,What is cross-validation?,it is a technique to test an ai by splitting the data into different training and testing groups,1
+AI/ML,q70,What is cross-validation?,It is a technique to test an AI by splitting the data into different training and testing groups.,1
+AI/ML,q70,What is cross-validation?,cross-validation is a cross-shaped validation stamp,0
+AI/ML,q70,What is cross-validation?,Cross-validation is a cross-shaped validation,0
+AI/ML,q70,What is cross-validation?,I would say that cross-validation is a cross-shaped validation stamp.,0
+AI/ML,q70,What is cross-validation?,Cross-validation means a cross-shaped validation stamp.,0
+AI/ML,q70,What is cross-validation?,Cross-validation is a cross-shaped validation stamp.,0
