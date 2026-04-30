@@ -309,6 +309,12 @@ def signup():
     name = data.get('name')
     email = data.get('email')
     password = data.get('password')
+    allowed = ["gmail.com","yahoo.com","outlook.com","hotmail.com","icloud.com"]
+
+    domain = email.split("@")[1].lower()
+
+    if domain not in allowed:
+        return jsonify({"error": "Use valid email provider"}), 400
 
     if not name or not email or not password:
         return jsonify({"error": "Missing required fields"}), 400
@@ -331,6 +337,12 @@ def login():
     data = request.json
     email = data.get('email')
     password = data.get('password')
+    allowed = ["gmail.com","yahoo.com","outlook.com","hotmail.com","icloud.com"]
+
+    domain = email.split("@")[1].lower()
+
+    if domain not in allowed:
+        return jsonify({"error":"Use valid email provider"}), 400
 
     if not email or not password:
         return jsonify({"error": "Missing required fields"}), 400
