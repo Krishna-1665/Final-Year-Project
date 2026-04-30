@@ -314,6 +314,20 @@ try:
         fieldnames = reader.fieldnames
         rows = list(reader)
 
+    import random
+
+    def get_variations(text):
+        if not text:
+            return []
+        v1 = text
+        v2 = text.lower().replace('.', '').replace(',', '')
+        words = text.split()
+        v3 = " ".join([w for w in words if random.random() > 0.1])
+        v4 = f"I would say that {text.lower()}"
+        v5 = text.replace(" is ", " means ").replace(" are ", " refer to ")
+        return [v1, v2, v3, v4, v5]
+
+    expanded_rows = []
     # Process rows
     for row in rows:
         q_id = row['question_id']
@@ -322,12 +336,25 @@ try:
         # If it's one of the questions we defined custom replacements for
         if q_id in custom_answers:
             if score in custom_answers[q_id]:
-                row['answer'] = custom_answers[q_id][score]
+                base_answer = custom_answers[q_id][score]
+            else:
+                base_answer = row['answer']
+        else:
+            base_answer = row['answer']
+            
+        variations = get_variations(base_answer)
+        # unique variations
+        variations = list(set([v for v in variations if v.strip()]))
+        
+        for v in variations:
+            new_row = row.copy()
+            new_row['answer'] = v
+            expanded_rows.append(new_row)
 
     with open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(rows)
+        writer.writerows(expanded_rows)
 
     print(f"Generated successfully to {output_file}")
 except Exception as e:

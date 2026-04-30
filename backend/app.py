@@ -28,12 +28,18 @@ CORS(app)  # Enable CORS for all routes
 BASE_DIR = os.path.dirname(__file__)
 
 
-# Load model and vectorizer
-MODEL_PATH = os.path.join(BASE_DIR, 'model', 'interview_clf_calibrated.joblib')
-VEC_PATH = os.path.join(BASE_DIR, 'model', 'vectorizer_calibrated.joblib')
+from sentence_transformers import SentenceTransformer
 
+# Load semantic model
+MODEL_PATH = os.path.join(BASE_DIR, 'model', 'interview_semantic_clf.joblib')
 MODEL = joblib.load(MODEL_PATH)
-VEC = joblib.load(VEC_PATH)
+
+# Load semantic embedder
+VEC = SentenceTransformer('all-MiniLM-L6-v2')
+
+# Load TF-IDF vectorizer for robust gibberish detection
+TFIDF_VEC_PATH = os.path.join(BASE_DIR, 'model', 'vectorizer_calibrated.joblib')
+TFIDF_VEC = joblib.load(TFIDF_VEC_PATH)
 
 # Load Dataset
 DATASET_PATH = os.path.join(BASE_DIR, 'data', 'dataset.xlsx')
@@ -109,7 +115,35 @@ def predict_score_dict(answer_text):
     Returns: expected_class (float), score_0_5 (float), probabilities (list)
     """
     cleaned = clean_text(answer_text)
-    X = VEC.transform([cleaned])
+    
+    # If the text is empty after cleaning
+    if not cleaned.strip():
+        return {
+            "expected_class": 0.0,
+            "score_0_5": 0.0,
+            "probabilities": [1.0, 0.0, 0.0]
+        }
+
+    import re
+    # Simple length check
+    if len(re.sub(r'[^a-zA-Z]', '', cleaned)) < 3:
+        return {
+            "expected_class": 0.0,
+            "score_0_5": 0.0,
+            "probabilities": [1.0, 0.0, 0.0]
+        }
+        
+    # Robust gibberish check using the old TF-IDF vocabulary
+    # If no words in the answer match any training data words, it's gibberish/off-topic.
+    if TFIDF_VEC.transform([cleaned]).nnz == 0:
+        return {
+            "expected_class": 0.0,
+            "score_0_5": 0.0,
+            "probabilities": [1.0, 0.0, 0.0]
+        }
+
+    X = VEC.encode([cleaned])
+        
     proba = MODEL.predict_proba(X)[0]                # probabilities for classes [0,1,2]
     classes = np.array(sorted(MODEL.classes_), dtype=float)
     expected = float((proba * classes).sum())
@@ -117,7 +151,7 @@ def predict_score_dict(answer_text):
     score_0_5 = (expected / max_class) * 5.0 if max_class > 0 else expected
     return {
         "expected_class": round(expected, 3),
-        "score_0_5": round(score_0_5, 2),
+        "score_0_5": round(float(score_0_5), 2),
         "probabilities": [round(float(x), 4) for x in proba.tolist()]
     }
 

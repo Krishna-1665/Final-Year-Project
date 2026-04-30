@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Timer, CheckCircle2, ArrowRight, Home, BrainCircuit, MessageSquare, AlertCircle, FastForward, Send, ShieldCheck } from 'lucide-react';
 import avatarInterviewer from "../assets/avatars/avatar_interviewer.png";
@@ -17,6 +17,7 @@ const AvatarDisplay = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const webcamRef = React.useRef(null);
   const navigate = useNavigate();
+  const lastSpokenIndex = useRef(null);
 
   const [interviewStarted, setInterviewStarted] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -34,6 +35,9 @@ const AvatarDisplay = () => {
   const [voices, setVoices] = useState([]);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [skippedQuestions, setSkippedQuestions] = useState([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
   const isLowTime = timeLeft < 60;
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -129,6 +133,9 @@ const AvatarDisplay = () => {
     return () => clearInterval(timer);
   }, [interviewStarted, showResult]);
   useEffect(() => {
+  
+}, [currentIndex]);
+  useEffect(() => {
     //  if (!interviewStarted || isStopped) return;
     if (!interviewStarted || isStopped || showResult) return;
     const interval = setInterval(() => {
@@ -157,7 +164,7 @@ const AvatarDisplay = () => {
 
     const interval = setInterval(() => {
       captureAndSend();
-    }, 1500);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [interviewStarted]);
@@ -165,7 +172,7 @@ const AvatarDisplay = () => {
     if (!interviewStarted || isStopped || showResult) return;
 
     const checkStatus = setInterval(async () => {
-      const res = await fetch("http://localhost:5000/api/live");
+     // const res = await fetch("http://localhost:5000/api/live");
       const data = await res.json();
 
       const me = data.find(u => u.email === user?.email);
@@ -183,10 +190,10 @@ const AvatarDisplay = () => {
 
         navigate("/login");
       }
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(checkStatus);
-  }, [interviewStarted]);
+  }, [interviewStarted,showResult]);
   useEffect(() => {
     const handleTabClose = async () => {
       if (!interviewStarted) return;
@@ -219,12 +226,16 @@ const AvatarDisplay = () => {
 
       if (category in categoryAvatarMap) {
         const avatarIndex = categoryAvatarMap[category];
+        if (avatarIndex !== activeAvatar) {
         setActiveAvatar(avatarIndex);
-
+      }
         const currentQ = questions[currentIndex]?.question;
         const gender = interviewPanel[avatarIndex]?.gender;
-
-        speak(currentQ, gender); // 🔥 SPEAK HERE
+      //speak only once
+      if (lastSpokenIndex.current !== currentIndex && currentQ) {
+        lastSpokenIndex.current = currentIndex;
+        speak(currentQ, gender);
+      }
       }
     }
   }, [currentIndex, questions]);
@@ -243,99 +254,81 @@ const AvatarDisplay = () => {
   };
 
   const handleSubmit = async (e) => {
-    if (e) e.preventDefault();
-    if (!sessionId) return;
+  if (e) e.preventDefault();
 
-    setLoading(true);
+  if (isProcessing || !answer.trim() || !sessionId) return;
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          answer: answer.trim(),
-          question_id: questions[currentIndex]?.question_id,
-          session_id: sessionId,
-        }),
-      });
+  setIsProcessing(true);
+  setLoading(true);
 
-      const data = await response.json();
+  try {
+    // ✅ ONLY IMPORTANT API
+    const response = await fetch(`${API_BASE_URL}/api/submit-answer`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        answer: answer.trim(),
+        question_id: questions[currentIndex]?.question_id,
+        session_id: sessionId,
+      }),
+    });
 
-      if (response.ok) {
-        setAnsweredQuestions((prev) => [...prev, currentIndex]);
-        const score = Number(data.prediction?.expected_class || 0);
-        const updatedScore = totalScore + score;
+    const data = await response.json();
 
-        setTotalScore(updatedScore);
-        setAnsweredCount((prev) => prev + 1);
-        setAnswer("");
+   if (response.ok) {
+  const score = Number(data.prediction?.expected_class || 0);
 
-        // ✅ Live progress update
-        await fetch(`${API_BASE_URL}/api/live`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: user?.name,
-            email: user?.email,
-            currentQuestion: Math.min(currentIndex + 2, questions.length),
-          }),
-        });
+  setTotalScore(prev => prev + score);
+  setAnsweredCount(prev => prev + 1);
 
-        // ✅ Next question or finish interview
-        if (currentIndex < questions.length - 1) {
-          setCurrentIndex((prev) => prev + 1);
-        } else {
-          // ✅ Save final score
-          await fetch(`${API_BASE_URL}/api/save-user`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: user?.name,
-              email: user?.email,
-              score: updatedScore,
-            }),
-          });
+  // ✅ ADD THIS (VERY IMPORTANT)
+  setAnsweredQuestions(prev => [...prev, currentIndex]);
 
-          // ✅ Mark completed
-          await fetch(`${API_BASE_URL}/api/live`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: user?.name,
-              email: user?.email,
-              status: "Completed",
-              currentQuestion: questions.length,
-              isCompleted: true,
-              lastActive: new Date().toISOString(),
-            }),
-          });
+  setAnswer("");
 
-
-          setShowResult(true);
-        }
+  // 🔥 DELAY QUESTION CHANGE
+  setTimeout(() => {
+    setCurrentIndex(prev => {
+      if (prev + 1 >= questions.length) {
+        finishInterview();
+        return prev;
       }
-    } catch (error) {
-      console.error("Submission failed:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      return prev + 1;
+    });
+  }, 300); // you can increase to 500 if needed
+
+  // 🔥 BACKGROUND CALL (NO CHANGE)
+  fetch(`${API_BASE_URL}/api/live`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: user?.name,
+      email: user?.email,
+      currentQuestion: currentIndex + 2,
+    }),
+  });
+}
+
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+    setIsProcessing(false);
+  }
+};
   const speak = (text, gender = "male") => {
     if (!text) return;
 
     const utterance = new SpeechSynthesisUtterance(text);
 
     // Stop previous speech
-    speechSynthesis.cancel();
-
+    if (speechSynthesis.speaking) return;
+    setIsSpeaking(true); 
+    utterance.onend = () => {
+          setIsSpeaking(false); 
+  };
     let selectedVoice;
 
     if (gender === "female") {
@@ -362,63 +355,85 @@ const AvatarDisplay = () => {
     speechSynthesis.speak(utterance);
   };
   const handleSkip = async () => {
-    setAnswer("");
+  // ✅ PREVENT MULTIPLE CLICKS
+  if (isProcessing) return;
 
-    // ✅ Mark current question as skipped
-    setSkippedQuestions((prev) => [...prev, currentIndex]);
+  setIsProcessing(true);
 
-    try {
-      await fetch(`${API_BASE_URL}/api/live`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user?.name,
-          email: user?.email,
-          currentQuestion: Math.min(currentIndex + 2, questions.length),
-        }),
-      });
+  // optional: stop speech
+  speechSynthesis.cancel();
 
-      // ✅ If NOT last question
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
-      } else {
-        // ✅ If last question skipped
+  setAnswer("");
 
-        await fetch(`${API_BASE_URL}/api/save-user`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: user?.name,
-            email: user?.email,
-            score: totalScore,
-          }),
-        });
+  // ✅ Mark skipped
+  setSkippedQuestions((prev) => [...prev, currentIndex]);
 
-        await fetch(`${API_BASE_URL}/api/live`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: user?.name,
-            email: user?.email,
-            status: "Completed",
-            currentQuestion: questions.length,
-            isCompleted: true,
-            lastActive: new Date().toISOString(),
-          }),
-        });
+  try {
+    // ⚡ FIRE AND FORGET (no await → faster UI)
+    fetch(`${API_BASE_URL}/api/live`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: user?.name,
+        email: user?.email,
+        currentQuestion: Math.min(currentIndex + 2, questions.length),
+      }),
+    });
 
-        setShowResult(true);
+    // ✅ SAFE INDEX UPDATE
+    setCurrentIndex((prev) => {
+      if (prev + 1 >= questions.length) {
+        finishInterview(); // 🔥 call separate function
+        return prev;
       }
-    } catch (error) {
-      console.error("Skip failed:", error);
-    }
-  };
+      return prev + 1;
+    });
+
+  } catch (error) {
+    console.error("Skip failed:", error);
+  } finally {
+    // 🔥 SMALL DELAY → prevents rapid clicking
+    setTimeout(() => {
+      setIsProcessing(false);
+    }, 300);
+  }
+};
+const finishInterview = async () => {
+  try {
+    await fetch(`${API_BASE_URL}/api/save-user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: user?.name,
+        email: user?.email,
+        score: totalScore,
+      }),
+    });
+
+    await fetch(`${API_BASE_URL}/api/live`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: user?.name,
+        email: user?.email,
+        status: "Completed",
+        currentQuestion: questions.length,
+        isCompleted: true,
+        lastActive: new Date().toISOString(),
+      }),
+    });
+
+    setShowResult(true);
+  } catch (err) {
+    console.error("Finish error:", err);
+  }
+};
   const startListening = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -460,7 +475,7 @@ const AvatarDisplay = () => {
 
 
   const captureAndSend = async () => {
-    if (!webcamRef.current) return;
+    if (!webcamRef.current || isProcessing) return;
 
     const imageSrc = webcamRef.current.getScreenshot();
 
@@ -880,11 +895,16 @@ const AvatarDisplay = () => {
               {/* Avatar */}
               <div className="relative mb-4">
                 <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                  <img
+                 <img
                     src={currentAvatar.image}
-                    alt={currentAvatar.name}
-                    className="w-full h-full object-cover"
-                  />
+                   alt={currentAvatar.name}
+                   className={`w-full h-full object-cover ${
+    isSpeaking ? "animate-pulse scale-105" : ""
+  }`}
+
+              />
+              
+              
                 </div>
 
                 {/* Online Dot */}
@@ -919,8 +939,15 @@ const AvatarDisplay = () => {
                   <MessageSquare className="w-4 h-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">Inquiry</span>
                 </div>
-                <div className="p-8 rounded-[2rem] rounded-tl-none bg-blue-50/50 border border-blue-100/50 text-slate-800 text-xl font-medium leading-relaxed shadow-sm w-170">
-                  {questions[currentIndex]?.question || "Loading question..."}
+                <div
+                  className={`p-8 rounded-[2rem] border text-xl font-medium leading-relaxed shadow-sm transition-all duration-300
+                  ${
+                    answeredQuestions.includes(currentIndex)
+                      ? "bg-green-100 border-green-300 text-green-900"
+                      : "bg-blue-50/50 border-blue-100/50 text-slate-800"
+                  }`}
+                >
+                  {questions[currentIndex]?.question}
                 </div>
               </div>
 
@@ -985,6 +1012,7 @@ const AvatarDisplay = () => {
 
                 <button
                   onClick={handleSkip}
+                  disabled={loading || isProcessing}
                   className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all duration-200 disabled:opacity-50"
                   title="Skip Question"
                 >
