@@ -489,6 +489,12 @@ def upload_frame():
     }
 
     db.frames.insert_one(record)
+    
+    # Update live collection with the latest image for fast retrieval
+    db.live.update_one(
+        {"email": data.get("email")},
+        {"$set": {"image": data.get("image")}}
+    )
 
     return jsonify({"message": "Frame saved"})
 @app.route('/api/frames', methods=['GET'])
@@ -501,35 +507,29 @@ def get_frames():
 @app.route('/api/live', methods=['GET'])
 def get_live():
     users = list(db.live.find({}, {"_id": 0}))
-    frames = list(db.frames.find({}, {"_id": 0}))
-
-    # 🔥 Get latest frame per user
-    frame_map = {}
-    for f in frames:
-        frame_map[f["email"]] = f["image"]
-
-    active_users = []
-    completed_users = []
 
     for u in users:
         last_active = u.get("lastActive")
         is_completed = u.get("isCompleted", False)
-
-        u["image"] = frame_map.get(u["email"])
-
-    # ✅ INSIDE LOOP (FIXED)
+        status = u.get("status", "")
         
-        if last_active:
+        is_active = False
+        if not is_completed and status == "In Interview" and last_active:
             try:
                 last_active_time = datetime.fromisoformat(last_active.replace("Z", ""))
-
                 if datetime.now() - last_active_time < timedelta(seconds=20):
-                    active_users.append(u)
-
+                    is_active = True
             except Exception as e:
                 print("Time parse error:", e)
+        
+        # Do not send frozen image if disconnected or completed
+        if not is_active and "image" in u:
+            u["image"] = None
+            
+        u["isActive"] = is_active
 
-    return jsonify(active_users)
+    # Return all users so dashboard can display total, active, and completed candidates correctly
+    return jsonify(users)
 @app.route('/api/save-user', methods=['POST'])
 def save_user():
     data = request.json

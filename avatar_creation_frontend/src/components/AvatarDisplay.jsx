@@ -121,7 +121,8 @@ const AvatarDisplay = () => {
             body: JSON.stringify({
               name: user?.name,
               email: user?.email,
-              status: "Completed"
+              status: "Completed",
+              isCompleted: true
             })
           });
           setShowResult(true); // End interview automatically
@@ -172,23 +173,27 @@ const AvatarDisplay = () => {
     if (!interviewStarted || isStopped || showResult) return;
 
     const checkStatus = setInterval(async () => {
-     // const res = await fetch("http://localhost:5000/api/live");
-      const data = await res.json();
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/live`);
+        const data = await res.json();
 
-      const me = data.find(u => u.email === user?.email);
+        const me = data.find(u => u.email === user?.email);
 
-      if (!me) return; // safety
+        if (!me) return; // safety
 
-      if (me?.isCompleted && me?.status === "Stopped by Admin") {
-        alert("Interview stopped by admin");
+        if (me?.isCompleted && me?.status === "Stopped by Admin") {
+          alert("Your interview is stopped by admin");
 
-        setIsStopped(true);
-        setInterviewStarted(false);
-        setShowResult(true);
+          setIsStopped(true);
+          setInterviewStarted(false);
+          setShowResult(true);
 
-        clearInterval(checkStatus);
+          clearInterval(checkStatus);
 
-        navigate("/login");
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Error checking status:", error);
       }
     }, 5000);
 
